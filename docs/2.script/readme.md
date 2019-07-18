@@ -10,6 +10,8 @@
   - 有 `async`，加载和渲染后续文档元素的过程将和 `script.js` 的加载与执行并行进行（异步）。
 - `<script defer src="myscript.js"></script>`
   - 有 `defer`，加载后续文档元素的过程将和 `script.js` 的加载并行进行（异步），但是 `script.js` 的执行要在所有元素解析完成之后，`DOMContentLoaded` 事件触发之前完成。
+- `<script async defer src="myscript.js"></script>`
+  - 效果同 async
 
 概括来讲，就是这两个属性都会使script标签异步加载，然而执行的时机是不一样的。如下图
 
