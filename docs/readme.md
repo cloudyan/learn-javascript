@@ -1,9 +1,9 @@
 # 学习 javascript
 
-1. [intro 介绍](./docs/1.intro)
-2. [script 加载](./docs/2.script)
-3. [var 变量](./docs/3.var)
-4. [引用类型](./docs/4.object)
+1. [intro 介绍](./1.intro)
+2. [script 加载](./2.script)
+3. [var 变量](./3.var)
+4. [引用类型](./4.object)
 5. 小结
 
 参考：
