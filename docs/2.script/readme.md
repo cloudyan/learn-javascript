@@ -115,8 +115,11 @@ document.write(`<script src="js/f.js"><\/script>`);
 - 如果在异步引入的js中运行`document.write()`，运行完后，最好手动关闭文档写入（`document.close()`）。
 
 > **注意：**在有`deferred` 或 `asynchronous` 属性的 script 中，`document.write` 会被忽略，控制台会显示 "A call to document.write() from an asynchronously-loaded external script was ignored" 的报错信息。
+>
 > **注意：**在 Edge 中，在 [`<iframe>`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/iframe) 内部调用 `document.write` 多于一次时会引发错误 SCRIPT70: Permission denied。
+>
 > **注意：**从 Chrome 55 开始，Chrome（可能）不会运行通过 `document.write()` 注入的`<script>`，以防止使用 2G 连接的用户找不到 HTTP 缓存。前往[此链接](https://developers.google.cn/web/updates/2016/08/removing-document-write)查看这种情况发生需要满足的条件。
+>
 > 如果js是异步引入的（加async或者动态加入的），里面的document.write因安全原因是无法工作的。"Failed to execute 'write' on 'Document': It isn't possible to write into a document from an asynchronously-loaded external script unless it is explicitly opened."
 
 执行顺序和普通的 script 标签没有区别。即使你插入的标签带有`async`或`defer`，其行为也是没有区别的。
