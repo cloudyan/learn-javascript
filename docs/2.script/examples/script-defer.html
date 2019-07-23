@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>script defer</title>
+  <script src="js/ready.js" defer></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function(res) {
+    console.log('ready:', 'DOMContentLoaded')
+  })
+  window.addEventListener('load', (event) => {
+    console.log('page is fully loaded');
+  });
+  </script>
+</head>
+<body>
+
+  <h1>defer 延迟属性</h1>
+  <ul>
+    <li>立即异步加载脚本(不阻塞文档解析)</li>
+    <li>加载完延迟执行脚本，直到文档解析完全</li>
+    <li>保证执行顺序</li>
+    <li>会延迟 `DOMContentLoaded` 事件的触发</li>
+  </ul>
+
+  <p>详细细节参见控制台</p>
+
+  <script src="js/a.js" defer></script>
+  <script src="js/b.js" defer></script>
+  <script src="js/c.js" defer></script>
+
+  <p>after c.js</p>
+
+  <script src="js/d.js" defer></script>
+  <script src="js/e.js" defer></script>
+
+  <p>after e.js</p>
+
+  <script src="js/f.js" defer></script>
+  <script src="js/g.js" defer></script>
+
+  <p>after g.js</p>
+
+</body>
+</html>

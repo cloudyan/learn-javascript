@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>script inline</title>
+</head>
+<body>
+
+  <h1>内入 script 的加载执行</h1>
+
+  <ul>
+    <li>按顺序解析执行</li>
+    <li>阻塞文档解析及渲染</li>
+    <li>保证执行顺序</li>
+  </ul>
+
+  <p>详细细节参见控制台</p>
+
+  <script>
+  // inline 1
+  let content = document.body.innerHTML;
+  console.log(content);
+  alert(content);
+  </script>
+
+  <p>after script 1</p>
+  <div id="test1"></div>
+
+  <script>
+  // inline 2
+  content = document.body.innerHTML;
+  console.log(content);
+  alert(content);
+  </script>
+
+  <p>after script 2</p>
+
+  <script>
+  // inline 3
+  content = document.body.innerHTML;
+  console.log(content);
+  alert(content);
+  </script>
+
+  <p>after script 3</p>
+
+</body>
+</html>
