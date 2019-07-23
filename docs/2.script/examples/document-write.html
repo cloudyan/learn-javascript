@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>关于 document.write</title>
+  <script data-index="1">
+  // head 中执行，代码输出在HTML中的什么位置？
+  document.write('<p>document.write head</p>');
+
+  // document.open=function(){}
+
+  window.addEventListener('DOMContentLoaded', (event) => {
+    document.write('<p>DOMContentLoaded callback</p>');
+  });
+  window.addEventListener('load', (event) => {
+    document.write('<p>onload callback</p>');
+  });
+  </script>
+</head>
+<body>
+
+  <h1>关于 document.write</h1>
+  <ul>
+    <li>如果页面正在加载，立即执行脚本(阻塞文档解析)</li>
+    <li>如果页面已经加载，清空文档</li>
+    <li>如果在异步脚本中执行，则会被拦截</li>
+  </ul>
+
+  <div id="test"></div>
+
+  <script src="js/d.js"></script>
+  <script src="js/e.js"></script>
+
+  <script data-index="2">
+  // 直接写
+  document.write('document.write inline');
+
+  // 子节点
+  var s = document.createElement('script');
+  s.text = 'document.write("<p>document.write script</p>")';
+  document.querySelector('body').appendChild(s);
+
+  // 这两种写法的结果分别是什么？有区别吗？
+  </script>
+
+  <script>
+  // document.write(`<script src="js/f.js"><\/script>`);
+
+  </script>
+
+  <p>after e.js</p>
+
+  <!-- 同步脚本中有write操作，输出的内容在什么位置？ -->
+  <!-- <script src="js/dw.js"></script> -->
+  <!-- 异步脚本中有write操作，是否能正常输出，如果不能，有什么好的办法？ -->
+  <script src="js/dw.js" async></script>
+
+  <script src="js/g.js"></script>
+
+  <p>after g.js</p>
+
+</body>
+</html>
