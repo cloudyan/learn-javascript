@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>测试 script 标签的加载时序与执行时序</title>
+  <style>
+  small {color: gray;}
+  </style>
+  <script data-index="1">
+  var result = '';
+  function log(msg) {
+    var currentScript = document.currentScript;
+    console.warn('script: ', currentScript);
+    currentScript = (currentScript && currentScript.src || 'inline script').replace(location.origin, '');
+    result = result + '<br><small>' + currentScript + '</small><br>' + msg + '<br>';
+  }
+  console.log = log;
+
+  console.log('inline 1');
+  </script>
+</head>
+<body>
+  <p>script loading and run</p>
+  <h1>测试 script 标签加载时序与执行时序</h1>
+  <p>关于位置或特性对加载和执行的影响，自行修改验证</p>
+
+  <div id="test">正在加载中...</div>
+
+  <script data-index="2">
+  console.log('inline 2');
+
+  // 获取 dom
+  var domTest = document.querySelector('#test');
+  </script>
+
+  <script src="js/a.js"></script>
+  <script src="js/b.js"></script>
+  <script src="js/c.js"></script>
+
+  <script data-index="3">
+  console.log('inline 3');
+  $(function(){
+    console.log('inline ready');
+  })
+  $(function(){
+    setTimeout(function(){
+      domTest.innerHTML = result;
+    }, 100)
+  })
+  </script>
+</body>
+</html>
