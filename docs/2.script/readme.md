@@ -190,6 +190,10 @@ export function loadCss(cssUrl) {
 - script标签放在head中与放在body中，是影响了js的下载开始时间还是执行开始时间
 - css，图片以及一些其它的外部资源的下载是否与html，js的下载并行
 
+## 提示
+
+深入理解 script 加载与执行机制，对性能提升，加载器实现非常重要
+
 参考：
 
 - 红皮书
