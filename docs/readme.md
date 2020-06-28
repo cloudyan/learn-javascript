@@ -21,12 +21,13 @@
 - sku-select
 - virtual-dom
 - shell 脚本
-- 前端错误上报及跟踪侦测
+- 前端错误上报及跟踪侦测 error-report
 - 前端调用链
-- hybrid 方案
+- hybrid 方案 jsBridge
 - 设计模式 design-pattern
 - 设备类型侦测
-- 前端缓存
+- 前端缓存 cache
+- 前端调试 debugging
 
 参考：
 
