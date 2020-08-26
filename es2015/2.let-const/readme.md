@@ -72,6 +72,33 @@ d.count()
 c.reset()
 c.count()
 d.count()
+
+// 问题 3
+for (var i = 0; i < 5; i++) {
+  setTimeout(function timer() {
+    console.log(i)
+  }, i*1000)
+}
+// 输出五个 5
+// 原因是：延迟函数的回调在循环结束时才执行
+
+for (var i = 0; i < 5; i++) {
+  (function(){
+    var j = i
+    setTimeout(function timer() {
+      console.log(j)
+    }, i*1000)
+  })()
+}
+
+for (var i = 0; i < 5; i++) {
+  (function(j){
+    setTimeout(function timer() {
+      console.log(j)
+    }, i*1000)
+  })(i)
+}
+// 严格来说，闭包需要满足三个条件：【1】访问所在作用域；【2】函数嵌套；【3】在所在作用域外被调用
 ```
 
 冻结对象
