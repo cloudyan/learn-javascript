@@ -96,3 +96,17 @@ console.log(globalThis);
   }
 }(Object));
 ```
+
+扩展
+
+```js
+(0, eval)('this')
+
+// vs
+eval('this')
+
+```
+
+Isn’t this equivalent to just `eval('this')`? Why the comma operator? 🤔
+
+`eval(code)` is a “direct eval” and executes code in the current scope. `(0, eval)(code)` is an [indirect eval](https://2ality.com/2014/01/eval.html) and executes code in the global scope.
