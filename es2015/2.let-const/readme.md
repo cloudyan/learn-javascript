@@ -38,7 +38,40 @@ console.log(i); // 5
 
 // 经典面试题: for 循环取 i（闭包解决）
 // https://segmentfault.com/a/1190000003818163
+// 犀牛书 p187
 
+// 返回一个函数组成的数组，他们的返回值是 0-9
+function constfuncs() {
+  var funcs = []
+  for (var i = 0; i < 10; i++) {
+    funcs[i] = function() {
+      return i
+    }
+  }
+  return funcs
+}
+
+var funcs = constfuncs(5)
+funcs[5]() // 返回值是什么
+
+// 经典 2 （p185）
+function counter() {
+  var n = 0;
+  return {
+    count: function() { return n++ },
+    reset: function() { n = 0 }
+  }
+}
+
+var c = counter()
+var d = counter()
+
+// 输出什么
+c.count()
+d.count()
+c.reset()
+c.count()
+d.count()
 ```
 
 冻结对象
