@@ -24,7 +24,7 @@
   - 最后遍历所有 Symbol 键，按照加入时间升序排列。
 - super 关键字
   - 指向当前对象的原型对象
-  - this关键字总是指向函数所在的当前对象
+  - this 关键字总是指向函数所在的当前对象
 - 对象的扩展运算符
   - 解构赋值
   - 扩展运算符 等同于使用`Object.assign()`方法
@@ -132,6 +132,31 @@ obj.foo() // "world"
 克隆一个对象
 
 ```js
+typeof Object.assign(2) // "object"
+Object.assign(undefined) // 报错
+Object.assign(null) // 报错
+let obj = {a: 1};
+Object.assign(obj, undefined) === obj // true
+Object.assign(obj, null) === obj // true
+
+const v1 = 'abc';
+const v2 = true;
+const v3 = 10;
+
+const obj = Object.assign({}, v1, v2, v3);
+console.log(obj); // { "0": "a", "1": "b", "2": "c" }
+
+const v1 = 'abc';
+const v2 = true;
+const v3 = 10;
+
+const obj = Object.assign({}, v1, v2, v3);
+console.log(obj); // { "0": "a", "1": "b", "2": "c" }
+// 原因
+Object(true) // {[[PrimitiveValue]]: true} 内部属性
+Object(10)  //  {[[PrimitiveValue]]: 10}
+Object('abc') // {0: "a", 1: "b", 2: "c", length: 3, [[PrimitiveValue]]: "abc"}
+
 let aClone = { ...a };
 // 等同于
 let aClone = Object.assign({}, a);
