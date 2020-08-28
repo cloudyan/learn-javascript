@@ -14,3 +14,17 @@
 - import()
 - Legacy RegEx
 - 私有的实例方法和访问器
+
+Symbol.prototype.description
+
+```js
+const sym = Symbol('foo');
+
+String(sym) // "Symbol(foo)"
+sym.toString() // "Symbol(foo)"
+
+// Symbol.prototype.description
+const sym = Symbol('foo');
+
+sym.description // "foo"
+```

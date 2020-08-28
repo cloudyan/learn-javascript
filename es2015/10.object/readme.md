@@ -29,6 +29,11 @@
   - 解构赋值
   - 扩展运算符 等同于使用`Object.assign()`方法
   - 扩展运算符后面可以跟表达式
+- Object.is() “Same-value equality”（同值相等）算法
+- Object.assign() 只拷贝源对象的自身属性（不拷贝继承属性），也不拷贝不可枚举的属性（enumerable: false）
+  - 会拷贝属性名为 `Symbol` 值的属性
+  - 浅拷贝 vs 深拷贝
+  - 可以处理数组
 
 ```js
 // 方法一: 标识符
