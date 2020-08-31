@@ -9,7 +9,7 @@
 - Object.fromEntries() 是 Object.entries()的逆操作
   - 该方法的主要目的，是将键值对的数据结构还原为对象，因此特别适合将 Map 结构转为对象。
   - 配合URLSearchParams对象，将查询字符串转为对象
-- String padding:
+- String padding: 字符串补全长度的功能
   - padStart()
   - padEnd()
 - 函数参数列表结尾允许逗号
