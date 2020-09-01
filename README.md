@@ -26,12 +26,19 @@
 
 - async/await
 - Object.values()
-- Object.entries()
-- String padding:
+- Object.entries() 只输出属性名非 Symbol 值的属性
+  - 遍历对象的属性
+  - 将对象转为真正的Map结构
+  - Object.create方法的第二个参数添加的对象属性（属性p），如果不显式声明，默认是不可遍历的
+- Object.fromEntries() 是 Object.entries()的逆操作
+  - 该方法的主要目的，是将键值对的数据结构还原为对象，因此特别适合将 Map 结构转为对象。
+  - 配合URLSearchParams对象，将查询字符串转为对象
+- String padding: 字符串补全长度的功能
   - padStart()
   - padEnd()
 - 函数参数列表结尾允许逗号
-- Object.getOwnPropertyDescriptors()
+- Object.getOwnPropertyDescriptors() 返回指定对象所有自身属性（非继承属性）的描述对象。
+  - 主要是为了解决Object.assign()无法正确拷贝get属性和set属性的问题。
 - ShareArrayBuffer和Atomics对象，用于从共享内存位置读取和写入
 
 ## ES2018
@@ -44,20 +51,41 @@
 - 正则表达式dotAll模式
 - 正则表达式 Unicode 转义
 - 非转义序列的模板字符串
+- 放松了对标签模板里面的字符串转义的限制
+  - 注意：这种对字符串转义的放松，只在标签模板解析字符串时生效，不是标签模板的场合，依然会报错。
 
 ## ES2019
 
-- 行分隔符（U + 2028）和段分隔符（U + 2029）符号现在允许在字符串文字中，与JSON匹配
+- 行分隔符（U+2028）和段分隔符（U+2029）符号现在允许在字符串文字中，与JSON匹配
+  - `const PS = eval("'\u2029'");` // 这样这个就不会报错
 - 更加友好的 JSON.stringify
+  - 为了确保返回的是合法的 UTF-8 字符，如果遇到0xD800到0xDFFF之间的单个码点，或者不存在的配对形式，它会返回转义字符串，留给应用自己决定下一步的处理
 - 新增了Array的flat()方法和flatMap()方法
-- 新增了String的trimStart()方法和trimEnd()方法
+- String trim 方法：返回新字符串
+  - trimStart()
+  - trimEnd()
+  - 除了空格键，这两个方法对字符串头部（或尾部）的 tab 键、换行符等不可见的空白符号也有效。
+  - 浏览器还部署了额外的两个方法，trimLeft()是trimStart()的别名，trimRight()是trimEnd()的别名。
+- ES2019 对函数实例的toString()方法做出了修改
+  - 以前会省略注释和空格，修改后的toString()方法，明确要求返回一模一样的原始代码。
 - Object.fromEntries()
 - Symbol.prototype.description
 - String.prototype.matchAll
 - Function.prototype.toString()现在返回精确字符，包括空格和注释
-- 简化try {} catch {},修改 catch 绑定
+- 简化try {} catch {}, 修改 catch 绑定
+  - ES2019 做出了改变，允许catch语句省略参数
 - 新的基本数据类型BigInt
 - globalThis
 - import()
 - Legacy RegEx
 - 私有的实例方法和访问器
+
+## ES2020
+
+- 链判断运算符 （optional chaining operator）`?.`
+  - 三种用法
+  - 常见用法
+  - 错误用法
+- Null 判断运算符 `??`
+  - 行为类似`||`，但是只有运算符左侧的值为`null`或`undefined`时，才会返回右侧的值
+  - 运算优先级问题
