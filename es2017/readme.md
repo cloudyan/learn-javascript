@@ -1,6 +1,7 @@
 # ES2017
 
-- async/await
+- 引入异步迭代器（asynchronous iterators）
+  - async/await await可以和for...of循环一起使用，以串行的方式运行异步操作
 - Object.values()
 - Object.entries() 只输出属性名非 Symbol 值的属性
   - 遍历对象的属性
@@ -16,6 +17,15 @@
 - Object.getOwnPropertyDescriptors() 返回指定对象所有自身属性（非继承属性）的描述对象。
   - 主要是为了解决Object.assign()无法正确拷贝get属性和set属性的问题。
 - ShareArrayBuffer和Atomics对象，用于从共享内存位置读取和写入
+
+
+```js
+async function process(array) {
+  for await (let i of array) {
+    doSomething(i);
+  }
+}
+```
 
 ```js
 const obj = Object.create({}, {p: {value: 42}});
