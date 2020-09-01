@@ -10,11 +10,14 @@
   - trimEnd()
   - 除了空格键，这两个方法对字符串头部（或尾部）的 tab 键、换行符等不可见的空白符号也有效。
   - 浏览器还部署了额外的两个方法，trimLeft()是trimStart()的别名，trimRight()是trimEnd()的别名。
+- ES2019 对函数实例的toString()方法做出了修改
+  - 以前会省略注释和空格，修改后的toString()方法，明确要求返回一模一样的原始代码。
 - Object.fromEntries()
 - Symbol.prototype.description
 - String.prototype.matchAll
 - Function.prototype.toString()现在返回精确字符，包括空格和注释
-- 简化try {} catch {},修改 catch 绑定
+- 简化try {} catch {}, 修改 catch 绑定
+  - ES2019 做出了改变，允许catch语句省略参数
 - 新的基本数据类型BigInt
 - globalThis
 - import()
@@ -33,4 +36,22 @@ sym.toString() // "Symbol(foo)"
 const sym = Symbol('foo');
 
 sym.description // "foo"
+```
+
+```js
+function /* foo comment */ foo () {}
+
+console.log(foo.toString())
+// "function /* foo comment */ foo () {}"
+```
+
+catch
+
+```js
+// 允许catch语句省略参数
+try {
+  // ...
+} catch {
+  // ...
+}
 ```
