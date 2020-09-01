@@ -34,6 +34,17 @@
   - 尾调用（Tail Call）是函数式编程的一个重要概念
   - 尾调用不一定出现在函数尾部，只要是最后一步操作即可。
 - 尾递归
+  - 函数调用自身，称为递归。如果尾调用自身，就称为尾递归。
+  - 递归非常耗费内存，因为需要同时保存成千上百个调用帧，很容易发生“栈溢出”错误（stack overflow）
+  - 但对于尾递归来说，由于只存在一个调用帧，所以永远不会发生“栈溢出”错误。
+  - 递归函数的改写
+    - 函数式编程 柯里化（currying），意思是将多参数的函数转换成单参数的形式
+    - 就是把所有用到的内部变量改写成函数的参数
+  - ES6 的尾调用优化只在严格模式下开启，正常模式是无效的。
+    - 因为在正常模式下，函数内部有两个变量，可以跟踪函数的调用栈。
+    - `func.arguments`：返回调用时函数的参数
+    - `func.caller`：返回调用当前函数的那个函数
+  - 正常模式怎么办（就是采用“循环”换掉“递归”）
 
 ```js
 let x = 99;
@@ -212,4 +223,152 @@ function f(x) {
   }
   return n(x);
 }
+
+
+// 分析
+// 注意，只有不再用到外层函数的内部变量，内层函数的调用帧才会取代外层函数的调用帧，否则就无法进行“尾调用优化”。
+
+function f() {
+  let m = 1;
+  let n = 2;
+  return g(m + n);
+}
+f();
+
+// 等同于
+function f() {
+  return g(3);
+}
+f();
+
+// 等同于
+g(3);
+```
+
+尾递归
+
+```js
+// 阶乘函数
+function factorial(n) {
+  if (n === 1) return 1;
+  return n * factorial(n - 1);
+}
+
+factorial(5) // 120
+
+// 改为尾递归
+function factorial(n, total = 1) {
+  if (n === 1) return total;
+  return factorial(n - 1, n * total);
+}
+
+factorial(5) // 120
+
+
+// 计算 Fibonacci 数列
+function Fibonacci (n) {
+  if ( n <= 1 ) {return 1};
+
+  return Fibonacci(n - 1) + Fibonacci(n - 2);
+}
+
+Fibonacci(10) // 89
+Fibonacci(100) // 超时
+Fibonacci(500) // 超时
+
+// 尾递归优化
+function Fibonacci2 (n , ac1 = 1 , ac2 = 1) {
+  if( n <= 1 ) {return ac2};
+
+  return Fibonacci2 (n - 1, ac2, ac1 + ac2);
+}
+
+Fibonacci2(100) // 573147844013817200000
+Fibonacci2(1000) // 7.0330367711422765e+208
+Fibonacci2(10000) // Infinity
+```
+
+递归函数的改写
+
+```js
+function currying(fn, n) {
+  return function (m) {
+    return fn.call(this, m, n);
+  };
+}
+```
+
+总结一下，递归本质上是一种循环操作。纯粹的函数式编程语言没有循环操作命令，所有的循环都用递归实现，这就是为什么尾递归对这些语言极其重要。
+
+对于其他支持“尾调用优化”的语言（比如 Lua，ES6），只需要知道循环可以用递归代替，而一旦使用递归，就最好使用尾递归。
+
+
+蹦床函数（trampoline）可以将递归执行转为循环执行。
+
+```js
+function sum(x, y) {
+  if (y > 0) {
+    return sum(x + 1, y - 1);
+  } else {
+    return x;
+  }
+}
+
+sum(1, 100000)
+// Uncaught RangeError: Maximum call stack size exceeded(…)
+
+// 蹦床函数
+function trampoline(f) {
+  while (f && f instanceof Function) {
+    f = f();
+  }
+  return f;
+}
+
+// 改写
+function sum(x, y) {
+  if (y > 0) {
+    return sum.bind(null, x + 1, y - 1);
+  } else {
+    return x;
+  }
+}
+
+console.log(trampoline(sum(1, 100000)))
+// 100001
+
+```
+
+蹦床函数并不是真正的尾递归优化，下面的实现才是
+
+```js
+function tco(f) {
+  var value;
+  var active = false;
+  var accumulated = [];
+
+  return function accumulator() {
+    accumulated.push(arguments);
+    if (!active) {
+      active = true;
+      while (accumulated.length) {
+        value = f.apply(this, accumulated.shift());
+      }
+      active = false;
+      return value;
+    }
+  };
+}
+
+var sum = tco(function(x, y) {
+  if (y > 0) {
+    return sum(x + 1, y - 1)
+  }
+  else {
+    return x
+  }
+});
+
+console.log(sum(1, 100000))
+// 100001
 ```
