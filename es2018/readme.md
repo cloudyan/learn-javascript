@@ -3,6 +3,7 @@
 - 异步迭代
 - Promise.finally()
 - Rest/Spread 属性
+  - ES2018 扩展运算符增加了对对象的支持
 - 正则表达式命名捕获组（Regular Expression Named Capture Groups）
 - 正则表达式反向断言（lookbehind）
 - 正则表达式dotAll模式
