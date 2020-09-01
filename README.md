@@ -4,6 +4,17 @@
 
 解决疑问，原理分析，常见用法，替代方案，常见坑等等
 
+ES全称ECMAScript，ECMAScript是ECMA制定的标准化脚本语言。目前JavaScript使用的ECMAScript版本为[ECMA-417](https://ecma-international.org/publications/standards/Ecma-417.htm)。关于ECMA的最新资讯可以浏览 [ECMA news](https://www.ecma-international.org/news/index.html)查看。
+
+ECMA规范最终由[TC39](https://github.com/tc39)敲定。TC39由包括浏览器厂商在内的各方组成，他们开会推动JavaScript提案沿着一条严格的发展道路前进。
+从提案到入选ECMA规范主要有以下几个阶段：
+
+- Stage 0: strawman——最初想法的提交。
+- Stage 1: proposal（提案）——由TC39至少一名成员倡导的正式提案文件，该文件包括API事例。
+- Stage 2: draft（草案）——功能规范的初始版本，该版本包含功能规范的两个实验实现。
+- Stage 3: candidate（候选）——提案规范通过审查并从厂商那里收集反馈
+- Stage 4: finished（完成）——提案准备加入ECMAScript，但是到浏览器或者Nodejs中可能需要更长的时间。
+
 ## ES2015 (ES6)
 
 - Let与Const
@@ -89,3 +100,8 @@
 - Null 判断运算符 `??`
   - 行为类似`||`，但是只有运算符左侧的值为`null`或`undefined`时，才会返回右侧的值
   - 运算优先级问题
+
+参考：
+
+- https://es6.ruanyifeng.com/
+- https://juejin.im/post/6844903811622912014
