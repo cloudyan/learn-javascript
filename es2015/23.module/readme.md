@@ -70,6 +70,7 @@ export { name1, name2, …, nameN };
 
 // 重命名导出
 export { variable1 as name1, variable2 as name2, …, nameN };
+export { myNumbers, myLogger as Logger, Alligator }
 
 // 解构导出并重命名
 export const { name1, name2: bar } = o;
