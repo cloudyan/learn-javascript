@@ -125,3 +125,31 @@ for (let ch of s) {
   console.log(ch.codePointAt(0).toString(16));
 }
 ```
+
+Do not reuse generators
+不要重用生成器
+
+Generators should not be re-used, even if the `for...of` loop is terminated early, for example via the `break` keyword. Upon exiting a loop, the generator is closed and trying to iterate over it again does not yield any further results.
+
+生成器不应该重用，即使`for...of`循环的提前终止，例如通过`break`关键字。在退出循环后，生成器关闭，并尝试再次迭代，不会产生任何进一步的结果。
+
+```js
+const gen = (function *(){
+  yield 1;
+  yield 2;
+  yield 3;
+})();
+for (const o of gen) {
+  console.log(o);
+  break;  // Closes iterator
+}
+
+// The generator should not be re-used, the following does not make sense!
+for (const o of gen) {
+  console.log(o); // Never called.
+}
+```
+
+参考：
+
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of
