@@ -1,5 +1,6 @@
 # ES2020
 
+- ES2020 引入了一种新的数据类型 BigInt（大整数），来解决这个问题，这是 ECMAScript 的第八种数据类型。BigInt 只用来表示整数，没有位数的限制，任何位数的整数都可以精确表示。
 - 链判断运算符 （optional chaining operator）`?.`
   - 三种用法
   - 常见用法
@@ -7,6 +8,10 @@
 - Null 判断运算符 `??`
   - 行为类似`||`，但是只有运算符左侧的值为`null`或`undefined`时，才会返回右侧的值
   - 运算优先级问题
+- 新的基本数据类型BigInt（大整数）。
+  - ECMAScript 的第八种数据类型，只用来表示整数，没有位数的限制
+- 顶层对象 globalThis 对象
+  - [ES2020](https://github.com/tc39/proposal-global) 在语言标准的层面，引入`globalThis`作为顶层对象。也就是说，任何环境下，`globalThis`都是存在的，都可以从它拿到顶层对象，指向全局环境下的`this`。
 
 ```js
 // 错误的写法
@@ -97,3 +102,8 @@ a?.b = c
 
 
 ??有一个运算优先级问题，它与&&和||的优先级孰高孰低。现在的规则是，如果多个逻辑运算符一起使用，必须用括号表明优先级，否则会报错。
+
+
+参考：
+
+- [BigInt](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/BigInt)
