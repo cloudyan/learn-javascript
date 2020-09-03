@@ -1,5 +1,8 @@
 
 console.log('bb 这个文件很大的');
+setTimeout(function () {
+  console.log('bb setTimeout 1000')
+}, 1000);
 
 var requirejs, require, define;
 !function(global) {
