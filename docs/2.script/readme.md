@@ -3,8 +3,8 @@
 引入使用 js 的方式有多种形式
 
 - 行内引入，`<img on+事件类型="js 代码" />`
-- 使用  script  标签，内联嵌入在当前的 `html` 文档内
-- 使用  script  标签引入外部 js
+- 使用 script 标签，内联嵌入在当前的 `html` 文档内
+- 使用 script 标签引入外部 js
 - 也可以动态加载
 
 重点内容便是掌握 **js 的加载时序与执行时序**
@@ -208,3 +208,63 @@ export function loadCss(cssUrl) {
 - [全面理解document.write()](https://segmentfault.com/a/1190000007958530)
 - [MDN document.write](https://developer.mozilla.org/zh-CN/docs/Web/API/Document/write)
 - [document.write知多少](https://segmentfault.com/a/1190000006197157)
+
+性能分析
+
+使用 `<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>` 可优化资源加载 crossorigin属性必须，不然资源会加载两次
+
+- https://web.dev/efficiently-load-third-party-javascript
+- https://web.dev/use-lighthouse-for-performance-budgets/
+- https://www.cdnplanet.com/blog/faster-google-webfonts-preconnect/
+- https://web.dev/codelab-optimize-third-party-javascript/
+
+https://github.com/marcelduran/webpagetest-api
+
+sudo npm i -g webpagetest
+webpagetest test https://m.mishifeng.com -k A.29c6fe1119c29af09a9171fdea280e1a
+
+https://css-tricks.com/use-webpagetest-api/#single-point-of-failure
+
+```js
+var WebPageTest = require('WebPageTest')
+var wpt = new WebPageTest('https://www.webpagetest.org/', 'your-api-key')
+wpt.runTest('https://css-tricks.com', {
+  connectivity: 'Cable',
+  location: 'Dulles:Chrome',
+  firstViewOnly: false,
+  runs: 1,
+  video: true
+}, function processTestRequest(err, result) {
+  console.log(err || result)
+})
+
+
+wpt.getTestStatus('160814_W7_960', function processTestStatus(err, result) {
+  console.log(err || result)
+})
+
+wpt.runTest('https://css-tricks.com', {
+  connectivity: 'Cable',
+  location: 'Dulles:Chrome',
+  firstViewOnly: false,
+  runs: 1,
+  pollResults: 5,
+  video: true
+}, function processTestResult(err, result) {
+  // First view — use `repeatView` for repeat view
+  console.log('Load time:', result.data.average.firstView.loadTime)
+  console.log('First byte:', result.data.average.firstView.TTFB)
+  console.log('Start render:', result.data.average.firstView.render)
+  console.log('Speed Index:', result.data.average.firstView.SpeedIndex)
+  console.log('DOM elements:', result.data.average.firstView.domElements)
+
+  console.log('(Doc complete) Requests:', result.data.average.firstView.requestsDoc)
+  console.log('(Doc complete) Bytes in:', result.data.average.firstView.bytesInDoc)
+
+  console.log('(Fully loaded) Time:', result.data.average.firstView.fullyLoaded)
+  console.log('(Fully loaded) Requests:', result.data.average.firstView.requestsFull)
+  console.log('(Fully loaded) Bytes in:', result.data.average.firstView.bytesIn)
+
+  console.log('Waterfall view:', result.data.runs[1].firstView.images.waterfall)
+})
+```
