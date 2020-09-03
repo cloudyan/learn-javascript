@@ -11,6 +11,7 @@
   - 如果将对象的属性也冻结（这样才彻底冻结）
 - 声明变量的六种方法
 - 顶层对象 globalThis 对象
+  - [ES2020](https://github.com/tc39/proposal-global) 在语言标准的层面，引入`globalThis`作为顶层对象。也就是说，任何环境下，`globalThis`都是存在的，都可以从它拿到顶层对象，指向全局环境下的`this`。
 
 为什么需要块级作用域？
 

@@ -105,3 +105,4 @@ ECMA规范最终由[TC39](https://github.com/tc39)敲定。TC39由包括浏览�
 
 - https://es6.ruanyifeng.com/
 - https://juejin.im/post/6844903811622912014
+- https://github.com/ruanyf/es6tutorial/blob/7b8c0632f62f3da9310f6fe13e8d6c96c72111e5/docs/reference.md
