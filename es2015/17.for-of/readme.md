@@ -99,7 +99,7 @@ while (!$result.done) {
 - `for...in`
   - `for...in`循环主要是为遍历对象而设计的，不适用于遍历数组
   - 场景
-    - 枚举对象（需要 !{}.hasOwnProperty(key) 过滤原型对象）
+    - 枚举对象（需要 hasOwnProperty(key) 过滤原型对象）
     - 枚举数组（但无法过滤 数组本身的属性，可以使用 forEach 替代（但无法中途 break or return））
     - IE9+ 也支持字符串遍历
 - `for...of`
