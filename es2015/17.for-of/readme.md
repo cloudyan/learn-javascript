@@ -110,6 +110,31 @@ while (!$result.done) {
   - 迭代类型数组 `new Uint8Array([0x00, 0xff])`
   - 迭代Map Set Generators
 
+
+```js
+Object.prototype.objCustom = function() {};
+Array.prototype.arrCustom = function() {};
+
+let iterable = [3, 5, 7];
+iterable.foo = 'hello';
+
+for (let i in iterable) {
+  console.log(i); // 0, 1, 2, "foo", "arrCustom", "objCustom"
+}
+
+for (let i in iterable) {
+  if (iterable.hasOwnProperty(i)) {
+    console.log(i); // 0, 1, 2, "foo"
+  }
+}
+
+for (let i of iterable) {
+  console.log(i); // 3, 5, 7
+}
+```
+
+遍历字符串
+
 ```js
 let s = '𠮷a';
 s.codePointAt(0).toString(16) // "20bb7"
