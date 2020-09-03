@@ -19,3 +19,15 @@ exports.bad = function (arg) {
 ```
 
 上面代码中，如果发生循环加载，`require('a').foo`的值很可能后面会被改写，改用`require('a')`会更保险一点。
+
+ES modules
+
+nodejs@13.2.0 之前想要在node中使用ES modules，需要添加`--experimental-modules`
+
+```bash
+# < nodejs@13.2.0
+node --experimental-modules ./complex/index.js
+
+# >= nodejs@13.2.0
+node ./complex/index.js
+```
