@@ -103,13 +103,14 @@ while (!$result.done) {
     - 枚举数组（但无法过滤 数组本身的属性，可以使用 forEach 替代（但无法中途 break or return））
     - IE9+ 也支持字符串遍历
 - `for...of`
-  - 遍历数组
-  - 迭代字符串
-  - 迭代`arguments`类数组对象（只要部署了遍历器接口就 OK）
-  - 迭代`NodeList`这类DOM集合
-  - 迭代类型数组 `new Uint8Array([0x00, 0xff])`
-  - 迭代Map Set Generators
-
+  - 场景
+    - 遍历数组
+    - 迭代字符串
+    - 可以遍历[类]数组（只要部署了遍历器接口就 OK），普通对象不能直接使用，会报错
+      - 迭代`arguments`类数组对象（）
+      - 迭代`NodeList`这类DOM集合
+      - 迭代类型数组 `new Uint8Array([0x00, 0xff])`
+      - 迭代Map Set Generators
 
 ```js
 Object.prototype.objCustom = function() {};
