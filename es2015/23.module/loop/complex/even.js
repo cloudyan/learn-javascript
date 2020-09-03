@@ -1,5 +1,5 @@
 // even.js
-import { odd } from './odd'
+import { odd } from './odd.js'
 export var counter = 0;
 export function even(n) {
   counter++;
