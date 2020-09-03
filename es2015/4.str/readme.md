@@ -76,7 +76,6 @@ String.raw = function (strings, ...values) {
 }
 ```
 
-
 计算字符串长度（将汉字长度记为 2，英文字母及数字长度记为 1）
 
 ```js
@@ -84,26 +83,30 @@ let s = '𠮷a';
 s.codePointAt(0).toString(16) // "20bb7"
 s.codePointAt(2).toString(16) // "61"
 
+// 会将汉字拆了
+for (let ch in s) {
+  console.log(s[ch].codePointAt(0).toString(16));
+}
+
+// 可以正确分割
 for (let ch of s) {
   console.log(ch.codePointAt(0).toString(16));
 }
-
-arr.forEach(
-  ch => console.log(ch.codePointAt(0).toString(16))
-)
-// 20bb7
-// 61
-```
-
-```js
-var s = '𠮷c小'
-console.log(s.length)
 
 // 会将汉字拆了，存在问题
 console.log(s.split(''))
 
 // 这个可以正确分割
 console.log([...s])
+
+console.log(s.startsWith('𠮷'))  // true
+console.log(s.includes('𠮷'))    // true
+
+[...s].forEach(
+  ch => console.log(ch.codePointAt(0).toString(16))
+)
+// 20bb7
+// 61
 
 const strLen(str) {
   return [...str].length;

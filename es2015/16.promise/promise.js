@@ -1,6 +1,6 @@
-// Promise 实现
+// Promise 模拟实现
 
-export default class Promise {
+export default class MyPromise {
   constructor() {
 
   }
