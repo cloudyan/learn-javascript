@@ -2,7 +2,7 @@
 
 - async/await (Generator 函数的语法糖)
   - 引入异步迭代器（asynchronous iterators）
-  - await可以和for...of循环一起使用，以串行的方式运行异步操作
+  - `await`可以和`for...of`循环一起使用，以串行的方式运行异步操作
 - Object.values()
 - Object.entries() 只输出属性名非 Symbol 值的属性
   - 遍历对象的属性

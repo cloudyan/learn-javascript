@@ -17,25 +17,30 @@ ECMA规范最终由[TC39](https://github.com/tc39)敲定。TC39由包括浏览�
 
 ## ES2015 (ES6)
 
-- Let与Const
-- 类
-- 模块化
+- let && const
+- 解构赋值
+- 扩展运算符
+- 对象属性简写
 - 箭头函数
 - 函数参数默认值
 - 模板字符串
-- 解构赋值
-- 延展操作符
-- 对象属性简写
+- Set && Map
+- Symbol
 - Promise
+- Proxy
+- 类 Class
+- 模块化
 
 ## ES2016
 
-- 数组includes()方法，用来判断一个数组是否包含一个指定的值，根据情况，如果包含则返回true，否则返回false。
+- 引入数组includes()方法
 - a ** b指数运算符，它与 Math.pow(a, b)相同。
 
 ## ES2017
 
-- async/await
+- async/await (Generator 函数的语法糖)
+  - 引入异步迭代器（asynchronous iterators）
+  - `await`可以和`for...of`循环一起使用，以串行的方式运行异步操作
 - Object.values()
 - Object.entries() 只输出属性名非 Symbol 值的属性
   - 遍历对象的属性
@@ -57,6 +62,7 @@ ECMA规范最终由[TC39](https://github.com/tc39)敲定。TC39由包括浏览�
 - 异步迭代
 - Promise.finally()
 - Rest/Spread 属性
+  - ES2018 扩展运算符增加了对对象的支持
 - 正则表达式命名捕获组（Regular Expression Named Capture Groups）
 - 正则表达式反向断言（lookbehind）
 - 正则表达式dotAll模式
@@ -85,14 +91,16 @@ ECMA规范最终由[TC39](https://github.com/tc39)敲定。TC39由包括浏览�
 - Function.prototype.toString()现在返回精确字符，包括空格和注释
 - 简化try {} catch {}, 修改 catch 绑定
   - ES2019 做出了改变，允许catch语句省略参数
-- 新的基本数据类型BigInt
-- globalThis
 - import()
 - Legacy RegEx
 - 私有的实例方法和访问器
+- Array.prototype.sort() 的排序稳定性
+  - 早先的 ECMAScript 没有规定，Array.prototype.sort()的默认排序算法是否稳定，留给浏览器自己决定，这导致某些实现是不稳定的。
+  - ES2019 明确规定，Array.prototype.sort()的默认排序算法必须稳定。
 
 ## ES2020
 
+- 新的基本数据类型`BigInt`（大整数）
 - 链判断运算符 （optional chaining operator）`?.`
   - 三种用法
   - 常见用法
@@ -100,6 +108,7 @@ ECMA规范最终由[TC39](https://github.com/tc39)敲定。TC39由包括浏览�
 - Null 判断运算符 `??`
   - 行为类似`||`，但是只有运算符左侧的值为`null`或`undefined`时，才会返回右侧的值
   - 运算优先级问题
+- 顶层对象 globalThis 对象
 
 参考：
 
