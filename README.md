@@ -13,7 +13,7 @@ ECMA规范最终由[TC39](https://github.com/tc39)敲定。TC39由包括浏览�
 - Stage 1: proposal（提案）——由TC39至少一名成员倡导的正式提案文件，该文件包括API事例。
 - Stage 2: draft（草案）——功能规范的初始版本，该版本包含功能规范的两个实验实现。
 - Stage 3: candidate（候选）——提案规范通过审查并从厂商那里收集反馈
-- Stage 4: finished（完成）——提案准备加入ECMAScript，但是到浏览器或者Nodejs中可能需要更长的时间。
+- [Stage 4](https://github.com/tc39/proposals/blob/master/finished-proposals.md): finished（完成）——提案准备加入ECMAScript，但是到浏览器或者Nodejs中可能需要更长的时间。
 
 ## ES2015 (ES6)
 
@@ -53,8 +53,7 @@ ECMA规范最终由[TC39](https://github.com/tc39)敲定。TC39由包括浏览�
   - padStart()
   - padEnd()
 - 函数参数列表结尾允许逗号
-- Object.getOwnPropertyDescriptors() 返回指定对象所有自身属性（非继承属性）的描述对象。
-  - 主要是为了解决Object.assign()无法正确拷贝get属性和set属性的问题。
+- Object.getOwnPropertyDescriptors()
 - ShareArrayBuffer和Atomics对象，用于从共享内存位置读取和写入
 
 ## ES2018
@@ -109,6 +108,16 @@ ECMA规范最终由[TC39](https://github.com/tc39)敲定。TC39由包括浏览�
   - 行为类似`||`，但是只有运算符左侧的值为`null`或`undefined`时，才会返回右侧的值
   - 运算优先级问题
 - 顶层对象 globalThis 对象
+
+## ES2021
+
+- String.prototype.replaceAll
+- Promise.any() 可以理解为 Promise.all 的相反操作
+- 逻辑赋值操作符 (简写逻辑运算符+赋值)
+  - `&&=`, `||=`, `??=`
+- 数字分隔符
+  - `console.log(1_23 === 123)`
+- WeakRefs
 
 参考：
 

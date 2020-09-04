@@ -1,15 +1,10 @@
 # Number
 
-- 扩展运算符
-- Array.from()
-- Array.of()
-- 实例方法
-  - copyWithin()
-  - find()
-  - findIndex()
-  - fill()
-  - entries() keys() values()
-  - includes()
-  - flat() flatMap()
-- 数组的空位
-- Array.prototype.sort() 的排序稳定性
+- 二进制和八进制表示法
+- Number.isFinite(), Number.isNaN()
+- Number.parseInt(), Number.parseFloat()
+- Number.isInteger()
+- Number.EPSILON
+- 安全整数和 Number.isSafeInteger()
+- Math 对象的扩展
+- 指数运算符
