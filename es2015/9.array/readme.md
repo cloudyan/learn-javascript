@@ -15,17 +15,22 @@
 - 数组实例的 find() 和 findIndex()
 - 数组实例的 fill()
 - 数组实例的 entries()，keys() 和 values()
-- 数组实例的 flat()，flatMap()
+- 数组实例的 flat()，flatMap() 将嵌套的数组“拉平”
 - 数组的空位
   - 空位 vs `undefined`
     - 空位不是`undefined`，一个位置的值等于`undefined`，依然是有值的。
     - 空位是没有任何值，`in`运算符可以说明这一点。
   - ES5 对空位的处理，很不一致
-  - ES6 则是明确将空位转为 `undefined`，
-    - 但 `copyWithin`, `for...of` 会处理空位
-    - 其他会将空位处理成 `undefined`
-- Array.prototype.sort() 的排序稳定性
-  - ES2019 明确规定，Array.prototype.sort()的默认排序算法必须稳定。
+    - `forEach()`, `filter()`, `reduce()`, `every()` 和`some()`都会跳过空位
+    - `map()`会跳过空位，但会保留这个值
+    - `join()`和`toString()`会将空位视为`undefined`，而`undefined`和`null`会被处理成空字符串。
+  - ES6 则是明确将空位转为 `undefined`
+    - `Array.from()`, 扩展运算符 其他会将空位处理成 `undefined`
+    - `copyWithin()` 会连空位一起拷贝
+    - `fill()` 会将空位视为正常的数组位置
+    - `for...of`循环也会遍历空位
+    - `entries()`、`keys()`、`values()`、`find()`和`findIndex()`会将空位处理成`undefined`。
+  - 由于空位的处理规则非常不统一，所以建议避免出现空位。
 
 扩展运算符
 
@@ -177,12 +182,20 @@ find && findIndex
 
 这两个方法都可以发现`NaN`，弥补了数组的`indexOf`方法的不足
 
+第二个参数，可以绑定回调函数中的 `this` 对象
+
 ```js
 [NaN].indexOf(NaN)
 // -1
 
 [NaN].findIndex(y => Object.is(NaN, y))
 // 0
+
+function f(v){
+  return v > this.age;
+}
+let person = {name: 'John', age: 20};
+[10, 12, 26, 15].find(f, person);    // 26
 ```
 
 fill(target, startIndex, endIndex)
@@ -196,6 +209,22 @@ new Array(3).fill(7)
 
 ['a', 'b', 'c'].fill(7, 1, 2)
 // ['a', 7, 'c']
+```
+
+flat() && flatMap()
+
+```js
+[1, 2, [3, [4, 5]]].flat()
+// [1, 2, 3, [4, 5]]
+
+[1, 2, [3, [4, 5]]].flat(2)
+// [1, 2, 3, 4, 5]
+
+[1, [2, [3]]].flat(Infinity)
+// [1, 2, 3]
+
+[1, 2, , 4, 5].flat()
+// [1, 2, 4, 5]
 ```
 
 数组的空位
