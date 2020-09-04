@@ -15,10 +15,12 @@
   - padStart()
   - padEnd()
 - 函数参数列表结尾允许逗号
-- Object.getOwnPropertyDescriptors() 返回指定对象所有自身属性（非继承属性）的描述对象。
-  - 主要是为了解决Object.assign()无法正确拷贝get属性和set属性的问题。
+- Object.getOwnPropertyDescriptors()
 - ShareArrayBuffer和Atomics对象，用于从共享内存位置读取和写入
 
+Object.getOwnPropertyDescriptors() 返回指定对象所有自身属性（非继承属性）的描述对象。
+
+主要是为了解决Object.assign()无法正确拷贝get属性和set属性的问题。
 
 ```js
 async function process(array) {

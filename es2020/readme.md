@@ -9,6 +9,8 @@
   - 行为类似`||`，但是只有运算符左侧的值为`null`或`undefined`时，才会返回右侧的值
   - 运算优先级问题
 - 顶层对象 globalThis 对象
+- Promise.allSettled
+- import.meta
 
 [ES2020](https://github.com/tc39/proposal-global) 在语言标准的层面，引入`globalThis`作为顶层对象。也就是说，任何环境下，`globalThis`都是存在的，都可以从它拿到顶层对象，指向全局环境下的`this`。
 
