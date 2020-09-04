@@ -96,9 +96,12 @@ for (let ch of s) {
 // 会将汉字拆了，存在问题
 console.log(s.split(''))
 
+// 可以正确识别
+
 // 这个可以正确分割
 console.log([...s])
 
+console.log(s.indexOf('𠮷') > -1) // true
 console.log(s.startsWith('𠮷'))  // true
 console.log(s.includes('𠮷'))    // true
 
