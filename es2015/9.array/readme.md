@@ -5,13 +5,16 @@
   - 支持后面放置表达式
   - 注意，只有函数调用时，扩展运算符才可以放在圆括号中，否则会报错
   - 可以将字符串转为真正的数组，能够正确识别四个字节的 Unicode 字符（split('') 不行）
-- Array.from()
-- Array.of()
+- Array.from() 用于将两类对象转为真正的数组
+  - 类似数组的对象（array-like object, 如 arrayLike, arguments对象, NodeList对象）
+  - 可遍历（iterable）的对象（包括 ES6 新增的数据结构 Set 和 Map）
+- Array.of() 用于将一组值，转换为数组
+  - 主要目的是弥补数组构造函数Array()的不足。因为参数个数的不同，会导致Array()的行为有差异。
 - 数组实例的 copyWithin()
+  - Array.prototype.copyWithin(target, start = 0, end = this.length)
 - 数组实例的 find() 和 findIndex()
 - 数组实例的 fill()
 - 数组实例的 entries()，keys() 和 values()
-- 数组实例的 includes()
 - 数组实例的 flat()，flatMap()
 - 数组的空位
   - 空位 vs `undefined`
@@ -24,7 +27,19 @@
 - Array.prototype.sort() 的排序稳定性
   - ES2019 明确规定，Array.prototype.sort()的默认排序算法必须稳定。
 
+扩展运算符
+
 ```js
+// 复制数组
+const a1 = [1, 2];
+const a2 = a1.concat();
+a1.concat(a2, a2)
+
+// 写法一
+const a2 = [...a1];
+// 写法二
+const [...a2] = a1;
+
 console.log(...[1, 2, 3])
 // 1 2 3
 
@@ -82,6 +97,105 @@ console.log([...go1])   // []
 
 console.log([...go()])  // 不能重用
 console.log([...go()])
+```
+
+Array.from()
+
+```js
+let arrayLike = {
+  '0': 'a',
+  '1': 'b',
+  '2': 'c',
+  length: 3
+};
+
+// console.log(...arrayLike) // 扩展运算符不能处理这个，Array.from 可以
+
+// ES5的写法
+var arr1 = [].slice.call(arrayLike); // ['a', 'b', 'c']
+console.log(arr1)
+
+// ES6的写法
+let arr2 = Array.from(arrayLike); // ['a', 'b', 'c']
+console.log(arr2)
+
+// NodeList对象
+let ps = document.querySelectorAll('p');
+Array.from(ps).filter(p => {
+  return p.textContent.length > 100;
+});
+
+// arguments对象
+function foo() {
+  var args = Array.from(arguments);
+
+  // [...arguments]
+  // ...
+}
+
+Array.from(arrayLike, x => x * x);
+// 等同于
+Array.from(arrayLike).map(x => x * x);
+
+// 将数组中布尔值为false的成员转为0。
+Array.from([1, , 2, , 3], (n) => n || 0)
+// [1, 0, 2, 0, 3]
+
+// 返回各种数据的类型
+function typesOf () {
+  return Array.from(arguments, value => typeof value)
+}
+typesOf(null, [], NaN)
+// ['object', 'object', 'number']
+
+Array.from({ length: 2 }, () => 'jack')
+// ['jack', 'jack']
+
+function countSymbols(string) {
+  return Array.from(string).length;
+}
+```
+
+Array.of()
+
+```js
+Array.of(3, 11, 8) // [3,11,8]
+Array.of(3) // [3]
+Array.of(3).length // 1
+
+Array() // []
+Array(3) // [, , ,]
+Array(3, 11, 8) // [3, 11, 8]
+
+// 模拟实现
+function ArrayOf(){
+  return [].slice.call(arguments);
+}
+```
+
+find && findIndex
+
+这两个方法都可以发现`NaN`，弥补了数组的`indexOf`方法的不足
+
+```js
+[NaN].indexOf(NaN)
+// -1
+
+[NaN].findIndex(y => Object.is(NaN, y))
+// 0
+```
+
+fill(target, startIndex, endIndex)
+
+```js
+['a', 'b', 'c'].fill(7)
+// [7, 7, 7]
+
+new Array(3).fill(7)
+// [7, 7, 7]
+
+['a', 'b', 'c'].fill(7, 1, 2)
+// ['a', 7, 'c']
 ```
 
 数组的空位

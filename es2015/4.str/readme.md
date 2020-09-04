@@ -99,7 +99,9 @@ console.log(s.split(''))
 // 可以正确识别
 
 // 这个可以正确分割
+let s = '𠮷a';
 console.log([...s])
+console.log(Array.from(s))
 
 console.log(s.indexOf('𠮷') > -1) // true
 console.log(s.startsWith('𠮷'))  // true
