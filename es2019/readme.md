@@ -64,3 +64,16 @@ try {
   // ...
 }
 ```
+
+Symbol.prototype.description
+
+```js
+const sym = Symbol('foo');
+
+String(sym) // "Symbol(foo)"
+sym.toString() // "Symbol(foo)"
+
+// 上面的用法不是很方便。
+// ES2019 提供了一个实例属性description，直接返回 Symbol 的描述。
+sym.description // "foo"
+```

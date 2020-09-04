@@ -7,9 +7,10 @@
 - 箭头函数
 - 函数参数默认值
 - 模板字符串
-- Set && Map
-- Symbol
-- Promise
-- Proxy
+- `Set` && `Map`
+- `Symbol` 第七种原始数据类型, 表示独一无二的值
+  - 前六种是：`undefined`、`null`、布尔值（Boolean）、字符串（String）、数值（Number）、对象（Object）
+- `Promise`
+- `Proxy`
 - 类 Class
 - 模块化
