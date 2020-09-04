@@ -1,6 +1,6 @@
 # ES2020
 
-- 新的基本数据类型`BigInt`（大整数）
+- `BigInt`（大整数）第八种原始数据类型
 - 链判断运算符 （optional chaining operator）`?.`
   - 三种用法
   - 常见用法
