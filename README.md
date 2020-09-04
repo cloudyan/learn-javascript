@@ -59,7 +59,7 @@ ECMA规范最终由[TC39](https://github.com/tc39)敲定。TC39由包括浏览�
 ## ES2018
 
 - 异步迭代
-- Promise.finally()
+- Promise.prototype.finally()
 - Rest/Spread 属性
   - ES2018 扩展运算符增加了对对象的支持
 - 正则表达式命名捕获组（Regular Expression Named Capture Groups）
@@ -90,8 +90,7 @@ ECMA规范最终由[TC39](https://github.com/tc39)敲定。TC39由包括浏览�
 - Function.prototype.toString()现在返回精确字符，包括空格和注释
 - 简化try {} catch {}, 修改 catch 绑定
   - ES2019 做出了改变，允许catch语句省略参数
-- import()
-- Legacy RegEx
+- Legacy RegExp
 - 私有的实例方法和访问器
 - Array.prototype.sort() 的排序稳定性
   - 早先的 ECMAScript 没有规定，Array.prototype.sort()的默认排序算法是否稳定，留给浏览器自己决定，这导致某些实现是不稳定的。
@@ -107,7 +106,11 @@ ECMA规范最终由[TC39](https://github.com/tc39)敲定。TC39由包括浏览�
 - Null 判断运算符 `??`
   - 行为类似`||`，但是只有运算符左侧的值为`null`或`undefined`时，才会返回右侧的值
   - 运算优先级问题
+- import() dynamic import
+- Promise.allSettled
 - 顶层对象 globalThis 对象
+- 规范 `for-in` 枚举顺序
+- import.meta
 
 ## ES2021
 
@@ -116,7 +119,7 @@ ECMA规范最终由[TC39](https://github.com/tc39)敲定。TC39由包括浏览�
 - 逻辑赋值操作符 (简写逻辑运算符+赋值)
   - `&&=`, `||=`, `??=`
 - 数字分隔符
-  - `console.log(1_23 === 123)`
+  - `console.log(1_23 === 123)` // true
 - WeakRefs
 
 参考：
