@@ -18,8 +18,7 @@
 - Function.prototype.toString()现在返回精确字符，包括空格和注释
 - 简化try {} catch {}, 修改 catch 绑定
   - ES2019 做出了改变，允许catch语句省略参数
-- import()
-- Legacy RegEx
+- Legacy RegExp
 - 私有的实例方法和访问器
 - Array.prototype.sort() 的排序稳定性
   - 早先的 ECMAScript 没有规定，Array.prototype.sort()的默认排序算法是否稳定，留给浏览器自己决定，这导致某些实现是不稳定的。
