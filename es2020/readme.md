@@ -9,7 +9,7 @@
   - 行为类似`||`，但是只有运算符左侧的值为`null`或`undefined`时，才会返回右侧的值
   - 运算优先级问题
 - import() dynamic import
-- Promise.allSettled
+- Promise.allSettled()
 - 顶层对象 globalThis 对象
 - 规范 `for-in` 枚举顺序
 - import.meta
