@@ -147,10 +147,10 @@ const { method } = packageMain;
 
 ```json
 // package.json
-"exports"：{
+"exports": {
   "require": "./index.js",
   "import": "./esm/wrapper.js"
-}
+},
 ```
 
 参考：
