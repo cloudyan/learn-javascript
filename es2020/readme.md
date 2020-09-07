@@ -20,6 +20,20 @@ ES2020 引入了一种新的数据类型 BigInt（大整数），来解决这个
 
 BigInt 只用来表示整数，没有位数的限制，任何位数的整数都可以精确表示。
 
+- 不支持小数，会报错
+- 不能与普通数值进行混合运算
+- 一元的求正运算符`+`, 报错，为了不破坏 asm.js
+- 不带符号的右移位运算符`>>>` (BigInt 总是带有符号的)
+
+```js
+// BigInt 参看js版本[雪花算法](https://github.com/cloudyan/snowflake)中的应用
+
+BigInt.parseInt('9007199254740993', 10)
+// 9007199254740993n
+```
+
+链判断运算符
+
 ```js
 // 错误的写法
 const firstName = message.body.user.firstName;
