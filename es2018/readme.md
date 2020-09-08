@@ -23,3 +23,16 @@ tag`\unicode and \u{55}` // 不报错
 
 let bad = `bad escape sequence: \unicode`; // 报错
 ```
+
+Promise.prototype.finally()
+
+```js
+// finally 的实现
+Promise.prototype.finally = function(callback) {
+  const P = this.constructor
+  return this.then(
+    value => P.resolve(callback()).then(() => value)
+    reason => P.resolve(callback()).then(() => { throw reason })
+  )
+}
+```
