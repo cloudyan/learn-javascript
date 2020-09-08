@@ -20,7 +20,7 @@
 - 一旦状态改变，就不会再变，任何时候都可以得到这个结果
 
 ```js
-const promise = new Promise(function(resolve, reject) {
+const promise = new Promise((resolve, reject) => {
   // ... some code
 
   if (/* 异步操作成功 */){
@@ -66,7 +66,16 @@ promise
   .finally(res => {  // 不论执行.then还是.catch，finally都会执行
     console.log('finally', res)
   })
+  // .then(res => {
+  //   console.log(111)
+  //   return 222
+  // })
 ```
+
+- finally 后面还可以写 then 调用吗
+- then catch finally 中回调函数的参数都从哪里来
+- 执行时序什么样，如果中途出错呢
+- 什么情况是 `Promise 会吃掉错误`
 
 关于执行顺序
 
