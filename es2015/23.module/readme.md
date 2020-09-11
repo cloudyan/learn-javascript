@@ -82,7 +82,7 @@ export default function (…) { … } // also class, function*
 export default function name1(…) { … } // also class, function*
 export { name1 as default, … };
 
-// Aggregating modules
+// 聚合模块 Aggregating modules
 export * from "module-name"; // does not set the default export
 export * as name1 from "module-name";
 export { name1, name2, …, nameN } from "module-name";
