@@ -132,6 +132,8 @@ for (let i in iterable) {
 for (let i of iterable) {
   console.log(i); // 3, 5, 7
 }
+
+
 ```
 
 遍历字符串

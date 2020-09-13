@@ -211,7 +211,7 @@ new Array(3).fill(7)
 // ['a', 7, 'c']
 ```
 
-flat() && flatMap()
+flat() && flatMap() 将数组拉平
 
 ```js
 [1, 2, [3, [4, 5]]].flat()
@@ -225,6 +225,9 @@ flat() && flatMap()
 
 [1, 2, , 4, 5].flat()
 // [1, 2, 4, 5]
+
+// flat 转对象
+
 ```
 
 数组的空位
