@@ -30,6 +30,7 @@
   - 扩展运算符 等同于使用`Object.assign()`方法
   - 扩展运算符后面可以跟表达式
 - Object.is() “Same-value equality”（同值相等）算法
+  - 与 `===` 不同之处只有两个：一是`+0`不等于`-0`，二是`NaN`等于自身。
 - Object.assign() 只拷贝源对象的自身属性（不拷贝继承属性），也不拷贝不可枚举的属性（enumerable: false）
   - 会拷贝属性名为 `Symbol` 值的属性
   - 浅拷贝 vs 深拷贝
@@ -181,4 +182,23 @@ const clone3 = Object.create(
   Object.getOwnPropertyDescriptors(obj)
 )
 // 写法一的__proto__属性在非浏览器的环境不一定部署，因此推荐使用写法二和写法三。
+```
+
+Object.is()
+
+```js
+// ES5 部署
+Object.defineProperty(Object, 'is', {
+  value: function(x, y) {
+    if (x === y) {
+      // 针对+0 不等于 -0的情况
+      return x !== 0 || 1 / x === 1 / y;
+    }
+    // 针对NaN的情况
+    return x !== x && y !== y;
+  },
+  configurable: true,
+  enumerable: false,
+  writable: true
+});
 ```
