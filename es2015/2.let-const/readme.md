@@ -121,7 +121,10 @@ ES2020 在语言标准的层面，引入globalThis作为顶层对象。也就是
 
 垫片库[global-this](https://github.com/ungap/global-this)模拟了这个提案，可以在所有环境拿到globalThis。
 
+- https://github.com/es-shims/globalThis
+
 ```js
+// 不支持小程序, 小程序内为 global
 // 解析: https://mathiasbynens.be/notes/globalthis
 (function() {
   if (typeof globalThis === 'object') return;
