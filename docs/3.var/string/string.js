@@ -121,7 +121,7 @@ splitString(tempestString);
 splitString(monthString, comma);
 
 
-// substr
+// substr(from, ?length)
 const str = 'abcdefghij';
 
 console.log('(1,2): '    + str.substr(1,2));   // (1,2): bc
@@ -132,7 +132,7 @@ console.log('(-20, 2): ' + str.substr(-20,2)); // (-20, 2): ab
 console.log('(20, 2): '  + str.substr(20,2));  // (20, 2):
 
 
-// substring
+// substring(start, ?end)
 // 如果 indexStart 等于 indexEnd，substring 返回一个空字符串。
 // 如果省略 indexEnd，substring 提取字符一直到字符串末尾。
 // 如果任一参数小于 0 或为 NaN，则被当作 0。
