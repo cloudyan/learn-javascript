@@ -5,15 +5,17 @@
   - 三种用法
   - 常见用法
   - 错误用法
-- Null 判断运算符 `??`
+- Null 判断运算符 `??` (空值)
   - 行为类似 `||`，但是只有运算符左侧的值为`null`或`undefined`时，才会返回右侧的值
   - 这个运算符的一个目的，就是跟链判断运算符`?.`配合使用，为`null`或`undefined`的值设置默认值。
   - 运算优先级问题，与 `&&` `||`一起使用，必须用括号表明优先级，否则会报错
 - import() dynamic import
+- import.meta
 - Promise.allSettled()
 - 顶层对象 globalThis 对象
-- 规范 `for-in` 枚举顺序
-- import.meta
+- 明确规范 `for-in` 的枚举顺序
+  - 之前没规范定义顺序，尽管浏览器实现了一致的顺序，现在纳入 ES2020 的官方规范
+- 导出模块的命名空间
 
 [ES2020](https://github.com/tc39/proposal-global) 在语言标准的层面，引入`globalThis`作为顶层对象。也就是说，任何环境下，`globalThis`都是存在的，都可以从它拿到顶层对象，指向全局环境下的`this`。
 
@@ -27,7 +29,7 @@ BigInt 只用来表示整数，没有位数的限制，任何位数的整数都�
 - 不带符号的右移位运算符`>>>` (BigInt 总是带有符号的)
 
 ```js
-// BigInt 参看js版本[雪花算法](https://github.com/cloudyan/snowflake)中的应用
+// BigInt 实战应用参看js版本[雪花算法](https://github.com/cloudyan/snowflake)
 
 BigInt.parseInt('9007199254740993', 10)
 // 9007199254740993n
@@ -122,9 +124,27 @@ a?.b = c
 
 为了保证兼容以前的代码，允许`foo?.3:0`被解析成`foo ? .3 : 0`，因此规定如果`?.`后面紧跟一个十进制数字，那么`?.`不再被看成是一个完整的运算符，而会按照三元运算符进行处理，也就是说，那个小数点会归属于后面的十进制数字，形成一个小数。
 
+关于 `??`
 
-??有一个运算优先级问题，它与&&和||的优先级孰高孰低。现在的规则是，如果多个逻辑运算符一起使用，必须用括号表明优先级，否则会报错。
+- nullish: 一个变量是否为空。仅标识是否是 undefined, null
+- falsely: JavaScript 中很多值都是 falsely。如 空字符串, 数字 0, undefined, null, false, NaN
 
+`??`有一个运算优先级问题，它与`&&`和`||`的优先级孰高孰低。现在的规则是，如果多个逻辑运算符一起使用，必须用括号表明优先级，否则会报错。
+
+导出模块的命名空间
+
+```js
+// 之前支持这个
+import * as utils from './utils'
+
+// 但(之前)不支持这个(现在支持了，通过 babel 可以更早的使用到最新的支持)
+export * as utils from './utils'
+
+// 等同以下效果
+import * as utils from './utils'
+
+export { utils }
+```
 
 参考：
 
