@@ -1,8 +1,10 @@
 # learn-javascript
 
+
 [docs](./docs)
 
-解决疑问，原理分析，常见用法，替代方案，常见坑等等
+- 解决疑问，原理分析，常见用法，替代方案，常见坑等等
+- 单点突破——集中精神，单点突破
 
 ES全称ECMAScript，ECMAScript是ECMA制定的标准化脚本语言。目前JavaScript使用的ECMAScript版本为[ECMA-417](https://ecma-international.org/publications/standards/Ecma-417.htm)。关于ECMA的最新资讯可以浏览 [ECMA news](https://www.ecma-international.org/news/index.html)查看。
 
