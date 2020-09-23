@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>draf: double requestAnimationFrame</title>
+  <meta name="description" content="double RAF JavaScript module">
+  <style>
+  * { box-sizing: border-box }
+  .line-compact { line-height: 1.3333 }
+  :focus { outline: 3px dotted Black }
+  :link { text-decoration-skip: ink }
+  :link, :visited { color: inherit }
+
+  .scheme-3 { background: Gold; color: Black }
+  .scheme-4 { background: MediumSpringGreen; color: Black }
+  .inline-block { display: inline-block }
+  .block { display: block }
+  .natural { display: table }
+  .button {
+    display: inline-block;
+    border: 0;
+    padding: 2rem 1rem;
+    font-size: 1rem;
+    font-family: inherit;
+    text-align: left;
+  }
+  .button::-moz-focus-inner { border-style: none; padding: 0 }
+  .button:enabled { cursor: pointer }
+  .zoomable {
+    transition: transform 450ms;
+    transform: scale(1);
+  }
+  .zoomed { transform: scale(.625) }
+  </style>
+</head>
+<body>
+
+  <figure class="m-auto mb1">
+    <button class="button zoomable scheme-4 mr1 mb1" data-click="reactive" autofocus>Press for reactive motion</button>
+    <button class="button zoomable scheme-3 mr1 mb1" data-click="janky">Press for janky motion</button>
+  </figure>
+
+<script>
+
+!function(root) {
+
+  function draf(cb) {
+    return requestAnimationFrame(function() {
+      requestAnimationFrame(cb)
+    })
+  }
+
+  function now(cb) {
+    cb(0)
+    return 0
+  }
+
+  var api = typeof requestAnimationFrame == 'undefined' ? now : draf
+  if (typeof module != 'undefined' && module.exports) module.exports = api
+  else root.draf = api
+
+}(this);
+
+!function(root) {
+  const draf = root.draf
+
+  function wasteful(stamp) {
+    let previous = document.querySelector('ul[hidden]')
+    if (previous) document.body.removeChild(previous)
+    let ul = document.createElement('ul')
+    ul.hidden = true
+    if (stamp) ul.dataset.frame = stamp
+    ul.dataset.created = performance.now()
+    for (let i = 0; i < 888; i++) ul.innerHTML += '<li>' + i + '</li>'
+    document.body.appendChild(ul)
+    ul.dataset.inserted = performance.now()
+  }
+
+  const handlers = {
+    janky: function() {
+      this.classList.toggle('zoomed')
+      wasteful()
+    },
+    reactive: function() {
+      this.classList.toggle('zoomed')
+      draf(wasteful)
+    }
+  }
+
+  document.addEventListener('click', function(e) {
+    var target = e.target
+    var method = target.dataset.click
+    if (!method) return
+    console.group(e.type)
+    console.dir(e)
+    if (handlers.hasOwnProperty(method)) {
+      console.group('render')
+      console.info('started')
+      handlers[method].call(target)
+      console.info('called')
+      console.groupEnd()
+    }
+    console.groupEnd()
+  })
+}(this);
+</script>
+
+</body>
+</html>

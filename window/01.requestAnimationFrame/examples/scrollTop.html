@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>scrollTop</title>
+  <style>
+    .box {border: 1px solid #ddd; margin: 10px; height: 100px;}
+    .btn { position: fixed; bottom: 20px; right: 20px; }
+  </style>
+</head>
+
+<body>
+  <div class="box">box</div>
+  <div class="box">box</div>
+  <div class="box">box</div>
+  <div class="box">box</div>
+  <div class="box">box</div>
+  <div class="box">box</div>
+  <div class="box">box</div>
+  <div class="box">box</div>
+  <div class="box">box</div>
+  <div class="box">box</div>
+  <div class="box">box</div>
+  <div class="box">box</div>
+  <div class="box">box</div>
+  <div class="box">box</div>
+  <div class="box">box</div>
+  <div class="box">box</div>
+  <div class="box">box</div>
+  <div class="box">box</div>
+  <div class="box">box</div>
+  <div class="box">box</div>
+  <div class="box">box</div>
+  <div class="box">box</div>
+  <div class="box">box</div>
+  <div class="box">box</div>
+  <div class="box">box</div>
+  <div class="box">box</div>
+  <div class="box">box</div>
+  <div class="box">box</div>
+  <div class="box">box</div>
+
+  <button class="btn" id="scrollButton">scrollTop 按钮</button>
+  <script>
+    //
+
+    document.getElementById('scrollButton').onclick = function () {
+      var nowScroll = document.body.scrollTop || document.documentElement.scrollTop
+      var flag = 'up';
+
+      var step = 20
+
+      var funScroll = function () {
+        var top = document.body.scrollTop || document.documentElement.scrollTop;
+        if (flag == 'up') {
+          top -= step;
+          if (top <= 0) {
+            top = 0;
+            flag = 'down';
+          }
+        } else if (flag == 'down') {
+          top += step;
+          if (top >= nowScroll) {
+            top = nowScroll;
+            flag = 'stop';
+          }
+        } else {
+          return;
+        }
+        document.body.scrollTop = top;
+        document.documentElement.scrollTop = top;
+        requestAnimationFrame(funScroll);
+      };
+
+      if (nowScroll) {
+        funScroll()
+      };
+
+    };
+  </script>
+</body>
+
+</html>
