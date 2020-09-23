@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {box-sizing: border-box;}
+    #box {
+      display: flex;
+      width: 200px;
+      height: 200px;
+      background-color: green;
+      overflow: hidden;
+    }
+    #box p {
+      flex-shrink: 0;
+      width: 50px;
+      height: 50px;
+      border: 1px solid red;
+    }
+  </style>
+</head>
+<body>
+  <div id="box">
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+    <p>4</p>
+    <p>5</p>
+    <p>6</p>
+    <p>7</p>
+    <p>8</p>
+    <p>9</p>
+    <p>10</p>
+    <p>11</p>
+    <p>12</p>
+    <p>13</p>
+    <p>14</p>
+    <p>15</p>
+  </div>
+  <button id="btn1">setTimeout moveTo1</button>
+  <button id="btn2">requestAnimationFrame moveTo2</button>
+  <script type="module">
+    import raf from '../raf.js'
+
+    let moveId_1 = null
+    const delay = 1000
+    const step = 50
+    function moveTo1(dom, to) {
+      clearTimeout(moveId_1)
+      if (dom.scrollLeft < to) {
+        console.log('move_1')
+        dom.scrollLeft += step;
+        moveId_1 = setTimeout(() => {
+          moveTo1(dom, to)
+        }, delay)
+      } else {
+        clearTimeout(moveId_1)
+      }
+    }
+
+    const step2 = 5
+    function moveToRight(dom, to) {
+      if (dom.scrollLeft < to) {
+        dom.scrollLeft += step2;
+        // window.requestAnimationFrame(() => {
+        raf(() => {
+          moveToRight(dom, to)
+        })
+      } else {
+        moveToLeft(dom, 0)
+      }
+    }
+    function moveToLeft(dom, to) {
+      if (dom.scrollLeft > to) {
+        dom.scrollLeft -= step2;
+        raf(() => {
+          moveToLeft(dom, 0)
+        })
+      } else {
+        moveToRight(dom, 300)
+      }
+    }
+
+    const $dom = document.getElementById('box')
+    document.getElementById('btn1').onclick = function(e) {
+      moveTo1($dom, 300)
+    }
+    document.getElementById('btn2').onclick = function(e) {
+      moveToRight($dom, 300)
+    }
+  </script>
+</body>
+</html>

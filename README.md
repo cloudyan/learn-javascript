@@ -122,6 +122,13 @@ ECMA规范最终由[TC39](https://github.com/tc39)敲定。TC39由包括浏览�
   - `console.log(1_23 === 123)` // true
 - WeakRefs
 
+## 其他
+
+- [x] [requestAnimationFrame](https://github.com/cloudyan/learn-javascript/tree/master/window/01.requestAnimationFrame)
+- [x] [cross-domain](https://github.com/cloudyan/cross-domain)
+- [x] [event-loop](https://github.com/cloudyan/learn-javascript/tree/master/docs/event-loop)
+- [x] [script 的加载时序与执行时序](https://github.com/cloudyan/learn-javascript/tree/master/docs/2.script)
+
 参考：
 
 - https://wangdoc.com/javascript/index.html
