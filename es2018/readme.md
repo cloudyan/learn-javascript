@@ -1,6 +1,6 @@
 # ES2018
 
-- 异步迭代
+- 异步迭代/异步遍历器（Async Iterator）
 - Promise.prototype.finally()
 - Rest/Spread 属性
   - ES2018 扩展运算符增加了对对象的支持
