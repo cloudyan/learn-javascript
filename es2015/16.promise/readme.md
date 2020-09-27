@@ -1,5 +1,10 @@
 # Promise
 
+Promise A+ 规范
+
+- 官方英文地址：https://promisesaplus.com/
+- 中文翻译可参考 http://malcolmyu.github.io/malnote/2015/06/12/Promises-A-Plus/
+
 - Promise 的含义
 - Promise.prototype.then()
 - Promise.prototype.catch()
@@ -18,6 +23,35 @@
 
 - 对象的状态不受外界影响
 - 一旦状态改变，就不会再变，任何时候都可以得到这个结果
+
+## 模拟实现
+
+```js
+class MyPromise {
+  constructor() {
+
+  }
+
+  then() {}
+  catch() {}
+  finally() {}
+
+  static all() {}
+  static race() {}
+  static allSettled() {}
+  static resolve() {}
+  static reject() {}
+  static any() {}
+  static try() {}
+}
+```
+
+关于 macrotask 和 microtask 两个概念
+
+- macro-task: script（整体代码）, setTimeout, setInterval, setImmediate, I/O, UI rendering
+- micro-task: process.nextTick, Promises（这里指浏览器实现的原生 Promise）, Object.observe, MutationObserver
+
+详见 [stackoverflow](https://stackoverflow.com/questions/25915634/difference-between-microtask-and-macrotask-within-an-event-loop-context) 解答
 
 ```js
 const promise = new Promise((resolve, reject) => {
