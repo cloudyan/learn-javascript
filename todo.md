@@ -3,7 +3,6 @@
 重点突破
 
 - [x] 模块循环引用的问题
-- [x] `for...of` vs `for...in`
 - [ ] array 的扩展
 - [ ] Symbol
 - [ ] Promise
@@ -14,3 +13,12 @@
 - [ ] Regexp
 - [ ] Buffer
 - [ ] Class
+
+## vs 对比
+
+- [x] `for...in` vs `for...of`
+- [ ] deno vs nodejs
+- [ ] macrotask vs microtask
+- [ ] npm vs yarn
+- [ ] vue-todo vs react-todo
+- [ ] throottle vs debounce
