@@ -6,6 +6,7 @@
 - [x] [react vs vue](https://github.com/cloudyan/react-vs-vue)
   - todo
 - [ ] npm vs yarn
-- [ ] macrotask vs microtask
-- [ ] throttle vs debounce
+- event loop
+  - [x] [macrotask vs microtask](https://github.com/cloudyan/learn-javascript/tree/master/docs/event-loop)
+- [x] [throttle vs debounce](./throttle-vs-debounce.md)
 - [ ] 类实现 ES5 vs ES6
