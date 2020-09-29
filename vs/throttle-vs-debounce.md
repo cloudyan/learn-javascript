@@ -10,6 +10,12 @@
 - 防抖动是将多次执行变为最后一次执行
 - 节流是将多次执行变成每隔一段时间执行。
 
+处理如：
+
+- window 的 resize、scroll
+- mousedown、mousemove
+- keyup、keydown
+
 ## 防抖 debounce
 
 > 防抖(debounce)：触发高频事件后 n 秒内函数只会执行一次，如果 n 秒内高频事件再次被触发，则重新计算时间
@@ -79,3 +85,9 @@ window.addEventListener('resize', throttle(sayHi));
 - 函数节流：使得一定时间内只触发一次函数。原理是通过判断是否有延迟调用函数未执行。
 
 区别：函数节流不管事件触发有多频繁，都会保证在规定时间内一定会执行一次真正的事件处理函数，而函数防抖只是在最后一次事件后才触发一次函数。 比如在页面的无限加载场景下，我们需要用户在滚动页面时，每隔一段时间发一次 Ajax 请求，而不是在用户停下滚动页面操作时才去请求数据。这样的场景，就适合用节流技术来实现。
+
+参考：
+
+- https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/5
+- https://github.com/mqyqingfeng/Blog/issues/22
+- https://github.com/mqyqingfeng/Blog/issues/26
