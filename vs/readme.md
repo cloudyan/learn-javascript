@@ -7,5 +7,5 @@
   - todo
 - [ ] npm vs yarn
 - [ ] macrotask vs microtask
-- [ ] throottle vs debounce
+- [ ] throttle vs debounce
 - [ ] 类实现 ES5 vs ES6
