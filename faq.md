@@ -89,3 +89,8 @@ Uncaught (in promise) TypeError: Failed to execute 'fetch' on 'ServiceWorkerGlob
     at Object.fetchAndCache (sw.js:1)
     at sw.js:1
 
+- 如何解决类似 curl: (7) Failed to connect to raw.githubusercontent.com port 443: Connection refused 的问题 #10
+
+解决方案：
+
+- https://github.com/hawtim/blog/issues/10
