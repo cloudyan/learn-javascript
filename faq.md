@@ -91,6 +91,8 @@ Uncaught (in promise) TypeError: Failed to execute 'fetch' on 'ServiceWorkerGlob
 
 - 如何解决类似 curl: (7) Failed to connect to raw.githubusercontent.com port 443: Connection refused 的问题 #10
 
-解决方案：
+解决方案： https://github.com/hawtim/blog/issues/10
 
-- https://github.com/hawtim/blog/issues/10
+- CocoaPods安装方法
+
+参考： https://www.jianshu.com/p/f43b5964f582
