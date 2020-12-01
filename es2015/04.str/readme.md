@@ -121,3 +121,17 @@ function is32Bit(c) {
   return c.codePointAt(0) > 0xFFFF;
 }
 ```
+
+常见问题
+
+- 如何快速正确的识别字符串的长度
+- Base64 编码
+  - binary <=> ASCII
+  - `btoa()` 任意值转为 Base64 编码
+  - `atob()` Base64 编码转为原来的值
+  - 要将非 ASCII 码字符转为 Base64 编码，必须中间插入一个转码环节，再使用这两个方法。
+  - `btoa(encodeURIComponent('你好'))`
+
+参见
+
+- https://wangdoc.com/javascript/types/string.html

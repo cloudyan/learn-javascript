@@ -18,3 +18,5 @@
   - 禁止`this`指向全局对象
   - 不能使用`fn.caller`和`fn.arguments`获取函数调用的堆栈
   - 增加了保留字（比如`protected`、`static`和`interface`）
+
+常见问题
