@@ -114,7 +114,8 @@ let arrayLike = {
   length: 3
 };
 
-// console.log(...arrayLike) // 扩展运算符不能处理这个，Array.from 可以
+// console.log(...arrayLike)
+// 扩展运算符不能处理这个，Array.from 可以
 
 // ES5的写法
 var arr1 = [].slice.call(arrayLike); // ['a', 'b', 'c']
