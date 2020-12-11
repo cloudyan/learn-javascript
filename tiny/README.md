@@ -46,6 +46,10 @@ setTimeout 的第一个参数使用字符串而非函数的话，会引发内存
 - [JS 代码片段](https://github.com/webcoding/js-bits)
 - [测试 lerna的使用](https://github.com/cloudyan/lerna-test)
 
+算法
+
+- https://github.com/pomegranitedesign/100-javascript-algorithms-challenge
+
 参考：
 
 - https://github.com/ecmadao/js-bits-cn
