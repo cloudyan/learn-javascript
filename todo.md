@@ -36,3 +36,23 @@
 - 设备类型侦测
 - 前端缓存 cache
 - 前端调试 debugging
+
+- 浏览器的平台化
+  - 操作本地文件
+  - 操作图片
+  - 调用摄像头
+  - 麦克风
+- Nodejs
+  - 嵌入式平台（Raspberry Pi）
+- 数据库操作
+- 移动平台开发
+- 跨平台的桌面应用程序
+  - Electron 项目
+  - Chrome App 项目
+
+JavaScript 难点
+
+- 涉及大量的外部 API
+- 《JavaScript: The Good Parts》
+
+WebAssembly 格式，它是 JavaScript 引擎的中间码格式，全部都是二进制代码。
