@@ -22,3 +22,13 @@ banana
       }
   })))(1)
 ```
+
+empty vs undefined
+
+```js
+(Array(2).join(0)+3).slice(-2)
+```
+
+```js
+[] == (![])
+```
