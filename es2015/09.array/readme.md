@@ -231,7 +231,7 @@ flat() && flatMap() 将数组拉平
 
 ```
 
-数组的空位
+数组的空位 empty vs undefined
 
 ```js
 Array(3) // [, , ,]
@@ -247,10 +247,12 @@ for (let i of arr) {
   console.log(i);
 }
 
-console.log([,'a','b',,].copyWithin(2,0))
-console.log([, ,])
-console.log([, 1,])
+console.log([,'a','b',,].copyWithin(2,0))  // [empty, "a", empty, "a"]
+console.log([, ,])  // [empty, empty]
+console.log([, 1,]) // [empty, 1]
 console.log([, 1,].length === [1,1].length) // true
+
+(Array(2).join(0)+3).slice(-2)
 ```
 
 pk: in/includes/indexOf
