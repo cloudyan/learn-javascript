@@ -32,3 +32,6 @@ empty vs undefined
 ```js
 [] == (![])
 ```
+
+- https://github.com/deepjs-cn/jsfuck
+

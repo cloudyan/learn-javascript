@@ -7,3 +7,32 @@
 参考：
 
 - https://www.cnblogs.com/sunshq/p/3808571.html
+
+## 理解变量提升
+
+```js
+function Foo() {
+  getName = function() { console.log(1) };
+  return this;
+}
+
+Foo.getName = function() { console.log(2) };
+Foo.prototype.getName = function() { console.log(3) };
+var getName = function() { console.log(4) };
+function getName() { console.log(5) }
+
+// 请输出下列的输出结果
+Foo.getName();
+getName();
+Foo().getName();
+getName();
+new Foo.getName();
+new Foo().getName();
+new new Foo().getName();
+```
+
+解析：https://b23.tv/zzNYY1
+
+1. 变量与函数冲突，优先保留函数
+2. `new Foo.getName();` => `new (Foo.getName)()`
+3. `new new Foo().getName();` => `new ((new Foo()).getName)()`
