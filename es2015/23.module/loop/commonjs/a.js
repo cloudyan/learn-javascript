@@ -1,3 +1,5 @@
+
+console.log('a.js 开始');
 exports.done = false;
 var b = require('./b.js');
 console.log('在 a.js 之中，b.done = %j', b.done);
