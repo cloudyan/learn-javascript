@@ -4,38 +4,30 @@
 // node --experimental-modules a.mjs
 // nodejs@13.2.0 之前想要在node中使用ES modules，需要添加`--experimental-module`
 
-/**
-
-ES6 循环加载是怎么处理的。
-
-首先，执行a.mjs以后，引擎发现它加载了b.mjs，因此会优先执行b.mjs，然后再执行a.mjs。
-
-接着，执行b.mjs的时候，已知它从a.mjs输入了a接口，这时不会去执行a.mjs，而是认为这个接口已经存在了，继续往下执行。
-
-执行到第五行console.log(a)的时候，才发现这个接口根本没定义，因此报错。
-
-*/
-
-// 解决这个问题的方法，就是让b.mjs运行的时候，foo已经有定义了。
-// 这可以通过将foo写成函数来解决。
-// 或改为 var 定义，就回变量提升，即先定义，后使用，就不会报错了
+// 这个示例 将 let 改为 var 后，node 中可以执行
+// var 有变量提升
+// 输出
 
 /**
 
-// 改为函数
+bar is running
+foo = undefined
+bar is finished
 
-// a.mjs
-import {bar} from './b';
-console.log('a.mjs');
-console.log(bar());
-function foo() { return 'foo' }
-export {foo};
-
-// b.mjs
-import {foo} from './a';
-console.log('b.mjs');
-console.log(foo());
-function bar() { return 'bar' }
-export {bar};
+foo is running
+bar = false
+foo is finished
+bar = true after 500 ms
 
 */
+
+// a.js 和 b.js 形成了循环依赖，但是程序却没有因陷入循环调用报错而是执行正常，这是为什么呢？
+
+// 还是因为 import 是在编译阶段执行的，这样就使得程序在编译时就能确定模块的依赖关系，一旦发现循环依赖，ES6 本身就不会再去执行依赖的那个模块了，所以程序可以正常结束。
+
+// 这也说明了 ES6 本身就支持循环依赖，保证程序不会因为循环依赖陷入无限调用。
+// 虽然如此，但是我们仍然要尽量避免程序中出现循环依赖，因为可能会发生一些让你迷惑的情况。
+// 注意到上面的输出，在 b.js 中输出的 foo = undefined，如果没注意到循环依赖会让你觉得明明在 a.js 中 export foo = false，为什么在 b.js 中却是 undefined 呢，这就是循环依赖带来的困惑。
+
+// 在一些复杂大型项目中，你是很难用肉眼发现循环依赖的，而这会给排查异常带来极大的困难。
+// 对于使用 webpack 进行项目构建的项目，推荐使用 webpack 插件 circular-dependency-plugin 来帮助你检测项目中存在的所有循环依赖，尽早发现潜在的循环依赖可能会免去未来很大的麻烦。
