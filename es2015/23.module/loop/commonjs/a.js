@@ -1,7 +1,7 @@
 
-console.log('a.js 开始');
+console.log('\na starting');
 exports.done = false;
-var b = require('./b.js');
-console.log('在 a.js 之中，b.done = %j', b.done);
+var b = require('./b');
+console.log('in a, b.done = %j', b.done);
 exports.done = true;
-console.log('a.js 执行完毕');
+console.log('a done\n');
