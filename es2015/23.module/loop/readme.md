@@ -106,11 +106,24 @@ import 静态执行是指，import 命令会被 JavaScript 引擎静态分析，
 
 export 动态绑定是指，export 命令输出的接口，与其对应的值是动态绑定关系，通过该接口可以实时取到模块内部的值。
 
+参看示例 [es6-1](./es6-1/a.mjs)
 
+输出
 
 ```js
-node
+$ node --experimental-modules a.mjs
+(node:84158) ExperimentalWarning: The ESM module loader is experimental.
+
+b is running
+b is finished
+
+a is running
+b = false
+a is finished
+b = true after 500 ms
 ```
+
+这个执行就和 commonjs 不一样了。
 
 参考：
 
