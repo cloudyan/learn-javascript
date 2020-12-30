@@ -41,14 +41,19 @@ node ./complex/index.js
 在这个例子中，a 模块调用 b 模块，b 模块又需要调用 a 模块，这就使得 a 和 b 之间形成了循环依赖，但是当我们执行 node main.js 时代码却没有陷入无限循环调用当中，而是输出了如下内容：
 
 ```js
-$ node main.js
+$ node index.js
+
 main starting
+
 a starting
+
 b starting
 in b, a.done = false
 b done
+
 in a, b.done = true
 a done
+
 in main, a.done=true, b.done=true
 ```
 

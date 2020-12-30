@@ -1,4 +1,4 @@
-console.log('main.js 开始');
-var a = require('./a.js');
-var b = require('./b.js');
-console.log('在 main.js 之中, a.done=%j, b.done=%j', a.done, b.done);
+console.log('\nmain starting');
+var a = require('./a');
+var b = require('./b');
+console.log('in main, a.done=%j, b.done=%j\n', a.done, b.done);
