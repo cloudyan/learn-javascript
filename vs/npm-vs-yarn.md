@@ -10,7 +10,9 @@ npm vs yarn, 还有 cnpm pnpm
   - yarn 加lock yarn.lock
   - pnpm 使用硬链接 提速并节省空间
   - cnpm 国内源库
-- 循环依赖
+- 循环依赖及解法
+  - 三大模块规范
+  - 解法
 
 参考：
 

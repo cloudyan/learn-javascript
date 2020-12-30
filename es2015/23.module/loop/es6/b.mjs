@@ -1,5 +1,6 @@
 // b.mjs
-import { foo } from './a.mjs';
-console.log('b.mjs');
-console.log(foo);
-export let bar = 'bar';
+console.log('b is running');
+import { a } from './a.mjs';
+console.log('in b, a =');
+console.log(a);
+export let b = 'bar';
