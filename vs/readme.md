@@ -14,9 +14,28 @@
 - [ ] 类实现 ES5 vs ES6
 - DOM vs BOM
 - uni-app mpvue taro rax
-- script async vs defer
+- [script]async vs defer
 - CommonJS AMD ES6
 - rollup vs webpack
 - vue vs react
 - babel-polyfill vs transform-runtime
 - babel core-js/library vs core-js/modules
+- prefetch vs preload dns-prefetch preconnect prerender
+  - https://segmentfault.com/a/1190000011065339
+- pwa vs pha
+- native白屏 vs webview白屏
+- http1.1 vs http2 http3
+- https vs http
+- 外部DSL vs 内部DSL
+- DSL vs GPL
+- [webpack] module chunk bundle
+  - module：就是js的模块化webpack支持commonJS、ES6等模块化规范，简单来说就是你通过import语句引入的代码。
+  - chunk: chunk是webpack根据功能拆分出来的，包含三种情况：
+    1. 你的项目入口（entry）
+    2. 通过import()动态引入的代码
+    3. 通过splitChunks拆分出来的代码
+    4. chunk包含着module，可能是一对多也可能是一对一。
+  - bundle：bundle是webpack打包之后的各个文件，一般就是和chunk是一对一的关系，bundle就是对chunk进行编译压缩打包等处理之后的产出。
+- CommonsChunkPlugin vs SplitChunksPlugin
+  - https://www.cnblogs.com/zhanyishu/p/9349576.html
+  - https://zhuanlan.zhihu.com/p/26131812
