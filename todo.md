@@ -56,3 +56,13 @@ JavaScript 难点
 - 《JavaScript: The Good Parts》
 
 WebAssembly 格式，它是 JavaScript 引擎的中间码格式，全部都是二进制代码。
+
+理解 webpack config optimization.splitChunks
+  - https://www.cnblogs.com/kwzm/p/10314438.html
+
+
+- Ajax, Axios, Fetch 的核心区别
+- 基于 Promise.all 实现 Ajax 的串行和并行
+- Promise.all 并发限制及 async-pool 的作用
+- JS 异步处理机制： EventQueue 和 EventLoop
+- JS 实现 Ajax 并发请求控制的两大解决方案
