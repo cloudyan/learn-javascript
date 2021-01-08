@@ -14,6 +14,26 @@ npm vs yarn, 还有 cnpm pnpm
   - 三大模块规范
   - 解法
 
+## 关于 npm cnpm && package.json
+
+npm vs cnpm
+package.json vs package-lock.json
+
+- package.json文件只能锁定大版本，也就是版本号的第一位，并不能锁定后面的小版本，在npm 5时添加package-lock.json。
+- npm i会根据package-lock.json里的内容来处理和安装依赖而不是package.json。
+- cnpm i不受package-lock.json影响，只会根据package.json进行下载。
+- npm i 会生成package-lock.json，如果删除了，再重新npm i会生成package-lock.json。
+- cnpm i是不会生成package-lock.json的。
+- cnpm i xxx@xxx不会跟新到package-lock.json中去。
+- npm i xxx@xxx会跟新到package-lock.json中去。
+- npm 配置文件 ~/.npmrc， 可以由nrm 管理
+- cnpm 配置文件 ~/.cnpmrc
+
+## 库的版本号详解(^ vs ~ 区别)
+
+- 波浪符号（~）：他会更新到当前minor version（也就是中间的那位数字）中最新的版本。匹配3.1.x中最新的版本
+- 插入符号（^）：这个符号就显得非常的灵活了，他将会把当前库的版本更新到当前major version（也就是第一位数字）中最新的版本。匹配3.x.x中最新的版本
+
 参考：
 
 - https://zhuanlan.zhihu.com/p/33049803
