@@ -13,6 +13,7 @@
 - [x] [throttle vs debounce](./throttle-vs-debounce.md)
 - [ ] 类实现 ES5 vs ES6
 - DOM vs BOM
+- [rebase vs merge](https://github.com/cloudyan/learn-git/blob/master/docs/rebase-vs-merge.md)
 - uni-app mpvue taro rax
   - 编译时 vs 运行时
 - [script] async vs defer
