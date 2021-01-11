@@ -46,6 +46,33 @@ import AA from 'react/lib/createClass'
 
 如果采用dll的方式，是不会造成重复打包的，他会将引用直接指向dll。但是如果使用external的话，则会react中的部分代码打包进来。
 
+externals 支持以下模块上下文(module context)
+
+- **global** - 外部 library 能够作为全局变量使用。用户可以通过在 script 标签中引入来实现。这是 externals 的默认设置。
+- **commonjs** - 用户(consumer)应用程序可能使用 CommonJS 模块系统，因此外部 library 应该使用 CommonJS 模块系统，并且应该是一个 CommonJS 模块。
+- **commonjs2** - 类似上面几行，但导出的是 module.exports.default。
+- **amd** - 类似上面几行，但使用 AMD 模块系统。
+
+不同环境设置externals方式
+
+- 比如 node 环境，使用 commonjs 或 commonjs2
+- 需要 requirejs等符合 AMD 规范的环境中，则使用 amd
+- 浏览器环境，可以什么都不加，默认设置就是 global
+
+`externals` 和 `libraryTarget` 的关系
+
+- libraryTarget配置如何暴露 library。如果不设置library,那这个library就不暴露。就相当于一个自执行函数
+- externals是决定的是以哪种模式去加载所引入的额外的包
+- libraryTarget决定了你的library运行在哪个环境，哪个环境也就决定了你哪种模式去加载所引入的额外的包。也就是说，externals应该和libraryTarget保持一致。library运行在浏览器中的，你设置externals的模式为commonjs，那代码肯定就运行不了了。
+- 如果是应用程序开发，一般是运行在浏览器环境libraryTarget可以不设置，externals默认的模式是global，也就是以全局变量的模式加载所引入外部的库。
+
 参考：
 
 - https://www.kancloud.cn/oldtimeofme/recording/1237182
+- https://www.css88.com/doc/webpack2/guides/author-libraries/
+- https://www.css88.com/doc/webpack2/configuration/externals/
+- [webpack externals详解](https://www.tangshuang.net/3343.html)
+- https://www.zihanzy.com/articles/206
+- https://webpack.js.org/configuration/externals/#root
+- https://webpack.js.org/plugins/dll-plugin/#root
+- https://array-huang.gitbooks.io/multipage-webapp-architecture-with-webpack/content/chapter4/webpack-dll.html
