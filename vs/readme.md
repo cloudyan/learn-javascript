@@ -14,7 +14,8 @@
 - [ ] 类实现 ES5 vs ES6
 - DOM vs BOM
 - uni-app mpvue taro rax
-- [script]async vs defer
+  - 编译时 vs 运行时
+- [script] async vs defer
 - CommonJS AMD ES6
 - rollup vs webpack
 - vue vs react
@@ -28,6 +29,7 @@
 - https vs http
 - 外部DSL vs 内部DSL
 - DSL vs GPL
+- [vue] dll vs externals
 - [webpack] module chunk bundle
   - module：就是js的模块化webpack支持commonJS、ES6等模块化规范，简单来说就是你通过import语句引入的代码。
   - chunk: chunk是webpack根据功能拆分出来的，包含三种情况：
@@ -39,3 +41,8 @@
 - CommonsChunkPlugin vs SplitChunksPlugin
   - https://www.cnblogs.com/zhanyishu/p/9349576.html
   - https://zhuanlan.zhihu.com/p/26131812
+- xhr vs fetch
+- Zepto vs jQuery 异同
+- [jQuery] 过滤 vs 查找
+- [jQuery/Zepto] attr vs prop
+- dll vs externals
