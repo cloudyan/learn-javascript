@@ -34,6 +34,17 @@ package.json vs package-lock.json
 - 波浪符号（~）：他会更新到当前minor version（也就是中间的那位数字）中最新的版本。匹配3.1.x中最新的版本
 - 插入符号（^）：这个符号就显得非常的灵活了，他将会把当前库的版本更新到当前major version（也就是第一位数字）中最新的版本。匹配3.x.x中最新的版本
 
+## 关于安装本地的依赖
+
+- git sources: This is a git specifier with resolved committish. (eg, git+https://example.com/foo/bar#115311855adb0789a0466714ed48a1499ffea97e)
+- http tarball sources: This is the URL of the tarball. (eg, https://example.com/example-1.3.0.tgz)
+- local tarball sources: This is the file URL of the tarball. (eg file:///opt/storage/example-1.3.0.tgz)
+- local link sources: This is the file URL of the link. (eg file:libs/our-module)
+
+- http://caibaojian.com/npm/all.html#version-1
+
 参考：
 
 - https://zhuanlan.zhihu.com/p/33049803
+- http://caibaojian.com/npm/all.html
+- http://caibaojian.com/npm/all.html#version-1
