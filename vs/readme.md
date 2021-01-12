@@ -7,7 +7,7 @@
 - [x] [deno vs nodejs](https://github.com/cloudyan/deno-vs-node)
 - [x] [react vs vue](https://github.com/cloudyan/react-vs-vue)
   - todo
-- [ ] npm vs yarn
+- [x] [npm vs yarn](./npm-vs-yarn.md)
 - event loop
   - [x] [macrotask vs microtask](https://github.com/cloudyan/learn-javascript/tree/master/docs/event-loop)
 - [x] [throttle vs debounce](./throttle-vs-debounce.md)
@@ -16,18 +16,18 @@
 - [rebase vs merge](https://github.com/cloudyan/learn-git/blob/master/docs/rebase-vs-merge.md)
 - uni-app mpvue taro rax
   - 编译时 vs 运行时
-- [script] async vs defer
+- [script] [async vs defer](../docs/2.script/readme.md)
 - CommonJS AMD ES6
-- rollup vs webpack
-- vue vs react
+- [rollup vs webpack](./rollup-vs-webpack.md)
 - babel-polyfill vs transform-runtime
 - babel core-js/library vs core-js/modules
-- prefetch vs preload dns-prefetch preconnect prerender
+- prefetch vs preload
+  - dns-prefetch preconnect prerender
   - https://segmentfault.com/a/1190000011065339
 - pwa vs pha
 - native白屏 vs webview白屏
-- http1.1 vs http2 http3
-- https vs http
+- [http vs https](./http-vs-https.md)
+  - http1.1 vs http2 http3
 - 外部DSL vs 内部DSL
 - DSL vs GPL
 - [vue] dll vs externals
