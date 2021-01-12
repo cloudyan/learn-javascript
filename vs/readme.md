@@ -40,8 +40,7 @@
     4. chunk包含着module，可能是一对多也可能是一对一。
   - bundle：bundle是webpack打包之后的各个文件，一般就是和chunk是一对一的关系，bundle就是对chunk进行编译压缩打包等处理之后的产出。
 - CommonsChunkPlugin vs SplitChunksPlugin
-  - https://www.cnblogs.com/zhanyishu/p/9349576.html
-  - https://zhuanlan.zhihu.com/p/26131812
+- filename vs chunkFilename
 - xhr vs fetch
 - Zepto vs jQuery 异同
 - [jQuery] 过滤 vs 查找
