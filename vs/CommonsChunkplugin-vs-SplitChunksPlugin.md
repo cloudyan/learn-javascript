@@ -5,7 +5,7 @@ webpackConfig.plugins.push(
   new webpack.optimize.CommonsChunkPlugin({
     async: true,
     name: ['common'], // 对应于上面的entry的key
-    filename: 'vendor.js',
+    filename: 'js/common.[chunkhash:7].js',
     children: true,
     // 引入node_modules的依赖全抽出来
     minChunks: (module, count) => {
