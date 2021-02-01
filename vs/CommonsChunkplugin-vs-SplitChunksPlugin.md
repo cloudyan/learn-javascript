@@ -1,5 +1,39 @@
 # CommonsChunkPlugin vs SplitChunksPlugin
 
+## SplitChunksPlugin
+
+webpack有一个默认配置，如下
+
+```js
+module.exports = {
+  //...
+  optimization: {
+    splitChunks: {
+      chunks: 'async',
+      minSize: 30000,
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      automaticNameDelimiter: '~',
+      name: true,
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true
+        }
+      }
+    }
+  }
+};
+```
+
+## 关于 CommonsChunkPlugin
+
 ```js
 webpackConfig.plugins.push(
   new webpack.optimize.CommonsChunkPlugin({
@@ -30,3 +64,5 @@ webpackConfig.plugins.push(
 
 - https://www.cnblogs.com/zhanyishu/p/9349576.html
 - https://zhuanlan.zhihu.com/p/26131812
+- 推荐 [理解webpack4.splitChunks](https://www.cnblogs.com/kwzm/p/10314438.html)
+- https://stackoverflow.com/questions/42523436/what-are-module-chunk-and-bundle-in-webpack
