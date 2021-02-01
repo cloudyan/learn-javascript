@@ -37,12 +37,13 @@
   - hash chunkhash contenthash
     - https://cloud.tencent.com/developer/article/1435638
   - module chunk bundle
+    - https://www.cnblogs.com/kwzm/p/10314438.html
     - module：就是js的模块化webpack支持commonJS、ES6等模块化规范，简单来说就是你通过import语句引入的代码。
     - chunk: chunk是webpack根据功能拆分出来的，包含三种情况：
       1. 你的项目入口（entry）
       2. 通过import()动态引入的代码
       3. 通过splitChunks拆分出来的代码
-      4. chunk包含着module，可能是一对多也可能是一对一。
+      chunk包含着module，可能是一对多也可能是一对一。
     - bundle：bundle是webpack打包之后的各个文件，一般就是和chunk是一对一的关系，bundle就是对chunk进行编译压缩打包等处理之后的产出。
 - xhr vs fetch
 - Zepto vs jQuery 异同
@@ -50,3 +51,13 @@
 - [jQuery/Zepto] attr vs prop
 - dll vs externals
 - [css] 100% vs 100vh
+- useLayoutEffect vs useEffect
+  - 最新React的useEffect与useLayoutEffect执行机制剖析
+  - https://segmentfault.com/a/1190000023396433?utm_source=tag-newest
+- rem vs vw
+- CSR vs SSR
+- [event-loop] browser vs nodejs
+  - https://blog.csdn.net/qq_39989929/article/details/89109937
+- Object.create(null) vs {}
+  - 空对象 {} 不够空，相当于 Object.create(Object.prototype)
+  - https://juejin.cn/post/6844903733432680456
