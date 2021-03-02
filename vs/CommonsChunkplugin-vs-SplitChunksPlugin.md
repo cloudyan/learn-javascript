@@ -32,6 +32,8 @@ module.exports = {
 };
 ```
 
+参看更多 splitChunks 相关信息
+
 ## 关于 CommonsChunkPlugin
 
 ```js
