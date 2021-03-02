@@ -22,6 +22,8 @@
 - babel-polyfill vs transform-runtime
 - babel core-js/library vs core-js/modules
 - prefetch vs preload
+  - Preload 当前页面关键资源
+  - Prefetch 可视化区域的`<link>`标签
   - dns-prefetch preconnect prerender
   - https://segmentfault.com/a/1190000011065339
 - pwa vs pha
@@ -58,6 +60,7 @@
 - CSR vs SSR
 - [event-loop] browser vs nodejs
   - https://blog.csdn.net/qq_39989929/article/details/89109937
+  - https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/
 - Object.create(null) vs {}
   - 空对象 {} 不够空，相当于 Object.create(Object.prototype)
   - https://juejin.cn/post/6844903733432680456
