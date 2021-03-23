@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Visibility API</title>
+</head>
+<body>
+
+<script>
+document.addEventListener('visibilitychange', function () {
+  // 用户离开了当前页面
+  if (document.visibilityState === 'hidden') {
+    document.title = '页面不可见';
+    console.log(document.title);
+  }
+
+  // 用户打开或回到页面
+  if (document.visibilityState === 'visible') {
+    document.title = '页面可见';
+    console.log(document.title);
+  }
+});
+
+var vidElem = document.getElementById('video-demo');
+document.addEventListener('visibilitychange', startStopVideo);
+
+function startStopVideo() {
+  if (document.visibilityState === 'hidden') {
+    vidElem && vidElem.pause();
+  } else if (document.visibilityState === 'visible') {
+    vidElem && vidElem.play();
+  }
+}
+</script>
+</body>
+</html>
