@@ -131,50 +131,72 @@ document.write(`<script src="js/f.js"><\/script>`);
 ## 实现动态加载 js
 
 ```js
-// @dwdjs/utils
-const noop = () => {};
-const error = url => {
-  console.log(`load script error ${url}`);
-};
-const doc = document;
-const domHead = doc.querySelector('head');
-const domBody = doc.querySelector('body') || domHead;
-// const s = doc.getElementsByTagName('script')[0];
+// import {loadJs, loadCss} from '@deepjs/load';
 
-export function loadJs(scriptUrl, obj = {}) {
-  const script = document.createElement('script');
-  if (typeof obj === 'boolean') {
-    // 默认是同步加载，同步模式又称阻塞模式
-    // 同步加载流程是瀑布模型，异步加载流程是并发模型。
-    obj = {
-      async: true, // 异步加载
-      defer: true, // 延迟加载
-    };
-  }
-  script.async = obj.async;
-  script.defer = obj.defer;
-  script.src = scriptUrl;
+let doc;
+let domHead;
 
-  script.onload = () => {
-    (obj.onload || noop)();
-  };
-  script.onerror = () => {
-    (obj.onerror || error)(scriptUrl);
-  };
-  // script.crossOrigin = 'anonymous';
-  // s.parentNode.insertBefore(s1, s);
-  if (obj.first) {
-    domHead.appendChild(script);
-  } else {
-    domBody.appendChild(script);
-  }
+if (typeof document !== 'undefined') {
+  doc = document;
+  domHead = doc.querySelector('head') || doc.querySelector('body');
 }
 
-export function loadCss(cssUrl) {
-  const style = document.createElement('style');
-  style.rel = 'stylesheet';
-  style.src = cssUrl;
-  domHead.appendChild(style);
+// const s = doc.getElementsByTagName('script')[0];
+
+export function load({tag, getDomTag, ...attributes}) {
+  return new Promise((resolve, reject) => {
+    if (!doc)
+      return reject(new Error(`load source fail: can not execute code from non browser environment`));
+    if (!domHead)
+      return reject(new Error(`load source fail: document not exist head && body tag`));
+
+    const isExists = Boolean(doc.querySelector(getDomTag()));
+    if (isExists) return resolve({code: 0, message: '资源已存在'});
+
+    const source = doc.createElement(tag);
+    Object.entries(attributes).forEach(([attribute, value]) => {
+      source.setAttribute(attribute, value);
+    });
+    source.onload = () => {
+      resolve({code: 1, message: '资源加载成功'});
+    };
+    source.onerror = (error) => {
+      reject(error);
+    };
+    // s.parentNode.insertBefore(s1, s);
+
+    domHead.appendChild(source);
+  })
+}
+
+export function loadJs(sourceUrl, obj = {}) {
+  // 默认是同步加载，同步模式又称阻塞模式
+  // 同步加载流程是瀑布模型，异步加载流程是并发模型。
+  const options = {
+    src: sourceUrl,
+    // async: false, // 异步加载
+    // defer: false, // 延迟加载
+    // crossOrigin: 'anonymous', // 默认不要开启，因为开启后，如果服务端不配合 CORS 设置，会导致无法正常加载（特别是第三方脚本）
+    ...obj,
+    tag: 'script',
+    getDomTag() {
+      return `script[src="${sourceUrl}"]`;
+    },
+  }
+  return load(options);
+}
+
+export function loadCss(sourceUrl, obj = {}) {
+  const options = {
+    href: sourceUrl,
+    ...obj,
+    rel: 'stylesheet',
+    tag: 'link',
+    getDomTag() {
+      return `link[href="${sourceUrl}"]`;
+    },
+  }
+  return load(options);
 }
 ```
 
@@ -189,6 +211,9 @@ export function loadCss(cssUrl) {
 - 是js的下载阻塞了页面的渲染还是js的执行阻塞了页面的渲染，还是两者都会阻塞页面
 - script标签放在head中与放在body中，是影响了js的下载开始时间还是执行开始时间
 - css，图片以及一些其它的外部资源的下载是否与html，js的下载并行
+- js，css 加载和执行过程是否会阻塞 html 解析、渲染？其他资源呢
+
+资源（css,js,img等）的加载都是并行的，浏览器尝试将所有外部资源下载并行化，尽快的完成，但需要考虑并发的数量。
 
 ## 提示
 
