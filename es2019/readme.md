@@ -24,6 +24,16 @@
   - 早先的 ECMAScript 没有规定，Array.prototype.sort()的默认排序算法是否稳定，留给浏览器自己决定，这导致某些实现是不稳定的。
   - ES2019 明确规定，Array.prototype.sort()的默认排序算法必须稳定。
 
+问题？
+
+Array.prototype.sort 是快排吗？
+
+- [深入浅出 JavaScript 的 Array.prototype.sort 排序算法](https://segmentfault.com/a/1190000010648740)
+
+ECMAScript 不同版本规范对 Array.prototype.sort 的定义中没有要求用什么样的排序方式实现 sort() 方法，也没有要求是否要采用稳定排序算法
+
+但 ES2019 明确规定，Array.prototype.sort()的默认排序算法必须稳定。
+
 常见的排序算法之中，插入排序、合并排序、冒泡排序等都是稳定的，堆排序、快速排序等是不稳定的。
 
 不稳定排序的主要缺点是，多重排序时可能会产生问题。
@@ -32,6 +42,12 @@
 > 开发者可能会先按名字排序，再按姓氏进行排序。如果排序算法是稳定的，这样就可以达到“先姓氏，后名字”的排序效果。
 > 如果是不稳定的，就不行。
 
+- 快速排序 不稳定
+- 归并排序 稳定
+- 插入排序 稳定
+- 桶排序   稳定
+
+更多关于[排序](https://github.com/trekhleb/javascript-algorithms/blob/master/README.zh-CN.md#%E6%95%B0%E7%BB%84%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E5%A4%8D%E6%9D%82%E6%80%A7)
 
 Symbol.prototype.description
 

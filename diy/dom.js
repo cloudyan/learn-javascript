@@ -66,8 +66,8 @@ function readXPath(el) {
 // 相同路径获取 dom
 // 比如某元素第二个子元素下第一个子元素
 export function findDom(realWrapper, clonedWrapper, target) {
-  const xpath = getXPathByDom(target, clonedWrapper)
-  return getDomByXPath(realWrapper, xpath)
+  const xpath = getXPathByDom(target, clonedWrapper);
+  return getDomByXPath(realWrapper, xpath);
 }
 
 function getChildNum(child) {
@@ -83,15 +83,15 @@ function getChildDom(parentNode, index) {
 function getXPathByDom(el, root = null) {
   let stack = [];
   while (el.parentNode != null) {
-    stack.push(getChildNum(el))
+    stack.push(getChildNum(el));
   }
   return stack;
 }
 
 function getDomByXPath(el, xpath = []) {
-  let node = el
+  let node = el;
   for (let i = 0; i < xpath.length; i++) {
-    node = getChildDom(el, xpath[i])
+    node = getChildDom(el, xpath[i]);
   }
-  return node
+  return node;
 }
