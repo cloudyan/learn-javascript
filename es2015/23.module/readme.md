@@ -109,6 +109,30 @@ Statement Form                          | [[ModuleRequest]] | [[ImportName]] | [
 <ins>`export * as ns from "mod";`</ins> | `"mod"`           | `"*"`          | **null**       | `"ns"`
 `export * from "mod";`                  | `"mod"`           | `"*"`          | **null**       | **null** (many)
 
+## export default 和 export { X as default } 的区别
+
+参考：https://jakearchibald.com/2021/export-default-thing-vs-thing-as-default/
+
+```js
+// module.js
+export let thing = 'initial';
+
+setTimeout(() => {
+  thing = 'changed';
+}, 500);
+
+// main.js
+import { thing as importedThing } from './module.js';
+const module = await import('./module.js');
+let { thing } = await import('./module.js');
+
+setTimeout(() => {
+  console.log(importedThing); // "changed"
+  console.log(module.thing); // "changed"
+  console.log(thing); // "initial"
+}, 1000);
+```
+
 ## CommonJs 模块加载 ES6 模块
 
 CommonJS 的`require()`命令不能加载 ES6 模块，会报错，只能使用`import()`这个方法加载。
