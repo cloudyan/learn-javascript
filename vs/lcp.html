@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FCP test(兼容性不行，safari 都不支持)</title>
+  <style>
+    *{margin: 0;padding: 0;}
+    .large-image {
+      width: 100%;
+      /* height: 400px; */
+      height: 200px;
+    }
+  </style>
+  <script>
+    // Inline code from `https://unpkg.com/web-vitals/dist/polyfill.js` here.
+    // !function(){var e,t,n,i,r={passive:!0,capture:!0},a=new Date,o=function(){i=[],t=-1,e=null,f(addEventListener)},c=function(i,r){e||(e=r,t=i,n=new Date,f(removeEventListener),u())},u=function(){if(t>=0&&t<n-a){var r={entryType:"first-input",name:e.type,target:e.target,cancelable:e.cancelable,startTime:e.timeStamp,processingStart:e.timeStamp+t};i.forEach((function(e){e(r)})),i=[]}},s=function(e){if(e.cancelable){var t=(e.timeStamp>1e12?new Date:performance.now())-e.timeStamp;"pointerdown"==e.type?function(e,t){var n=function(){c(e,t),a()},i=function(){a()},a=function(){removeEventListener("pointerup",n,r),removeEventListener("pointercancel",i,r)};addEventListener("pointerup",n,r),addEventListener("pointercancel",i,r)}(t,e):c(t,e)}},f=function(e){["mousedown","keydown","touchstart","pointerdown"].forEach((function(t){return e(t,s,r)}))},p="hidden"===document.visibilityState?0:1/0;addEventListener("visibilitychange",(function e(t){"hidden"===document.visibilityState&&(p=t.timeStamp,removeEventListener("visibilitychange",e,!0))}),!0);o(),self.webVitals={firstInputPolyfill:function(e){i.push(e),u()},resetFirstInputPolyfill:o,get firstHiddenTime(){return p}}}();
+  </script>
+</head>
+<body>
+  <!-- 这里用于验证对于 FCP 的理解，最大的内容 -->
+  <!-- large-image -->
+  <img class="large-image" src="./img/diagram-transaction-vitals.png">
+  <!-- large-paragraph -->
+  <article id="large-paragraph">
+    <header>野性的呼唤</header>
+    <p>从小生活在温室环境中的巴克被偷着拐卖到原始荒野当雪橇狗。残酷的现实触动了巴克由于人类文明的长久熏陶而向大自然回归的本能和意识。恶劣的生存环境锻炼了巴克，他在历练中不断成长。最终通过战胜狗王斯匹茨而赢得了拉雪橇狗群中的头把交椅。当残暴的哈尔将巴克打得遍体鳞伤、奄奄一息时，约翰·桑顿的解救让巴克感受到温暖并决定誓死效忠恩主，但恩主的遇害彻底打碎了巴克对于人类社会的留恋，从而促使巴克坚定决心，毅然走向荒野，回归自然。</p>
+  </article>
+
+  <script src="https://unpkg.com/web-vitals/dist/web-vitals.iife.js"></script>
+  <script>
+    // (function(){
+    //   const observer = new PerformanceObserver((list) => {
+    //     let perfEntries = list.getEntries();
+    //     let lastEntry = perfEntries[perfEntries.length - 1];
+    //     // Process the latest candidate for largest contentful paint
+    //   });
+    //   observer.observe({entryTypes: ['largest-contentful-paint']});
+    // }());
+    // 可在 chrome 调试面板 Performance 内点 refresh 图标，加载进图标识消失时停止采集数据
+    // 可调整 large-image 的高度来对比 LCP 的值（）
+    (function() {
+
+        // When loading `web-vitals` using a classic script, all the public
+        // methods can be found on the `webVitals` global namespace.
+        webVitals.getCLS(sendToAnalytics);
+        webVitals.getFID(sendToAnalytics);
+        webVitals.getLCP(sendToAnalytics);
+    }());
+    function sendToAnalytics(metric) {
+      console.log(metric);
+      // Replace with whatever serialization method you prefer.
+      // Note: JSON.stringify will likely include more data than you need.
+      const body = JSON.stringify(metric);
+
+      // Use `navigator.sendBeacon()` if available, falling back to `fetch()`.
+      (navigator.sendBeacon && navigator.sendBeacon('/analytics', body)) ||
+          fetch('/analytics', {body, method: 'POST', keepalive: true});
+    }
+    </script>
+</body>
+</html>

@@ -11,6 +11,7 @@
   - 运算优先级问题，与 `&&` `||`一起使用，必须用括号表明优先级，否则会报错
 - import() dynamic import
 - import.meta
+- export 加强
 - Promise.allSettled()
 - 顶层对象 `globalThis` 对象
 - 明确规范 `for-in` 的枚举顺序
@@ -134,6 +135,20 @@ a?.b = c
 - falsely: JavaScript 中很多值都是 falsely。如 空字符串, 数字 0, undefined, null, false, NaN
 
 `??`有一个运算优先级问题，它与`&&`和`||`的优先级孰高孰低。现在的规则是，如果多个逻辑运算符一起使用，必须用括号表明优先级，否则会报错。
+
+动态imports
+
+```js
+const baseModulePath = "./baseModules";
+const btnImportModule = document.getElementById("btnImportModule");
+let userList = [];
+
+btnImportModule.addEventListener("click", async e => {
+  const userModule = await import(`${baseModulePath}/users.js`);
+
+  userList = userModule.getUsers();
+});
+```
 
 导出模块的命名空间
 
