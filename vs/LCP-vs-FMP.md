@@ -2,6 +2,10 @@
 
 > 性能监控的底线应该是不让性能变得更糟
 
+其实统计首屏时间本身就是浏览器的职责，交由浏览器来处理是最好的。 目前W3C关于首屏统计已经进入了提议阶段，坐等W3C再次标准化。
+
+- https://github.com/w3c/paint-timing
+
 ## Web Vitals
 
 - https://docs.sentry.io/product/performance/web-vitals/
@@ -21,11 +25,12 @@
 - FCP(First Contentful Paint) 测量第一个内容在视口中呈现的时间。
 - TTI(Time To Interactive)
 - SI(Speed Index)
-- TBT(Total Blocking Time)
+- TBT(Total Blocking Time)    总阻塞时间，测量 FCP 和 TTI 之间主线程被阻塞足够长的时间以防止输入响应的总时间。
+- CLS(Cumulative Layout Shift)是衡量页面整个生命周期内发生的每个意外布局偏移的最大布局偏移分数的度量。
 - FID(Fist Inout Delay)       x 测量用户尝试与视口交互时的响应时间。
-- FMP(First Meaningful Paint) x 指页面的首要内容（primary content）出现在屏幕上的时间
+- FMP(First Meaningful Paint) x 首次有意义的绘制，指页面的首要内容（primary content）出现在屏幕上的时间。
   - 参考：https://web.dev/first-meaningful-paint/
-  - https://docs.google.com/document/d/1BR94tJdZLsin5poeet0XoTW60M0SjvOJQttKT-JK8HI/view
+  - [首次有意义绘制的时间：基于布局的方法](https://docs.google.com/document/d/1BR94tJdZLsin5poeet0XoTW60M0SjvOJQttKT-JK8HI/view)
 - FCI(First CPU Idle)         x
 
 关于这些指标，有发生过定义上的变化，参考
@@ -65,7 +70,7 @@
 
 FMP vs LCP
 
-- FMP 单位时间内布局节点点增加最多的时间点
+- FMP 侦听页面元素的变化，每次新增节点数量最多的时间点
   - 限制：没有标准实现；对页面细微的变化过于敏感
 - LCP 统计图片，视频/直播，文本节点中最大屏幕元素额绘制的时间
   - 限制：最大元素不一定是最重要的元素；浏览器支持率仅 70% （safari 不支持）
@@ -113,14 +118,14 @@ const browserSupportsLCP = browserSupportsEntry('largest-contentful-paint');
 - 首先很容易想到的是元素是否可见，元素如果是不可见的，那就算增加再多，对用户也是无感知的，一定不能认定为主要内容。
 - 其次是每个元素对页面的影响是否等效？从手淘的案例来看，占位屏的信息价值明显比不上第三屏的内容。因此，对不同的元素需要有不同的权重来衡量。阿里云前端监控是取元素到根节点的长度作为权重。
 
-根据上面的修正因子。ARMS 重新设计了一遍算法，如下图所示
+根据上面的修正因子。ARMS 重新设计了一遍算法, 如下图所示
 
 ![img/FMP-计算方式.jpg]
 
 分为三个步骤
 
 1. 侦听页面元素的变化(MutationObserver 可以观察每批次的元素变动)
-2. 遍历每次新增的元素，并计算这些元素的得分总和
+2. 遍历**每次新增**的元素，并计算这些元素的得分总和
 3. 如果元素可见，得分为 1 * weight(权重), 如果元素不可见，得分为0
 
 如果每次都去遍历新增元素并计算是否可见是非常消耗性能的。实际上采用的是深度优先算法，如果子元素可见，那父元素可见，不再计算。 同样的，如果最后一个元素可见，那前面的兄弟元素也可见。通过深度优先算法，性能有了大幅的提升。

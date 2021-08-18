@@ -3,6 +3,7 @@
 参考：
 
 - https://wangdoc.com/webapi/
+- https://developer.mozilla.org/zh-CN/docs/Web/API
 
 - dom
   - https://github.com/oneuijs/oui-dom-utils/blob/master/src/index.js#L194
