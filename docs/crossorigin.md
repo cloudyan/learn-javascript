@@ -11,7 +11,7 @@ crossorigin or crossOrigin
 
 测试结果：
 
---- | 加crossorigin属性         |    不加crossorigin属性
---- | ---- | ----
-资源服务器开启cors  |  可以正常加载，准确捕获错误   |    可以正常加载，无法准确捕获错误(只能捕获到:Script error.)
-资源服务器不开启cors |  无法正常加载              |    可以正常加载，无法准确捕获错误(只能捕获到:Script error.)
+ -  | 加crossorigin属性                       | 不加crossorigin属性
+--- | ------------------------               | ----
+资源服务器开启cors  |  可以正常加载，准确捕获错误   | 可以正常加载，无法准确捕获错误(只能捕获到:Script error.)
+资源服务器不开启cors |  无法正常加载              | 可以正常加载，无法准确捕获错误(只能捕获到:Script error.)

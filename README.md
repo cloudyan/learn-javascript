@@ -1,5 +1,9 @@
 # learn-javascript
 
+- [Web API 接口参考](https://developer.mozilla.org/zh-CN/docs/Web/API)
+- [JavaScript](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript)
+- [关于跨域请求](https://github.com/cloudyan/cross-domain)
+- [本地环境配置 https 证书](https://github.com/cloudyan/cross-domain/blob/master/server/cors/https.js)
 
 [docs](./docs)
 
