@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beacon API demo</title>
+</head>
+<body>
+  <h1>Beacon API demo</h1>
+  <p>
+    <a href="https://www.baidu.com/" onclick="reportEvent(this)">baidu</a>
+  </p>
+  <!-- <button onclick="reportEvent('some event')">Click me</button> -->
+  <script>
+    window.addEventListener('unload', logData, false);
+    // document.addEventListener('click', logData, false);
+
+    // const sendBeacon = navigator.sendBeacon || function sendBeaconPolyfill(url, data) {
+    //   // var xhr = new XMLHttpRequest();
+    //   // xhr.open('POST', url, true); // 第三个参数表明是同步的 xhr, 同步会导致页面卸载被延迟。
+    //   // xhr.setRequestHeader("Content-Type", "text/plain;charset=UTF-8");
+    //   // xhr.send(data);
+    // }
+
+    // 使用 sendBeacon, 是异步的
+    const reportUrl = 'http://127.0.0.1:8000'
+    function logData(e) {
+      // console.log(e);
+      // const analyticsData = {node: e.target};
+      var data = JSON.stringify({
+        event: event,
+        time: performance.now()
+      });
+      navigator.sendBeacon(`${reportUrl}/log`, data);
+    }
+
+    // emit non-blocking beacon to record client-side event
+    function reportEvent(event) {
+      var data = JSON.stringify({
+        event: event,
+        time: performance.now()
+      });
+      navigator.sendBeacon(`${reportUrl}/report`, data);
+    }
+
+    // emit non-blocking beacon with session analytics as the page
+    // transitions to background state (Page Visibility API)
+    document.addEventListener('visibilitychange', function() {
+      if (document.visiblityState === 'hidden') {
+        var sessionData = buildSessionReport();
+        navigator.sendBeacon(`${reportUrl}/log`, sessionData);
+      }
+    });
+  </script>
+
+</body>
+</html>
