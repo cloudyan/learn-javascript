@@ -10,9 +10,11 @@
 
 - 常规错误捕获 `onerror` 捕获同步错误，可收集报错堆栈
   - 任何没有被 try/catch 语句处理的错误都会在 window 对象上触发 error 事件
+  - 包含 setTimeout 等内部的错误
+  - 错误发生，会导致代码执行中止（后续代码不再执行），任意此类错误都要重视
   - 若该函数返回true，则阻止执行默认事件处理函数。
-- 异步错误捕获 `unhandledrejection`
-  - 包括 `Promise` `setTimeout`
+- Promise 错误捕获 `unhandledrejection`
+  - 包括 `Promise`
 - 资源加载错误捕获 使用 `addEventListener` error，兼容性参见 https://www.quirksmode.org/dom/events/error.html
   - image source
   - css source

@@ -5,25 +5,23 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>错误异常捕获 addEventListener unhandledrejection</title>
-  <script>
-    window.addEventListener("unhandledrejection", (event) => {
-      console.log('unhandledrejection:reason', event.reason);
-      console.log('unhandledrejection:err', event);
-
-      // 防止默认处理（例如将错误输出到控制台）
-      // event.preventDefault();
-    }, true);
-  </script>
 </head>
 <body>
   <!-- 资源错误 -->
   <!-- <img src="../404.png" /> -->
+  <script type="module">
+    import { unhandledRejection } from './sdk/error/unhandledrejection.js';
+
+    unhandledRejection(data => {
+      console.log(JSON.stringify(data, null, 2));
+    })
+  </script>
   <script>
     // 模拟错误
 
   </script>
   <!-- <script src="./js/syntax-error.js"></script> -->
-  <script src="./js/async-error.js"></script>
+  <script type="module" src="./js/async-error.js"></script>
   <!-- <script src="./js/sync-error.js"></script> -->
 </body>
 </html>
