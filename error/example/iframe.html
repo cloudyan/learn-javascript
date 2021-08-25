@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>错误异常捕获 iframe</title>
+</head>
+<body>
+  <!-- 资源错误 -->
+  <img src="../404.png" />
+  <script>
+    // iframe 错误
+    (function(){
+      var frames = window.frames;
+      for (var i = 0; i < frames.length; i++) {
+        frames[i].addEventListener('error', (err)=>{
+          console.warn('addEventListener')
+          console.warn(err)
+        }, true);
+
+        frames[i].addEventListener("unhandledrejection", function(err) {
+          console.warn('unhandledrejection')
+          console.warn(err)
+        }, true);
+      }
+    })();
+  </script>
+  <script>
+    // 模拟错误
+
+  </script>
+</body>
+</html>
