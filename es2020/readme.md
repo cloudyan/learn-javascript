@@ -150,7 +150,9 @@ btnImportModule.addEventListener("click", async e => {
 });
 ```
 
-导出模块的命名空间
+## export 加强
+
+导出模块的命名空间 https://github.com/tc39/proposal-export-ns-from
 
 ```js
 // 之前支持这个

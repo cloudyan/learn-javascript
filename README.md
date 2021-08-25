@@ -2,21 +2,27 @@
 
 - [Web API 接口参考](https://developer.mozilla.org/zh-CN/docs/Web/API)
 - [JavaScript](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript)
-- [关于跨域请求](https://github.com/cloudyan/cross-domain)
-- [本地环境配置 https 证书](https://github.com/cloudyan/cross-domain/blob/master/server/cors/https.js)
 
 [docs](./docs)
 
 - 解决疑问，原理分析，常见用法，替代方案，常见坑等等
 - 单点突破——集中精神，单点突破
 
-其他
+更多
 
-- [useGit 入门教程](https://github.com/webcoding/useGit)
-- [bable-7 and jest](https://github.com/cloudyan/jest-use-babel7)
-- [研究学习反爬虫、防注入广告等](https://github.com/webcoding/js_block)
-- [JS 代码片段](https://github.com/cloudyan/js-bits)
-- [测试 lerna的使用](https://github.com/cloudyan/lerna-test)
+- [x] [useGit 入门教程](https://github.com/webcoding/useGit)
+- [x] [bable-7 and jest](https://github.com/cloudyan/jest-use-babel7)
+- [x] [研究学习反爬虫、防注入广告等](https://github.com/webcoding/js_block)
+- [x] [requestAnimationFrame](https://github.com/cloudyan/learn-javascript/tree/master/webapi/requestAnimationFrame)
+- [x] [event-loop](https://github.com/cloudyan/learn-javascript/tree/master/docs/event-loop)
+- [x] [script 的加载时序与执行时序](https://github.com/cloudyan/learn-javascript/tree/master/docs/2.script)
+- [x] [关于跨域请求](https://github.com/cloudyan/cross-domain)
+- [x] [本地环境配置 https 证书](https://github.com/cloudyan/cross-domain/blob/master/server/cors/https.js)
+  - mkcert
+- [ ] [测试 lerna的使用](https://github.com/cloudyan/lerna-test)
+- [ ] [JS 代码片段](https://github.com/cloudyan/js-bits)
+- [x] [tapable](https://github.com/cloudyan/tapable)
+- [ ] [探究JS 加密](https://github.com/cloudyan/js_encryption)
 
 ES全称ECMAScript，ECMAScript是ECMA制定的标准化脚本语言。目前JavaScript使用的ECMAScript版本为[ECMA-417](https://ecma-international.org/publications/standards/Ecma-417.htm)。关于ECMA的最新资讯可以浏览 [ECMA news](https://www.ecma-international.org/news/index.html)查看。
 
@@ -28,6 +34,8 @@ ECMA规范最终由[TC39](https://github.com/tc39)敲定。TC39由包括浏览�
 - Stage 2: draft（草案）——功能规范的初始版本，该版本包含功能规范的两个实验实现。
 - Stage 3: candidate（候选）——提案规范通过审查并从厂商那里收集反馈
 - [Stage 4](https://github.com/tc39/proposals/blob/master/finished-proposals.md): finished（完成）——提案准备加入ECMAScript，但是到浏览器或者Nodejs中可能需要更长的时间。
+
+![JavaScript发展简史](./static/img/JavaScript%20的发展简史.png)
 
 ## ES5
 
@@ -142,12 +150,10 @@ ECMA规范最终由[TC39](https://github.com/tc39)敲定。TC39由包括浏览�
   - `console.log(1_23 === 123)` // true
 - WeakRefs
 
-## 其他
+其他
 
-- [x] [requestAnimationFrame](https://github.com/cloudyan/learn-javascript/tree/master/window/01.requestAnimationFrame)
-- [x] [cross-domain](https://github.com/cloudyan/cross-domain)
-- [x] [event-loop](https://github.com/cloudyan/learn-javascript/tree/master/docs/event-loop)
-- [x] [script 的加载时序与执行时序](https://github.com/cloudyan/learn-javascript/tree/master/docs/2.script)
+- [deno-vs-node](https://github.com/cloudyan/deno-vs-node)
+- [html-build](https://github.com/cloudyan/html-build)
 
 参考：
 
