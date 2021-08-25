@@ -38,19 +38,7 @@ setTimeout 的第一个参数使用字符串而非函数的话，会引发内存
 
 从逻辑角度来看，多线程的意义在于一个应用程序中，有多个执行部分可以同时执行。但操作系统并没有将多个线程看做多个独立的应用，来实现进程的调度和管理以及资源分配。这就是进程和线程的重要区别。
 
-其他
-
-- [useGit 入门教程](https://github.com/webcoding/useGit)
-- [bable-7 and jest](https://github.com/cloudyan/babel-7)
-- [研究学习反爬虫、防注入广告等](https://github.com/webcoding/js_block)
-- [JS 代码片段](https://github.com/webcoding/js-bits)
-- [测试 lerna的使用](https://github.com/cloudyan/lerna-test)
-
 算法
 
 - https://github.com/pomegranitedesign/100-javascript-algorithms-challenge
 
-参考：
-
-- https://github.com/ecmadao/js-bits-cn
-- https://github.com/webcoding/js-bits

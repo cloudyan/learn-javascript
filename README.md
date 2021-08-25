@@ -10,6 +10,14 @@
 - 解决疑问，原理分析，常见用法，替代方案，常见坑等等
 - 单点突破——集中精神，单点突破
 
+其他
+
+- [useGit 入门教程](https://github.com/webcoding/useGit)
+- [bable-7 and jest](https://github.com/cloudyan/jest-use-babel7)
+- [研究学习反爬虫、防注入广告等](https://github.com/webcoding/js_block)
+- [JS 代码片段](https://github.com/cloudyan/js-bits)
+- [测试 lerna的使用](https://github.com/cloudyan/lerna-test)
+
 ES全称ECMAScript，ECMAScript是ECMA制定的标准化脚本语言。目前JavaScript使用的ECMAScript版本为[ECMA-417](https://ecma-international.org/publications/standards/Ecma-417.htm)。关于ECMA的最新资讯可以浏览 [ECMA news](https://www.ecma-international.org/news/index.html)查看。
 
 ECMA规范最终由[TC39](https://github.com/tc39)敲定。TC39由包括浏览器厂商在内的各方组成，他们开会推动JavaScript提案沿着一条严格的发展道路前进。
@@ -21,7 +29,13 @@ ECMA规范最终由[TC39](https://github.com/tc39)敲定。TC39由包括浏览�
 - Stage 3: candidate（候选）——提案规范通过审查并从厂商那里收集反馈
 - [Stage 4](https://github.com/tc39/proposals/blob/master/finished-proposals.md): finished（完成）——提案准备加入ECMAScript，但是到浏览器或者Nodejs中可能需要更长的时间。
 
+## ES5
+
+- 严格模式(strict mode) `'use strict';`
+
 ## ES2015 (ES6)
+
+2015年6月17日
 
 - let && const
 - 解构赋值

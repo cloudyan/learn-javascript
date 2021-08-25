@@ -13,14 +13,21 @@ banana
 
 ```js
 (i =>
-  ((f => {
-      f(f, i)
-  })((f, i) => {
-      console.log("i:", i)
-      if (i < 10) {
-          f(f, i + 1)
+  (
+    (
+      f => {
+        f(f, i)
       }
-  })))(1)
+    )(
+      (f, i) => {
+        console.log("i:", i);
+        if (i < 10) {
+          f(f, i + 1);
+        }
+      }
+    )
+  )
+)(1);
 ```
 
 empty vs undefined
@@ -30,8 +37,27 @@ empty vs undefined
 ```
 
 ```js
+![] == false
 [] == (![])
 ```
 
-- https://github.com/deepjs-cn/jsfuck
+- https://github.com/aemkei/jsfuck
 
+```js
+false       =>  ![]
+true        =>  !![]
+undefined   =>  [][[]]
+NaN         =>  +[![]]
+0           =>  +[]
+1           =>  +!+[]
+2           =>  !+[]+!+[]
+10          =>  +[[+!+[]]+[+[]]]
+Array       =>  []
+Number      =>  +[]
+String      =>  []+[]
+Boolean     =>  ![]
+Function    =>  []["filter"]
+run         =>  []["filter"]["constructor"]( CODE )()
+eval        =>  []["filter"]["constructor"]("return eval")()( CODE )
+window      =>  []["filter"]["constructor"]("return this")()
+```
