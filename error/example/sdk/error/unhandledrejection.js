@@ -7,8 +7,8 @@ export function unhandledRejection(callback = noop) {
 
     let bool;
     if (typeof callback === 'function') {
-      const data = formatAsyncError(event, 'unhandledrejection');
-      callback(data)
+      const data = formatAsyncError(event);
+      bool = callback(data)
     }
 
     // 防止默认处理（例如将错误输出到控制台）

@@ -34,7 +34,7 @@ export function formatError(event = {}, uncaughtType) {
   return data;
 }
 
-export function formatAsyncError(error, uncaughtType) {
+export function formatAsyncError(error) {
   let lineno = 0;
   let colno = 0;
   let message = '';
@@ -58,7 +58,7 @@ export function formatAsyncError(error, uncaughtType) {
   }
 
   const data = {
-    uncaught_type: uncaughtType,
+    uncaught_type: 'unhandledrejection',
     type: 'AsyncType', // errorType
     sub_type: 'uncaught',
     filename,
@@ -68,4 +68,32 @@ export function formatAsyncError(error, uncaughtType) {
     selector: '',
   };
   return data;
+}
+
+export function readNodePath(el) {
+  let selector = el.nodeName.toLowerCase();
+  if (el.id) {
+    selector += '#' + el.id;
+  } else if (el.classList.length) {
+    selector += '.' + [...el.classList].join('.');
+  } else {
+    let sib = el, nth = 1;
+    while (sib = sib.previousElementSibling) {
+      if (sib.nodeName.toLowerCase() == selector) nth++;
+    }
+    if (nth != 1) selector += ":nth-of-type("+nth+")";
+  }
+  return selector;
+}
+// 标准CSS路径
+export function readXPath(el) {
+  if (!(el instanceof Element)) return;
+
+  let path = [];
+  while (el.nodeType === Node.ELEMENT_NODE) {
+    const selector = readNodePath(el)
+    path.unshift(selector);
+    el = el.parentNode;
+  }
+  return path.join(' > ');
 }

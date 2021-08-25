@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>错误异常捕获 resource</title>
+  <script type="module">
+    import { resourceError } from './sdk/error/resource.js';
+    import { unhandledRejection } from './sdk/error/unhandledrejection.js';
+
+    unhandledRejection(data => {
+      console.log(JSON.stringify(data, null, 2));
+    })
+    resourceError(data => {
+      console.log(JSON.stringify(data, null, 2));
+    })
+  </script>
+</head>
+<body>
+  <!-- 资源错误, 使用 es6 module, 异步加载 js，导致捕获不到资源加载错误  -->
+  <!-- 测试示例加载的资源，改为动态生成 -->
+  <!-- <img src="./404.png" />
+  <link rel="stylesheet" href="./style.css" />
+  <script type="module" src="./script.js"></script> -->
+
+  <div id="root">
+    <div class="test-box"></div>
+  </div>
+
+  <script type="module">
+    // 模拟错误
+    import { loadJs, loadCss, loadImage } from './sdk//utils/load.js';
+
+    // 为了避免产生 reject 后影响 unhandledrejection 捕获错误，此处处理下
+    loadJs('./sdk/utils/load.js', {root: '.test-box', type: 'module'}).then(res => {
+      console.log(`outer load ${res.resource} 成功`)
+    })
+    loadJs('./404.js', {root: '.test-box'}).then(res => {
+      console.log(`outer load ${res.resource} 成功`)
+    }).catch(err => {
+      // throw err // catch 里 throw 之后，会被 unhandledrejection 捕获到错误
+      console.log('%couter catch log:', 'color: #fff; background: red;', err);
+    })
+    loadCss('./404.css', {root: '.test-box'}) // .catch(err => {})
+    loadImage('./404.png', {root: '.test-box', style: 'display: none;'}).catch(err => {})
+  </script>
+  <!-- <script src="./js/syntax-error.js"></script>
+  <script src="./js/async-error.js"></script>
+  <script src="./js/sync-error.js"></script> -->
+</body>
+</html>

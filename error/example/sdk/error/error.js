@@ -3,13 +3,12 @@ import { formatError, noop } from '../utils/index.js';
 export function uncaughtError(callback = noop) {
   // 错误监听
   window.addEventListener('error', (event) => {
-    // 只处理 window 事件
-    // if (event.target !== window) return
+    // 只处理 window 事件（区别于资源类错误）
+    if (event.target !== window) return
 
     // ErrorEvent 类型的event包含有关事件和错误的所有信息。
     // 也可以捕获到错误，但这个拿到的 JS 报错堆栈往往是不完整的(待验证)
-    console.warn('addEventListener');
-    console.warn('error:err', event);
+    console.log('error:err', event);
     // console.warn('error:message', message);
     // console.warn('error:filename', filename);
     // console.warn('error:lineno', lineno);
@@ -34,6 +33,7 @@ export function uncaughtError(callback = noop) {
 export function uncaughtOnError(callback = noop) {
   const handleError = window.onerror
   window.onerror = function(message, filename, lineno, colno, error) {
+    console.log('onerror', arguments);
     var msg = message.toLowerCase();
     var subMsg = "script error";
     let bool = false
