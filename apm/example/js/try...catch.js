@@ -30,6 +30,7 @@ try {
   xxx // 运行时错误(必须是有效的Javascript代码)，tryCatch 仅能处理有效代码中的错误，被称为“运行时”错误
 } catch (err) {
   console.log('语法错误', err);
+  // throw err;
 }
 
 // try...catch 只能捕获同步错误，如 setTimeout 就无法捕获
@@ -42,13 +43,15 @@ try {
   console.log(`won't work`);
 }
 
-try {
-  // 解析时错误，不能被 tryCatch 处理，
-  // 此类错误直接导致代码执行中断，比较严重
-  {{{ // 此错误会影响上述两个 tryCatch 的执行，该错误被 window.onerror 捕获到
-} catch (err) {
-  console.log('语法错误', err);
-}
+// 解析时错误，不能被 tryCatch 处理，
+// 此类错误直接导致代码执行中断，比较严重
+//   此错误会影响前面的 tryCatch 执行
+//   该错误会被 window.onerror 捕获到
+// try {
+//   {{{
+// } catch (err) {
+//   console.log('语法错误', err);
+// }
 
 // 在下面的代码中，try块的代码可能会抛出三种异常：TypeError，RangeError和EvalError。
 // 当一个异常抛出时，控制将会进入与其对应的catch语句。如果这个异常不是特定的，那么控制将转移到无条件catch子句。

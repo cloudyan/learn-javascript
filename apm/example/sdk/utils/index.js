@@ -21,9 +21,11 @@ export function formatError(event = {}, uncaughtType) {
     error,
   } = event;
   const stack = getStackMessage(error?.stack);
+
+  // 错误类型 SyntaxError
   const data = {
     uncaught_type: uncaughtType,
-    type: 'SyntaxError', // errorType
+    type: 'error', // errorType
     sub_type: 'uncaught',
     filename,
     message,
