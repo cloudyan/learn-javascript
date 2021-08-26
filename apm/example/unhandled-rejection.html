@@ -10,10 +10,11 @@
   <!-- 资源错误 -->
   <!-- <img src="../404.png" /> -->
   <script type="module">
-    import { unhandledRejection } from './sdk/error/unhandledrejection.js';
+    import { unhandledRejection } from './sdk/error/unhandled-rejection.js';
 
     unhandledRejection(data => {
       console.log(JSON.stringify(data, null, 2));
+      // return true
     })
   </script>
   <script>

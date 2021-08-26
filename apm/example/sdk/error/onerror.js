@@ -1,5 +1,6 @@
 import { formatError, noop } from '../utils/index.js';
 
+const regCrosError = /Script error\.?/;
 export function uncaughtError(callback = noop) {
   // 错误监听
   window.addEventListener('error', (event) => {
@@ -29,15 +30,13 @@ export function uncaughtError(callback = noop) {
   }, true);
 }
 
-
+// 推荐使用 onerror
 export function uncaughtOnError(callback = noop) {
   const handleError = window.onerror
   window.onerror = function(message, filename, lineno, colno, error) {
     console.log('onerror', arguments);
-    var msg = message.toLowerCase();
-    var subMsg = "script error";
-    let bool = false
-    if (msg.indexOf(subMsg) > -1) {
+    let bool
+    if (regCrosError.test(message)) {
       console.warn('Script Error: See Browser Console for Detail');
     } else {
       // console.warn('onerror:err', arguments);
@@ -59,7 +58,7 @@ export function uncaughtOnError(callback = noop) {
       }
     }
 
-    handleError && handleError(arguments)
+    handleError && handleError.apply(this, arguments)
 
     // 若该函数返回 true，则阻止执行默认事件处理函数（输出错误信息到 console）
     // 注: 红皮书上此处 说返回 false，是错误的描述，直接可验证得到结论(相比较 MDN 站点更准确)

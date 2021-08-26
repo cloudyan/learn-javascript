@@ -57,7 +57,15 @@ sentry 通过 tryCatch 的方式 wrap 了一些关键函数，使得这些函数
 
 错误相关的辅助信息需要采集哪些
 
+## SDK
 
+- device
+- error
+- event
+- http
+- performance
+- request
+- utils
 
 ## 报警邮件 or 钉钉
 

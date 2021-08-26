@@ -11,7 +11,8 @@ try {
 } catch(err) {
   console.log('tryCatch');
   // TypeError
-  // throw err; // 此处 throw 仍然导致后续代码执行中止
+  // throw err; // 这里 throw 会导致后续代码执行中止
+                // 而不 throw 则不能被全局捕获到此错误，必须自己处理错误上报
 }
 console.log('after: tryCatch throw')
 
@@ -23,5 +24,6 @@ setTimeout(()=>{
 }, 10)
 
 const obj = {};
+console.warn(`%c产生错误导致执行中断，注意看是否log`, 'color: red;', `'after: obj.a.b'`);
 console.log(obj.a.b); // 发生错误就会导致后续代码执行中止
-console.log('after: obj.a.b');
+console.log('%cafter: obj.a.b', 'background: red;color:#fff;');

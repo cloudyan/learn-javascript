@@ -12,10 +12,11 @@
   <!-- <img src="../404.png" /> -->
   <!-- <script type="module" src="./sdk/tests/error_test.js"></script> -->
   <script type="module">
-    import { uncaughtOnError, uncaughtError } from './sdk/error/error.js';
+    import { uncaughtOnError, uncaughtError } from './sdk/error/onerror.js';
 
-    uncaughtError(data => {
+    uncaughtOnError(data => {
       console.log(JSON.stringify(data, null, 2));
+      // return true;
     })
   </script>
   <script>
