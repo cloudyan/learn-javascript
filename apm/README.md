@@ -9,8 +9,15 @@
 - [Worker.onerror](https://developer.mozilla.org/en-US/docs/Web/API/Worker/onerror)
 - http://rapheal.sinaapp.com/2014/11/06/javascript-error-monitor/
 - https://dashenquan.yuque.com/docs/share/6417d568-e053-4b1c-a8c5-daec1523ed80?# 《错误监控》
+- [移动运维监控](https://sls.console.aliyun.com/lognext/app/mobilAPM), SLS、UC 岳鹰联合出品移动应用线上监控平台
+  - [阿里云日志服务-前端监控](https://help.aliyun.com/document_detail/300011.html)
+  - [接入前端监控数据](https://help.aliyun.com/document_detail/300009.htm)
+- [w3c paint-timing](https://github.com/w3c/paint-timing)
+- TODO: [Fast load times](https://web.dev/fast/)
+- TODO: [Web Vitals](https://web.dev/learn-web-vitals/)
+- [lighthouse-performance](https://web.dev/lighthouse-performance/)
 
-重点：
+错误监控：
 
 - 任何没有被 try/catch 语句处理的错误都会在 window 对象上触发 error 事件。
   - Promise 例外，详见 `unhandledrejection`
@@ -22,6 +29,8 @@
   - 在某些浏览器中，通过在`<script>`使用`crossorigin`属性并要求服务器发送适当的 CORS HTTP 响应头，该行为可被覆盖。
 
 加载一个全局的error事件处理函数可用于自动收集错误报告。
+
+### 错误监控维度
 
 - 常规错误捕获 `onerror` 捕获同步错误，可收集报错堆栈
   - 任何没有被 try/catch 语句处理的错误都会在 window 对象上触发 error 事件
@@ -114,6 +123,64 @@ ECMA-262定义了下列8种错误类型：
 异常是不可避免的，例如数据库挂了，网络错误，你虽然知道有可能，但是不知道何时发生，这些异常你需要捕捉或者传给上层。
 
 而错误处理，则是一些基本的判定，可以从代码级别避免其发生，可预知可推测，如果发生了，不是系统问题，而是你的程序有bug了。
+
+## 监控指标
+
+- 实时大盘
+- JS 异常
+- API 请求
+- 页面性能
+- 资源异常
+- 页面访问
+- 自定义查询
+
+### 数据指标维度
+
+- 错误收集 error
+  1. JavaScript 语法错误
+  2. Promise 错误
+  3. 资源加载错误
+  4. 接口请求错误
+- 性能监控 performance
+  1. 上次页面卸载耗时
+  2. 连接时间
+  3. 重定向耗时
+  4. 请求耗时
+  5. 获取首字节时间 (TTFB)
+  6. 响应读取时间
+  7. Dom 解析时间
+  8. 脚本执行时间
+  9. Dom 渲染耗时
+  10. 首次可交互时间
+  11. 页面完整加载时间
+  12. 白屏时间
+- 渲染指标, 参看下文渲染指标文档
+  - TTFB(Time To First Byte)      : 首字节时间        (web-vitals)
+  - FP  (First Paint)             : 首次绘制          (w3c...)
+  - FID (First Input Delay)       : 首次输入/交互延迟  (web-vitals)
+  - FCP (First Contentful Paint)  : 首次内容绘制       (lighthouse/web-vitals/w3c...)
+  - TTI (Time to Interactive)     : 交互时间          (lighthouse)
+  - SI  (Speed Index)             : 速度指数          (lighthouse)
+  - TBT (Total Blocking Time)     : 总阻塞时间        (lighthouse)
+  - LCP (Large Contentful Paint)  : 最大内容绘制      (lighthouse/web-vitals)
+  - CLS (Cumulative Layout Shift) : 累积布局偏移      (lighthouse/web-vitals)
+  - ~~FMP (First Meaningful Paint): 首次有意义的绘制~~ (lighthouse已弃, => LCP)
+  - ~~FCI (First CPU Idle)        : 首次CPU空闲~~     (lighthouse已弃, => TBT+TTI)
+- 资源加载
+  - 资源加载时间(JavaScript, CSS, Image)
+
+文档参考
+
+- 渲染指标文档
+  - [w3c paint-timing](https://github.com/w3c/paint-timing)
+  - [web-vitals](https://web.dev/vitals/)
+  - [lighthouse-performance](https://web.dev/lighthouse-performance/)
+- [User Timing API](https://w3c.github.io/user-timing/)
+- [Long Tasks API](https://w3c.github.io/longtasks/)
+- [Element Timing API](https://wicg.github.io/element-timing/)
+- [Navigation Timing API](https://w3c.github.io/navigation-timing/)
+- [Resource Timing API](https://w3c.github.io/resource-timing/)
+- [Server timing](https://w3c.github.io/server-timing/)
 
 ## 报警邮件 or 钉钉
 

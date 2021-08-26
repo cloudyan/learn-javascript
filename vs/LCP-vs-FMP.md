@@ -19,12 +19,12 @@
 
 ![一张图介绍以上概念](img/diagram-transaction-vitals.png)
 
-其他网络重要信息
+其他网络重要信息，https://web.dev/lighthouse-performance/
 
 - FP(First Paint)             测量第一个像素出现在视口中所花费的时间
 - FCP(First Contentful Paint) 测量第一个内容在视口中呈现的时间。
-- TTI(Time To Interactive)
-- SI(Speed Index)
+- TTI(Time To Interactive)    交互时间TTI 衡量一个页面需要多长时间才能完全交互
+- SI(Speed Index)             速度指数衡量页面加载期间内容的视觉显示速度。
 - TBT(Total Blocking Time)    总阻塞时间，测量 FCP 和 TTI 之间主线程被阻塞足够长的时间以防止输入响应的总时间。
 - CLS(Cumulative Layout Shift)是衡量页面整个生命周期内发生的每个意外布局偏移的最大布局偏移分数的度量。
 - FID(Fist Inout Delay)       x 测量用户尝试与视口交互时的响应时间。
@@ -74,6 +74,7 @@ FMP vs LCP
   - 限制：没有标准实现；对页面细微的变化过于敏感
 - LCP 统计图片，视频/直播，文本节点中最大屏幕元素额绘制的时间
   - 限制：最大元素不一定是最重要的元素；浏览器支持率仅 70% （safari 不支持）
+  - https://github.com/GoogleChrome/web-vitals#browser-support
   - https://caniuse.com/?search=largest-contentful-paint
 
 不推荐使用第一次有意义的绘制 (FMP)。在实践中，FMP 对页面加载的微小差异过于敏感，导致结果不一致（双峰）。此外，该指标的定义依赖于特定于浏览器的实现细节，这意味着它无法标准化，也无法在所有 Web 浏览器中实现。
