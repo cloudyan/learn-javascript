@@ -5,55 +5,18 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>错误异常捕获 try...catch</title>
-  <script>
-    (function() {
-      const handleError = window.onerror
-      window.onerror = function(message, source, lineno, colno, error) {
-        var msg = message.toLowerCase();
-        var subMsg = "script error";
-        if (msg.indexOf(subMsg) > -1) {
-          console.warn('Script Error: See Browser Console for Detail');
-          return false;
-        }
-        console.warn('onerror:err', arguments);
-        console.warn('onerror:message', message);
-        console.warn('onerror:source', source);
-        console.warn('onerror:lineno', lineno);
-        console.warn('onerror:colno', colno);
-        console.warn('onerror:error', error);
-        console.warn('onerror:error.stack', error.stack);
-
-        handleError && handleError(arguments)
-
-        // 若该函数返回true，则阻止执行默认事件处理函数。
-        return false;
-      }
-
-      // 跨域的JS资源，window.onerror拿不到详细的信息，需要往资源的请求添加额外的头部。
-      // 静态资源请求需要加多一个Access-Control-Allow-Origin头部，同时script引入外链的标签需要加多一个crossorigin的属性。
-    })();
-
-    // 错误监听
-    window.addEventListener('error', (event) => {
-      // 也可以捕获到错误，但这个拿到的 JS 报错堆栈往往是不完整的
-      console.warn('addEventListener');
-      console.warn('error:err', event);
-      console.warn('error:message', event.message);
-      console.warn('error:filename', event.filename);
-      console.warn('error:lineno', event.lineno);
-      console.warn('error:colno', event.colno);
-      console.warn('error:error', event.error);
-      console.warn('error:error.stack', event.error.stack);
-
-      // 禁止默认错误提示
-      // err.preventDefault();
-    }, true);
-
-  </script>
 </head>
 <body>
   <!-- 资源错误 -->
   <!-- <img src="../404.png" /> -->
+  <script type="module">
+    import { uncaughtOnError, uncaughtError } from './sdk/error/onerror.js';
+
+    uncaughtOnError(data => {
+      console.log(JSON.stringify(data, null, 2));
+      // return true;
+    })
+  </script>
   <script>
     // 模拟错误
 
@@ -61,6 +24,6 @@
   <!-- <script src="./js/syntax-error.js"></script> -->
   <!-- <script src="./js/async-error.js"></script> -->
   <!-- <script src="./js/sync-error.js"></script> -->
-  <script src="./js/try...catch.js"></script>
+  <script type="module" src="./js/try...catch.js"></script>
 </body>
 </html>
