@@ -2,6 +2,13 @@
 
 - [Web API 接口参考](https://developer.mozilla.org/zh-CN/docs/Web/API)
 - [JavaScript](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript)
+- [ES6 入门教程](https://es6.ruanyifeng.com/)
+- 推荐书籍
+  - JavaScript高级程序设计
+  - 你不知道的JavaScript(三部)
+  - Effective JavaScript
+  - 深入理解ES6
+  - JavaScript设计模式与开发实践
 
 [docs](./docs)
 
