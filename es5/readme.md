@@ -2,6 +2,16 @@
 
 深入了解 js 特性
 
+2009 年发布的改进版本 ES5，引入了
+
+- Object.create()
+- Object.defineProperty()
+- getters
+- setters
+- 严格模式 `'use strict';`
+- JSON 对象
+- 新的数组方法, `.map()`, `.filter()` 等
+
 - ES5 引入严格模式 `'use strict';`, 主要有以下限制:
   - 变量必须声明后再使用
   - 函数的参数不能有同名属性，否则报错
