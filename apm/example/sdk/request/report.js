@@ -1,6 +1,7 @@
 
 // SLS web数据采集上报SDK
-// https://help.aliyun.com/document_detail/300009.htm
+//  - [接入前端监控数据](https://help.aliyun.com/document_detail/300009.htm)
+//  - [前端监控相关的基本概念](https://help.aliyun.com/document_detail/300012.html)
 import SlsReporter from 'sls-wpk-reporter'
 import wpkglobalerrorPlugin from 'sls-wpk-reporter/src/plugins/globalerror';   //用于监控JS异常。
 import wpkperformancePlugin from 'sls-wpk-reporter/src/plugins/performance';   //用于监控页面性能。
@@ -19,19 +20,14 @@ const wpk = new SlsReporter({
   rel: '', // 前端资源版本号，推荐设置（非必填）
   uid: '', // 用户唯一ID，推荐设置（非必填）
   plugins: [ // 采集插件
-    // [wpkinterfacePlugin, { sampleRate: 0.5 }], // 构造方法传参
     // 基础性能数据自动上报
-    [
-      wpkperformancePlugin,
-      {
-        enable: true, // 默认为 true，可设为false关闭上报
-        sampleRate: 1 // 采样率，默认 100%
-      }
-    ],
+    [wpkperformancePlugin, {
+      enable: true, // 默认为 true，可设为false关闭上报
+      sampleRate: 1 // 采样率，默认 100%
+    }],
+
     // 全局错误监控
-    [
-      wpkglobalerrorPlugin,
-      {
+    [wpkglobalerrorPlugin, {
         // 默认只会捕获 js error(包括unhandledrejection)，需要监控资源加载异常可以设置 resErr: true
         jsErr: true, // 是否开启js error监控
         jsErrSampleRate: 1, // js error采样率，默认为 1
@@ -39,9 +35,9 @@ const wpk = new SlsReporter({
         resErr: false, // 是否开启资源加载异常监控
         resErrSampleRate: 1, // 资源异常监控采样率，默认为 1
         resErrFilter: function(params) {}, // 资源加载异常过滤的回调函数，参数为 error对象，返回 false则不上报
-      },
-    ],
-    // 接口异常监控
+    }],
+
+    // 接口异常监控（构造方法传参）
     [wpkinterfacePlugin, {
       enable: true, // 默认为 true，可设为false关闭插件功能
       sampleRate: 1,  // 采样率，默认为 1
@@ -54,19 +50,16 @@ const wpk = new SlsReporter({
     }],
 
     // wpkflowPlugin
-    [
-      wpkflowPlugin,
-      {
-        enable: true, // 默认开启，默认在 onload时会自动上报
-        // spa: false,
-      }
-    },
+    [wpkflowPlugin, {
+      enable: true, // 默认开启，默认在 onload时会自动上报
+      // spa: false,
+    }],
   ],
 });
 wpk.install(); // 初始化！一定记得调用
 
 // 接口方式传参
-wpk.addPlugin(interfacePlugin, { sampleRate: 0.5 })
+// wpk.addPlugin(interfacePlugin, { sampleRate: 0.5 })
 
 // 5 个 API
 wpk.logReport(logData) // 主动上报一条日志

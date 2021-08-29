@@ -2,6 +2,8 @@ import SlsWebLogger from 'js-sls-logger';
 
 /**
  * SLS WebTracking JavaScript Logging SDK
+ *    [使用Web Tracking采集日志](https://help.aliyun.com/document_detail/31752.htm)
+ *    [PutWebtracking](https://help.aliyun.com/document_detail/120218.htm)
  *    https://www.npmjs.com/package/js-sls-logger
  *
  * Web Tracking 可以采集各种浏览器、iOS APP 或 Android APP 的用户信息，例如：
@@ -24,7 +26,7 @@ const opts = {
 
 const logger = new SlsWebLogger(opts);
 
-// 上传日志
+// 上传日志, 自定义数据
 logger.send({
   customer: "zhangsan",
   product: "iphone 12",

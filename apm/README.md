@@ -12,6 +12,7 @@
 - [移动运维监控](https://sls.console.aliyun.com/lognext/app/mobilAPM), SLS、UC 岳鹰联合出品移动应用线上监控平台
   - [阿里云日志服务-前端监控](https://help.aliyun.com/document_detail/300011.html)
   - [接入前端监控数据](https://help.aliyun.com/document_detail/300009.htm)
+  - [日志服务学习路径](https://help.aliyun.com/learn/learningpath/log.html)
 - [w3c paint-timing](https://github.com/w3c/paint-timing)
 - TODO: [Fast load times](https://web.dev/fast/)
 - TODO: [Web Vitals](https://web.dev/learn-web-vitals/)
@@ -136,38 +137,40 @@ ECMA-262定义了下列8种错误类型：
 
 ### 数据指标维度
 
-- 错误收集 error
-  1. JavaScript 语法错误
-  2. Promise 错误
-  3. 资源加载错误
-  4. 接口请求错误
-- 性能监控 performance
-  1. 上次页面卸载耗时
-  2. 连接时间
-  3. 重定向耗时
-  4. 请求耗时
-  5. 获取首字节时间 (TTFB)
-  6. 响应读取时间
-  7. Dom 解析时间
-  8. 脚本执行时间
-  9. Dom 渲染耗时
-  10. 首次可交互时间
-  11. 页面完整加载时间
-  12. 白屏时间
-- 渲染指标, 参看下文渲染指标文档
-  - TTFB(Time To First Byte)      : 首字节时间        (web-vitals)
-  - FP  (First Paint)             : 首次绘制          (w3c...)
-  - FID (First Input Delay)       : 首次输入/交互延迟  (web-vitals)
-  - FCP (First Contentful Paint)  : 首次内容绘制       (lighthouse/web-vitals/w3c...)
-  - TTI (Time to Interactive)     : 交互时间          (lighthouse)
-  - SI  (Speed Index)             : 速度指数          (lighthouse)
-  - TBT (Total Blocking Time)     : 总阻塞时间        (lighthouse)
-  - LCP (Large Contentful Paint)  : 最大内容绘制      (lighthouse/web-vitals)
-  - CLS (Cumulative Layout Shift) : 累积布局偏移      (lighthouse/web-vitals)
-  - ~~FMP (First Meaningful Paint): 首次有意义的绘制~~ (lighthouse已弃, => LCP)
-  - ~~FCI (First CPU Idle)        : 首次CPU空闲~~     (lighthouse已弃, => TBT+TTI)
-- 资源加载
-  - 资源加载时间(JavaScript, CSS, Image)
+- 错误监控 error
+  1. JS 错误
+     1. JavaScript 语法错误
+     2. Promise 错误
+  2. 资源加载错误（js,css,image,iframe）
+  3. 接口请求错误
+- 性能监控
+  - 基础性能指标 performance
+    1. 上次页面卸载耗时
+    2. 连接时间
+    3. 重定向耗时
+    4. 请求耗时
+    5. 获取首字节时间 (TTFB)
+    6. 响应读取时间
+    7. Dom 解析时间
+    8. 脚本执行时间
+    9. Dom 渲染耗时
+    10. 首次可交互时间
+    11. 页面完整加载时间
+    12. 白屏时间
+  - 资源加载
+    13. 资源加载时间(script, css, image) `window.performance.getEntriesByType('resource')`
+  - 渲染指标, 参看下文渲染指标文档
+    - TTFB(Time To First Byte)      : 首字节时间        (web-vitals)
+    - FP  (First Paint)             : 首次绘制          (w3c...)
+    - FID (First Input Delay)       : 首次输入/交互延迟  (web-vitals)
+    - FCP (First Contentful Paint)  : 首次内容绘制       (lighthouse/web-vitals/w3c...)
+    - TTI (Time to Interactive)     : 交互时间          (lighthouse)
+    - SI  (Speed Index)             : 速度指数          (lighthouse)
+    - TBT (Total Blocking Time)     : 总阻塞时间        (lighthouse)
+    - LCP (Large Contentful Paint)  : 最大内容绘制      (lighthouse/web-vitals)
+    - CLS (Cumulative Layout Shift) : 累积布局偏移      (lighthouse/web-vitals)
+    - ~~FMP (First Meaningful Paint): 首次有意义的绘制~~ (lighthouse已弃, => LCP)
+    - ~~FCI (First CPU Idle)        : 首次CPU空闲~~     (lighthouse已弃, => TBT+TTI)
 
 文档参考
 
@@ -184,5 +187,5 @@ ECMA-262定义了下列8种错误类型：
 
 ## 报警邮件 or 钉钉
 
-
+可以设置错误匹配规则，超过阈值，通过邮件或钉钉通知相关开发者。
 
