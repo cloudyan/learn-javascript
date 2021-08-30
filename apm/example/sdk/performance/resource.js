@@ -16,7 +16,7 @@ export function getResourceTiming() {
   //   xmlhttprequest: [], // 接口请求
   // };
 
-  return entries.map((item) => {
+  const resource = entries.map((item) => {
     // let arr = resource[item.initiatorType];
     // if (!arr) {
     //   resource[item.initiatorType] = arr = [];
@@ -39,4 +39,11 @@ export function getResourceTiming() {
       connect: item.connectEnd - item.connectStart,
     };
   })
+
+  // 如何以图的形式展示数据呢，以及对比两次数据的差异点
+  // let total = resource.reduce((t, item) => {
+  //   return t += (item.duration || 0);
+  // }, 0)
+  // console.log('total', total);
+  return resource;
 }

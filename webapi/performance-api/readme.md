@@ -113,19 +113,20 @@ Performance API 定义了 DOMHighResTimeStamp 类型，而不是使用 Date.now(
 - [w3c resource-timing](https://w3c.github.io/resource-timing/)
 - [PerformanceEntry.entryType](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceEntry/entryType)
 
-
 ### PerformanceEntry.entryType
 
-- element
+参看 [entryType 注册表](https://w3c.github.io/timing-entrytypes-registry/#registry) availableFromTimeline
+
 - frame
 - navigation
 - resource
 - paint
 - mark
 - measure
-- longtask
+- element  非w3c规范
+- longtask 草案尚不可用，具体用法参见 [longtasks-api](https://w3c.github.io/longtasks/)
 
-### initiatorType的值：(谁发起的请求)
+### initiatorType 的值：(谁发起的请求)
 
 发起对象 | 值 | 描述
 --- | --- | ----
