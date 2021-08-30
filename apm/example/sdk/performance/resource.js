@@ -6,7 +6,7 @@ export function getResourceTiming() {
 
   // 资源类型
   // const resourceTypes = {
-  //   css: [],    // 通过css加载的资源，如字体或背景等
+  //   css: [],    // 通过css加载的资源，如字体或背景图等
   //   img: [],    // 图片
   //   link: [],   // 样式
   //   other: [],  // 如 favicon.ico

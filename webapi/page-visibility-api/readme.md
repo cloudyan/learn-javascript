@@ -37,4 +37,4 @@ document.addEventListener('visibilitychange', function () {
 
 参考：
 
-- http://www.ruanyifeng.com/blog/2018/10/page_visibility_api.html
+- 阮一峰-[Page Visibility API 教程](https://www.ruanyifeng.com/blog/2018/10/page_visibility_api.html)

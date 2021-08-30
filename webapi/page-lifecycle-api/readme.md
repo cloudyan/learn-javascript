@@ -18,5 +18,5 @@ Page Visibility API。可以监听各种情况的网页卸载。
 
 参考：
 
-- http://www.ruanyifeng.com/blog/2018/11/page_lifecycle_api.html
+- 阮一峰-[Page Lifecycle API 教程](https://www.ruanyifeng.com/blog/2018/11/page_lifecycle_api.html)
 - https://github.com/GoogleChromeLabs/page-lifecycle
