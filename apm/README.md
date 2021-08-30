@@ -147,23 +147,23 @@ ECMA-262定义了下列8种错误类型：
      2. Promise 错误
   2. 资源加载错误（js,css,image,iframe）
   3. 接口请求错误
-- 性能监控
-  - 基础性能指标 performance
+- 性能监控 performance
+  - 基础性能指标 base
     1. 上次页面卸载耗时
-    2. 连接时间
+    2. 连接耗时
     3. 重定向耗时
     4. 请求耗时
-    5. 获取首字节时间 (TTFB)
-    6. 响应读取时间
-    7. Dom 解析时间
-    8. 脚本执行时间
+    5. 获取首字节耗时 (TTFB)
+    6. 响应读取耗时
+    7. Dom 解析耗时
+    8. 脚本执行耗时
     9. Dom 渲染耗时
     10. 首次可交互时间
     11. 页面完整加载时间
     12. 白屏时间
-  - 资源加载
-    13. 资源加载时间(script, css, image) `window.performance.getEntriesByType('resource')`
-  - 渲染指标, 参看下文渲染指标文档
+  - 资源加载 resource
+    13. 资源加载耗时(script, css, image) `window.performance.getEntriesByType('resource')`
+  - 渲染指标 paint, 参看下文渲染指标文档
     - TTFB(Time To First Byte)      : 首字节时间        (web-vitals)
     - FP  (First Paint)             : 首次绘制          (w3c...)
     - FID (First Input Delay)       : 首次输入/交互延迟  (web-vitals)

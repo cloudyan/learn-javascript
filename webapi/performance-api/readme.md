@@ -6,9 +6,9 @@ Performance API 定义了 DOMHighResTimeStamp 类型，而不是使用 Date.now(
 - [网页性能管理详解](http://www.ruanyifeng.com/blog/2015/09/web-page-performance-in-depth.html)
 - [Performance Timeline](https://developer.mozilla.org/zh-CN/docs/Web/API/Performance_Timeline)
 - https://www.jianshu.com/p/3259ed7f68e2
-- [w3c navigation-timing](https://www.w3.org/TR/navigation-timing/)
-
-
+- w3c navigation-timing
+  - https://w3c.github.io/navigation-timing 👍
+  - https://www.w3.org/TR/navigation-timing
 
 ```js
 {
@@ -25,15 +25,16 @@ Performance API 定义了 DOMHighResTimeStamp 类型，而不是使用 Date.now(
   timeOrigin: 1629105163391.1,
   timing: {
     // 时间节点及指标计算
-    navigationStart: 1629105163391,
 
-    // redirect
+    // Resource Timing
+    navigationStart: 1629105163391,
+    // Redirect
     redirectStart: 0,
-      // unload
+      // Prompt for unload
       unloadEventStart: 0,
       unloadEventEnd: 0,            // -unloadEventStart=页面卸载耗时
     redirectEnd: 0,                 // -redirectStart=重定向耗时
-    // APP cache
+    // AppCache
     fetchStart: 1629105163394,
     // DNS
     domainLookupStart: 1629105163394,
@@ -48,13 +49,15 @@ Performance API 定义了 DOMHighResTimeStamp 类型，而不是使用 Date.now(
     // Response
     responseStart: 1629105163453,   // -requestStart=首字节时间
     responseEnd: 1629105163455,     // -responseStart=响应读取时间  -requestStart=请求耗时
+
     // Processing
     domLoading: 1629105163505,
     domInteractive: 1629105163595,  // -fetchStart=首次可交互时间
     domContentLoadedEventStart: 1629105163852, // -domLoading=dom解析时间
     domContentLoadedEventEnd: 1629105163852,   // -domContentLoadedEventStart=脚本执行时间
     domComplete: 1629105163897,     // -domLoading=DOM渲染耗时
-    // onLoad
+
+    // Load
     loadEventStart: 1629105163897,  // -fetchStart=完整加载时间
     loadEventEnd: 1629105163897,
   },
@@ -65,7 +68,7 @@ Performance API 定义了 DOMHighResTimeStamp 类型，而不是使用 Date.now(
 
 时序图
 
-![performance_timeline](../img/timing-overview.png)
+![navigation-timing](./../img/timestamp-diagram.svg)
 
 1. navigationStart
     - 同一个浏览器上一个页面卸载(unload)结束时的时间戳。如果没有上一个页面，这个值会和fetchStart相同。
@@ -109,3 +112,35 @@ Performance API 定义了 DOMHighResTimeStamp 类型，而不是使用 Date.now(
     - load事件被发送时的时间戳。如果这个事件还未被发送，它的值将会是0。
 21. loadEventEnd
     - 当load事件结束，即加载事件完成时的时间戳。如果这个事件还未被发送，或者尚未完成，它的值将会是0.
+
+
+## 关于 PerformanceResourceTiming
+
+参见 [PerformanceResourceTiming](https://developer.mozilla.org/zh-CN/docs/Web/API/PerformanceResourceTiming)
+
+```js
+{
+  connectEnd: 320.1000000014901,
+  connectStart: 187.39999999850988,
+  decodedBodySize: 145205,
+  domainLookupEnd: 182,
+  domainLookupStart: 182,
+  duration: 196.5,
+  encodedBodySize: 36059,
+  entryType: "resource",
+  fetchStart: 182,
+  initiatorType: "link",
+  name: "https://xxx.com/1.0.0/static/css/first-screen.chunk.css",
+  nextHopProtocol: "h2",
+  redirectEnd: 0,
+  redirectStart: 0,
+  requestStart: 321,
+  responseEnd: 378.5,
+  responseStart: 354.19999999925494,
+  secureConnectionStart: 187.89999999850988,
+  serverTiming: [],
+  startTime: 182,
+  transferSize: 36359,
+  workerStart: 0,
+}
+```
