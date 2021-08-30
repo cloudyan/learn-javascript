@@ -10,113 +10,134 @@ Performance API 定义了 DOMHighResTimeStamp 类型，而不是使用 Date.now(
   - https://w3c.github.io/navigation-timing 👍
   - https://www.w3.org/TR/navigation-timing
 
+时序图
+
+![navigation-timing](./../img/navigation-timing.svg)
+
 ```js
+// window.performance
 {
   eventCounts: {size: 36},
+  // memory 是非标准属性，只在 Chrome 有
   memory: {
-    jsHeapSizeLimit: 4294705152,
-    totalJSHeapSize: 8757487,
-    usedJSHeapSize: 7985291
+    jsHeapSizeLimit: 4294705152,  // 内存大小限制
+    totalJSHeapSize: 8757487,     // 可使用的内存
+    usedJSHeapSize: 7985291,      // JS 对象（包括V8引擎内部对象）占用的内存，一定小于 totalJSHeapSize
   },
   navigation: {
-    type: 0,
-    redirectCount: 0
+    redirectCount: 0, // 如果有重定向的话，页面通过几次重定向跳转而来
+    type: 0,          // 0   即 TYPE_NAVIGATENEXT 正常进入的页面（非刷新、非重定向等）
+                      // 1   即 TYPE_RELOAD       通过 window.location.reload() 刷新的页面
+                      // 2   即 TYPE_BACK_FORWARD 通过浏览器的前进后退按钮进入的页面（历史记录）
+                      // 255 即 TYPE_UNDEFINED    非以上方式进入的页面
   },
   timeOrigin: 1629105163391.1,
   timing: {
     // 时间节点及指标计算
 
     // Resource Timing
+    // 在同一个浏览器上下文中，前一个网页（与当前页面不一定同域）unload 的时间戳，如果无前一个网页 unload ，则与 fetchStart 值相等
     navigationStart: 1629105163391,
+    // Prompt for unload
+    // 前一个网页（与当前页面同域）unload 的时间戳，如果无前一个网页 unload 或者前一个网页与当前页面不同域，则值为 0
+    unloadEventStart: 0,
+    // 和 unloadEventStart 相对应，返回前一个网页 unload 事件绑定的回调函数执行完毕的时间戳
+    unloadEventEnd: 0,
     // Redirect
+    // 第一个 HTTP 重定向发生时的时间。有跳转且是同源的重定向才算，否则值为 0
     redirectStart: 0,
-      // Prompt for unload
-      unloadEventStart: 0,
-      unloadEventEnd: 0,            // -unloadEventStart=页面卸载耗时
-    redirectEnd: 0,                 // -redirectStart=重定向耗时
+    // 最后一个 HTTP 重定向完成时的时间。有跳转且是同源的重定向才算，否则值为 0
+    redirectEnd: 0,
     // AppCache
+    // 浏览器准备好使用 HTTP 请求抓取文档的时间，这发生在检查本地缓存之前
     fetchStart: 1629105163394,
     // DNS
+    // DNS 域名查询开始的时间，如果使用了本地缓存（即无 DNS 查询）或持久连接，则与 fetchStart 值相等
     domainLookupStart: 1629105163394,
-    domainLookupEnd: 1629105163394, // -domainLookupStart=DNS解析时间
+    // DNS 域名查询完成的时间，如果使用了本地缓存（即无 DNS 查询）或持久连接，则与 fetchStart 值相等
+    domainLookupEnd: 1629105163394,
     // TCP
+    // HTTP（TCP） 开始建立连接的时间，如果是持久连接，则与 fetchStart 值相等
+    // 注意如果在传输层发生了错误且重新建立连接，则这里显示的是新建立的连接开始的时间
     connectStart: 1629105163394,
       // HTTPS
+      // HTTPS 连接开始的时间，如果不是安全连接，则值为 0
       secureConnectionStart: 0,
-    connectEnd: 1629105163394,      // -connectStart=连接时间
+    // HTTP（TCP） 完成建立连接的时间（完成握手），如果是持久连接，则与 fetchStart 值相等
+    // 注意如果在传输层发生了错误且重新建立连接，则这里显示的是新建立的连接完成的时间
+    // 注意这里握手结束，包括安全连接建立完成、SOCKS 授权通过
+    connectEnd: 1629105163394,
     // Request
+    // HTTP 请求读取真实文档开始的时间（完成建立连接），包括从本地读取缓存
+    // 连接错误重连时，这里显示的也是新建立连接的时间
     requestStart: 1629105163452,
     // Response
-    responseStart: 1629105163453,   // -requestStart=首字节时间
-    responseEnd: 1629105163455,     // -responseStart=响应读取时间  -requestStart=请求耗时
+    // HTTP 开始接收响应的时间（获取到第一个字节），包括从本地读取缓存
+    responseStart: 1629105163453,
+    // HTTP 响应全部接收完成的时间（获取到最后一个字节），包括从本地读取缓存
+    responseEnd: 1629105163455,
 
     // Processing
+    // 开始解析渲染 DOM 树的时间，此时 Document.readyState 变为 loading，并将抛出 readystatechange 相关事件
+    // ⚠️ 因 domLoading 特定于实现，不应在有意义的指标中使用，参见 w3c
     domLoading: 1629105163505,
-    domInteractive: 1629105163595,  // -fetchStart=首次可交互时间
-    domContentLoadedEventStart: 1629105163852, // -domLoading=dom解析时间
-    domContentLoadedEventEnd: 1629105163852,   // -domContentLoadedEventStart=脚本执行时间
-    domComplete: 1629105163897,     // -domLoading=DOM渲染耗时
+    domInteractive: 1629105163595,
+    // 完成解析 DOM 树的时间，Document.readyState 变为 interactive，并将抛出 readystatechange 相关事件
+    // 注意只是 DOM 树解析完成，这时候并没有开始加载网页内的资源
+    domContentLoadedEventStart: 1629105163852,
+    // DOM 解析完成后，网页内资源加载开始的时间
+    // 在 DOMContentLoaded 事件抛出前发生
+    // DOM 解析完成后，网页内资源加载完成的时间（如 JS 脚本也加载执行完毕），文档的DOMContentLoaded 事件的结束时间
+    domContentLoadedEventEnd: 1629105163852,
+    // DOM 树解析完成，且资源也准备就绪的时间，Document.readyState 变为 complete，并将抛出 readystatechange 相关事件
+    domComplete: 1629105163897,
 
     // Load
-    loadEventStart: 1629105163897,  // -fetchStart=完整加载时间
+    // load 事件发送给文档，也即 load 回调函数开始执行的时间
+    // 注意如果没有绑定 load 事件，以下两个值都为 0
+    loadEventStart: 1629105163897,
+    // load 事件的回调函数执行完毕的时间
     loadEventEnd: 1629105163897,
+
+    // 白屏时间: responseStart - navigationStart
   },
 }
 ```
 
-## 关于 timing
-
-时序图
-
-![navigation-timing](./../img/timestamp-diagram.svg)
-
-1. navigationStart
-    - 同一个浏览器上一个页面卸载(unload)结束时的时间戳。如果没有上一个页面，这个值会和fetchStart相同。
-2. unloadEventStart
-    - 上一个页面unload事件抛出时的时间戳。如果没有上一个页面，这个值会返回0。
-3. unloadEventEnd
-    - 和 unloadEventStart 相对应，unload事件处理完成时的时间戳。如果没有上一个页面,这个值会返回0。
-4. redirectStart
-    - 第一个HTTP重定向开始时的时间戳。如果没有重定向，或者重定向中的一个不同源，这个值会返回0。
-5. redirectEnd
-    - 最后一个HTTP重定向完成时（也就是说是HTTP响应的最后一个比特直接被收到的时间）的时间戳。如果没有重定向，或者重定向中的一个不同源，这个值会返回0.
-6. fetchStart
-    - 浏览器准备好使用HTTP请求来获取(fetch)文档的时间戳。这个时间点会在检查任何应用缓存之前。
-7. domainLookupStart
-    - DNS 域名查询开始的UNIX时间戳。如果使用了持续连接(persistent connection)，或者这个信息存储到了缓存或者本地资源上，这个值将和fetchStart一致。
-8. domainLookupEnd
-    - DNS 域名查询完成的时间。 如果使用了本地缓存（即无 DNS 查询）或持久连接，则与 fetchStart 值相等
-9. connectStart
-    - HTTP（TCP） 域名查询结束的时间戳。如果使用了持续连接(persistent connection)，或者这个信息存储到了缓存或者本地资源上，这个值将和 fetchStart一致。
-10. (secureConnectionStart)
-    - HTTPS 返回浏览器与服务器开始安全链接的握手时的时间戳。如果当前网页不要求安全连接，则返回0。
-11. connectEnd
-    - HTTP（TCP） 返回浏览器与服务器之间的连接建立时的时间戳。如果建立的是持久连接，则返回值等同于fetchStart属性的值。连接建立指的是所有握手和认证过程全部结束。
-12. requestStart
-    - 返回浏览器向服务器发出HTTP请求时（或开始读取本地缓存时）的时间戳。
-13. responseStart
-    - 返回浏览器从服务器收到（或从本地缓存读取）第一个字节时的时间戳。如果传输层在开始请求之后失败并且连接被重开，该属性将会被数制成新的请求的相对应的发起时间。
-14. responseEnd
-    - 返回浏览器从服务器收到（或从本地缓存读取，或从本地资源读取）最后一个字节时（如果在此之前HTTP连接已经关闭，则返回关闭时）的时间戳。
-15. domLoading
-    - 当前网页DOM结构开始解析时（即Document.readyState属性变为“loading”、相应的 readystatechange事件触发时）的时间戳。
-16. domInteractive
-    - 当前网页DOM结构结束解析、开始加载内嵌资源时（即Document.readyState属性变为“interactive”、相应的readystatechange事件触发时）的时间戳。
-17. domContentLoadedEventStart
-    - 当解析器发送DOMContentLoaded 事件，即所有需要被执行的脚本已经被解析时的时间戳。
-18. domContentLoadedEventEnd
-    - 当所有需要立即执行的脚本已经被执行（不论执行顺序）时的时间戳。
-19. domComplete
-    - 当前文档解析完成，即Document.readyState 变为 'complete'且相对应的readystatechange 被触发时的时间戳
-20. loadEventStart
-    - load事件被发送时的时间戳。如果这个事件还未被发送，它的值将会是0。
-21. loadEventEnd
-    - 当load事件结束，即加载事件完成时的时间戳。如果这个事件还未被发送，或者尚未完成，它的值将会是0.
-
-
 ## 关于 PerformanceResourceTiming
 
-参见 [PerformanceResourceTiming](https://developer.mozilla.org/zh-CN/docs/Web/API/PerformanceResourceTiming)
+参见
+
+- [PerformanceResourceTiming](https://developer.mozilla.org/zh-CN/docs/Web/API/PerformanceResourceTiming)
+- [w3c resource-timing](https://w3c.github.io/resource-timing/)
+- [PerformanceEntry.entryType](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceEntry/entryType)
+
+
+### PerformanceEntry.entryType
+
+- element
+- frame
+- navigation
+- resource
+- paint
+- mark
+- measure
+- longtask
+
+### initiatorType的值：(谁发起的请求)
+
+发起对象 | 值 | 描述
+--- | --- | ----
+a Element | link/script/img/iframe等 | 通过标签形式加载的资源，值是该节点名的小写形式
+a CSS resource | css | 通过css样式加载的资源，比如background的url方式加载资源
+a XMLHttpRequest object | xmlhttprequest/fetch | 通过xhr加载的资源
+a PerformanceNavigationTiming object | navigation | 当对象是PerformanceNavigationTiming时返回
+
+> 目前通过`<audio>`，`<video>`加载资源,`initiatorType`还无法返回"audio"和"video"，chrome中只能返回空字符串,firfox返回"other"
+> 如果一个图片在页面内既用img引入，又作为背景图片引入，那么`initiatorType`返回的"img"
+> 使用该方法统计资源信息的时候首先可以合理利用`clearResourceTimings()`清除已统计过的对象避免重复统计，其次要过滤掉因上报统计数据而产生的对象。
+
+![resource-timing](./../img/resource-timing.svg)
 
 ```js
 {
@@ -125,13 +146,13 @@ Performance API 定义了 DOMHighResTimeStamp 类型，而不是使用 Date.now(
   decodedBodySize: 145205,
   domainLookupEnd: 182,
   domainLookupStart: 182,
-  duration: 196.5,
+  duration: 196.5, // 加载时间
   encodedBodySize: 36059,
-  entryType: "resource",
+  entryType: 'resource', // 资源类型
   fetchStart: 182,
-  initiatorType: "link",
-  name: "https://xxx.com/1.0.0/static/css/first-screen.chunk.css",
-  nextHopProtocol: "h2",
+  initiatorType: 'link', // 谁发起的请求
+  name: 'https://xxx.com/1.0.0/static/css/first-screen.chunk.css', // 资源名称，是资源的绝对路径或调用mark方法自定义的名称
+  nextHopProtocol: 'h2', // http/1.1
   redirectEnd: 0,
   redirectStart: 0,
   requestStart: 321,
@@ -139,7 +160,7 @@ Performance API 定义了 DOMHighResTimeStamp 类型，而不是使用 Date.now(
   responseStart: 354.19999999925494,
   secureConnectionStart: 187.89999999850988,
   serverTiming: [],
-  startTime: 182,
+  startTime: 182,     // 开始时间
   transferSize: 36359,
   workerStart: 0,
 }

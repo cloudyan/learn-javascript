@@ -188,6 +188,7 @@ ECMA-262定义了下列8种错误类型：
 - [Navigation Timing API](https://w3c.github.io/navigation-timing/)
 - [Resource Timing API](https://w3c.github.io/resource-timing/)
 - [Server timing](https://w3c.github.io/server-timing/)
+- [使用性能API快速分析web前端性能](https://segmentfault.com/a/1190000004010453)
 
 ## 报警邮件 or 钉钉
 
