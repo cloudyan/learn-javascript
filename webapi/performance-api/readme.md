@@ -5,7 +5,7 @@ Performance API 定义了 DOMHighResTimeStamp 类型，而不是使用 Date.now(
 - [Performance API](https://developer.mozilla.org/zh-CN/docs/Web/API/Performance_API)
 - [网页性能管理详解](http://www.ruanyifeng.com/blog/2015/09/web-page-performance-in-depth.html)
 - [Performance Timeline](https://developer.mozilla.org/zh-CN/docs/Web/API/Performance_Timeline)
-- https://www.jianshu.com/p/3259ed7f68e2
+- [初探 performance – 监控网页与程序性能](http://www.alloyteam.com/2015/09/explore-performance/)
 - w3c navigation-timing
   - https://w3c.github.io/navigation-timing 👍
   - https://www.w3.org/TR/navigation-timing
