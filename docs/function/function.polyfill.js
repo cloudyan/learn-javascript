@@ -1,5 +1,6 @@
 // 实现一个call函数
 // 将要改变this指向的方法挂到目标this上执行并返回
+// 后续迁移到 [diy-x](https://github.com/cloudyan/diy-x) 项目
 Function.prototype.mycall = function (context) {
   if (typeof this !== 'function') {
     throw new TypeError('not funciton')

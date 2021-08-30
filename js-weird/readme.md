@@ -1,5 +1,9 @@
 # 有趣的代码
 
+```js
+(Array(2).join(0)+3).slice(-2)
+```
+
 banana
 
 ```js
@@ -7,6 +11,17 @@ banana
 
 ('b'+'a'+ +'a'+'a').toLocaleLowerCase()
 // banana
+```
+
+vsinder
+
+```js
+// ship.js
+let name = 'my friend'
+Array(4).fill(1).forEach((item, index) => {
+  console.log(`Merry christmas ${index == 3 ?
+`dear ${name}` : 'to You'}`)
+});
 ```
 
 闭包
