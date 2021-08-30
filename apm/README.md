@@ -50,7 +50,7 @@
   - ajax 请求
   - fetch 请求
 - iframe 错误捕获
-- 语法错误是无法被捕获的，throw 后可以捕获
+- 语法错误是无法被捕获的，throw 后可以捕获，但会终止代码执行
 - 跨域错误 `Script error.` 处理
   - server: `Access-Control-Allow-Origin: *`
   - client: `crossorigin="anonymous"`
@@ -61,22 +61,26 @@ sentry 通过 tryCatch 的方式 wrap 了一些关键函数，使得这些函数
 
 ## 错误类型
 
-- JavaScript执行错误
-  - SyntaxError
-  - ReferenceError
-    - caught    手动捕获
-    - uncaught  自动捕获
-  - notify 测试
-  - notifyError 手动上报错误
-- resourceError 资源加载错误
-  - silentResource 可关闭监控资源加载错误
-- httpError HTTP 请求错误
-  - silentHttp
-- unhandledrejection 未使用 catch 处理的 Promise 错误
-  - silentPromise
-  - 如果不需要监控 unhandledrejection 的话，可以通过配置filters来实现
+- js_error JS错误
+  - onerror 语法错误
+  - unhandledrejection 未使用 catch 处理的 Promise 错误
+  - 如果不需要监控某类错误的话，可以通过配置filters来实现
     - `filters: [{type: /^unhandledrejection$/}]`
-- websocketError
+- resource_error 资源加载错误
+  - silentResource 可关闭监控资源加载错误
+- http_error HTTP 请求错误
+  - silentHttp
+- websocket_error
+
+手动调用上报
+
+- notify 测试
+- notifyError 手动上报错误
+
+错误捕获标识
+
+- caught    手动捕获
+- uncaught  自动捕获
 
 ## 错误公参
 

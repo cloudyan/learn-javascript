@@ -24,6 +24,6 @@ setTimeout(()=>{
 }, 10)
 
 const obj = {};
-console.warn(`%c产生错误导致执行中断，注意看是否log`, 'color: red;', `'after: obj.a.b'`);
+console.warn(`%c产生错误导致执行中断，注意看是否有log`, 'color: red;', `'after: obj.a.b'`);
 console.log(obj.a.b); // 发生错误就会导致后续代码执行中止
 console.log('%cafter: obj.a.b', 'background: red;color:#fff;');

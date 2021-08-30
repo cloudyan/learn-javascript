@@ -7,13 +7,17 @@
   <title>错误异常捕获 resource</title>
   <script type="module">
     import { resourceError } from './sdk/error/resource.js';
+    import { uncaughtError, uncaughtOnError } from './sdk/error/onerror.js';
     import { unhandledRejection } from './sdk/error/unhandled-rejection.js';
 
+    uncaughtOnError(data => {
+      console.warn('onerror', JSON.stringify(data, null, 2));
+    })
     unhandledRejection(data => {
-      console.log(JSON.stringify(data, null, 2));
+      console.warn('unhandledrejection', JSON.stringify(data, null, 2));
     })
     resourceError(data => {
-      console.log(JSON.stringify(data, null, 2));
+      console.log('resource-error', JSON.stringify(data, null, 2));
     })
   </script>
 </head>
@@ -30,23 +34,27 @@
 
   <script type="module">
     // 模拟错误
-    import { loadJs, loadCss, loadImage } from './sdk//utils/load.js';
+    import { loadJs, loadCss, loadImage } from './sdk/utils/load.js';
 
     // 为了避免产生 reject 后影响 unhandledrejection 捕获错误，此处处理下
-    loadJs('./sdk/utils/load.js', {root: '.test-box', type: 'module'}).then(res => {
+    const loadSuccess = res => {
       console.log(`outer load ${res.resource} 成功`)
-    })
-    loadJs('./404.js', {root: '.test-box'}).then(res => {
-      console.log(`outer load ${res.resource} 成功`)
-    }).catch(err => {
+    }
+    const catchErr = err => {
       // throw err // catch 里 throw 之后，会被 unhandledrejection 捕获到错误
       console.log('%couter catch log:', 'color: #fff; background: red;', err);
-    })
-    loadCss('./404.css', {root: '.test-box'}) // .catch(err => {})
-    loadImage('./404.png', {root: '.test-box', style: 'display: none;'}).catch(err => {})
+    };
+    loadJs('./sdk/utils/load.js', {root: '.test-box', type: 'module'}).then(loadSuccess)
+    loadJs('./404.js', {root: '.test-box'})
+      .then(res => {})
+      .catch(catchErr)
+    loadCss('./404.css', {root: '.test-box'})
+      .catch(catchErr)
+    loadImage('./404.png', {root: '.test-box', style: 'display: none;'})
+      .catch(catchErr)
   </script>
-  <!-- <script src="./js/syntax-error.js"></script>
-  <script src="./js/async-error.js"></script>
-  <script src="./js/sync-error.js"></script> -->
+  <!-- <script type="module" src="./js/syntax-error.js"></script> -->
+  <!-- <script type="module" src="./js/async-error.js"></script> -->
+  <!-- <script type="module" src="./js/sync-error.js"></script> -->
 </body>
 </html>
