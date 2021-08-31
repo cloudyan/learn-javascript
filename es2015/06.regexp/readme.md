@@ -12,4 +12,4 @@
 - Unicode 属性类
 - 具名组匹配
 - 正则匹配索引
-- String.prototype.matchAll()
+- [ES2020] String.prototype.matchAll()

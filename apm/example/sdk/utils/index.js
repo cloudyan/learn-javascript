@@ -24,9 +24,9 @@ export function formatError(event = {}, uncaughtType) {
 
   // 错误类型 SyntaxError
   const data = {
-    uncaught_type: uncaughtType,
-    type: 'error', // errorType
-    sub_type: 'uncaught',
+    type: 'js_error', // errorType
+    handled: false,
+    sub_type: uncaughtType,
     filename,
     message,
     stack,
@@ -60,9 +60,9 @@ export function formatAsyncError(error) {
   }
 
   const data = {
-    uncaught_type: 'unhandledrejection',
-    type: 'AsyncType', // errorType
-    sub_type: 'uncaught',
+    type: 'js_error', // errorType
+    handled: false,
+    sub_type: 'unhandledrejection',
     filename,
     message,
     stack,

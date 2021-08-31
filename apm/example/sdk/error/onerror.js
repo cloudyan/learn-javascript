@@ -32,12 +32,13 @@ export function uncaughtError(callback = noop) {
 
 // 推荐使用 onerror
 export function uncaughtOnError(callback = noop) {
-  const handleError = window.onerror
+  const oldOnError = window.onerror
   window.onerror = function(message, filename, lineno, colno, error) {
     console.log('onerror', arguments);
     let bool
-    if (regCrosError.test(message)) {
+    if (lineno === 0 && regCrosError.test(message)) {
       console.warn('Script Error: See Browser Console for Detail');
+      // console.warn('Ignoring cross-domain or eval script error.');
     } else {
       // console.warn('onerror:err', arguments);
       // console.warn('onerror:source', filename);
@@ -58,7 +59,7 @@ export function uncaughtOnError(callback = noop) {
       }
     }
 
-    handleError && handleError.apply(this, arguments)
+    if (oldOnError) oldOnError.apply(this, arguments)
 
     // 若该函数返回 true，则阻止执行默认事件处理函数（输出错误信息到 console）
     // 注: 红皮书上此处 说返回 false，是错误的描述，直接可验证得到结论(相比较 MDN 站点更准确)

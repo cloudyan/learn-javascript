@@ -17,6 +17,7 @@
 - 明确规范 `for-in` 的枚举顺序
   - 之前没规范定义顺序，尽管浏览器实现了一致的顺序，现在纳入 ES2020 的官方规范
 - 导出模块的命名空间
+- 新增 `String.prototype.matchAll()` 可以一次性取出所有匹配，返回的是一个遍历器
 
 [ES2020](https://github.com/tc39/proposal-global) 在语言标准的层面，引入`globalThis`作为顶层对象。也就是说，任何环境下，`globalThis`都是存在的，都可以从它拿到顶层对象，指向全局环境下的`this`。
 
@@ -167,7 +168,16 @@ import * as utils from './utils'
 export { utils }
 ```
 
+String.prototype.matchAll()
 
+```js
+const string = 'test1test2test3';
+const regex = /t(e)(st(\d?))/g;
+
+for (const match of string.matchAll(regex)) {
+  console.log(match);
+}
+```
 
 参考：
 

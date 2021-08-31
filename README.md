@@ -19,6 +19,7 @@
 更多
 
 - [x] [useGit 入门教程](https://github.com/webcoding/useGit)
+- [x] [learn-git](https://github.com/cloudyan/learn-git)
 - [x] [bable-7 and jest](https://github.com/cloudyan/jest-use-babel7)
 - [x] [研究学习反爬虫、防注入广告等](https://github.com/webcoding/js_block)
 - [x] [requestAnimationFrame](https://github.com/cloudyan/learn-javascript/tree/master/webapi/requestAnimationFrame)
@@ -31,6 +32,7 @@
 - [ ] [JS 代码片段](https://github.com/cloudyan/js-bits)
 - [x] [tapable](https://github.com/cloudyan/tapable)
 - [ ] [探究JS 加密](https://github.com/cloudyan/js_encryption)
+- [ ] [AST]
 
 ES全称ECMAScript，ECMAScript是ECMA制定的标准化脚本语言。目前JavaScript使用的ECMAScript版本为[ECMA-417](https://ecma-international.org/publications/standards/Ecma-417.htm)。关于ECMA的最新资讯可以浏览 [ECMA news](https://www.ecma-international.org/news/index.html)查看。
 

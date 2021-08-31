@@ -17,6 +17,8 @@
 - TODO: [Fast load times](https://web.dev/fast/)
 - TODO: [Web Vitals](https://web.dev/learn-web-vitals/)
 - [lighthouse-performance](https://web.dev/lighthouse-performance/)
+- [让前端监控数据采集更高效](https://juejin.cn/post/6844903826256822279)
+- [【编译篇】AST实现函数错误的自动上报](https://juejin.cn/post/6888470833237327879)
 
 错误监控：
 
@@ -189,6 +191,8 @@ ECMA-262定义了下列8种错误类型：
 - [Resource Timing API](https://w3c.github.io/resource-timing/)
 - [Server timing](https://w3c.github.io/server-timing/)
 - [使用性能API快速分析web前端性能](https://segmentfault.com/a/1190000004010453)
+- [让前端监控数据采集更高效](https://juejin.cn/post/6844903826256822279)
+- https://github.com/fingerprintjs/fingerprintjs
 
 ## 报警邮件 or 钉钉
 

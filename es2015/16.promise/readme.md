@@ -1,5 +1,12 @@
 # Promise
 
+## 几个问题
+
+- finally 后面还可以写 then 调用吗
+- then catch finally 中回调函数的参数都从哪里来
+- 执行时序什么样，如果中途出错呢
+- 什么情况是 `Promise 会吃掉错误`
+
 Promise A+ 规范
 
 - 官方英文地址：https://promisesaplus.com/
@@ -25,6 +32,8 @@ Promise A+ 规范
 - 一旦状态改变，就不会再变，任何时候都可以得到这个结果
 
 ## 模拟实现
+
+具体参看 [diy-promise](https://github.com/cloudyan/diy-x/tree/main/diy-promise)
 
 ```js
 class MyPromise {
@@ -106,11 +115,6 @@ promise
   // })
 ```
 
-- finally 后面还可以写 then 调用吗
-- then catch finally 中回调函数的参数都从哪里来
-- 执行时序什么样，如果中途出错呢
-- 什么情况是 `Promise 会吃掉错误`
-
 关于执行顺序
 
 ```js
@@ -149,4 +153,4 @@ setTimeout(() => {
 
 参考：
 
-- https://www.zhihu.com/question/36273908?sort=created
+- [关于 Promise 执行顺序的一个问题？](https://www.zhihu.com/question/36273908?sort=created)

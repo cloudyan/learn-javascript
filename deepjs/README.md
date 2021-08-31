@@ -14,6 +14,15 @@
 - 函数式编程
 - sort 排序
 
+- TODO: [实战篇 - 如何把性能优化的颗粒度做的更细](https://juejin.cn/post/6970988759529553927)
+- TODO: [仅使用CSS提高页面渲染速度](https://juejin.cn/post/6942661408181977118)
+- TODO: [DIY VSCode 插件，让你的开发效率突飞猛进](https://juejin.cn/post/6844903960885624846)
+- TODO: [解析篇 - Task-slice实现淘宝移动端方式加载](https://juejin.cn/post/6844903906221228039)
+- TODO: [实战篇 - 如何实现和淘宝移动端一样的模块化加载 （task-silce）](https://juejin.cn/post/6844903894301016078)
+- TODO: [有关 npm 包的本地开发和调试](https://juejin.cn/post/6888493557716353032)
+- TODO: [babel插件入门-AST（抽象语法树）](https://juejin.cn/post/6844903583549243406)
+- TODO: [【编译篇】AST实现函数错误的自动上报](https://juejin.cn/post/6888470833237327879)
+
 ### 哪些常见操作会造成内存泄漏？
 
 内存泄漏指任何对象在您不再拥有或需要它之后仍然存在。
