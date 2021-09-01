@@ -5,11 +5,13 @@ import { noop, readNodePath } from '../utils/index.js';
 export function resourceError(callback = noop) {
   window.addEventListener('error', (event) => {
     // 只处理资源类错误
-    const { target } = event;
+    // TODO: css 背景图资源
+    // TODO: iframe 资源加载
+    // const { target } = event;
+    const target = event.target || event.srcElement;
     if (target === window) return;
     console.log('resource error', event);
 
-    // const target = e.target || e.srcElement;
     // if (!(target instanceof HTMLScriptElement)) return;
     const filename = (target.src || target.href) ?? '';
     if (!filename) return;
@@ -23,7 +25,7 @@ export function resourceError(callback = noop) {
     const data = {
       type: 'resource_error', // errorType
       handled: false,
-      sub_type: `${tagName}_error`, // link image script
+      sub_type: `${tagName}_error`, // link img script iframe
       filename,
       tag_name: tagName,
       tag_path: path, //  html > body > div#root > div.test-box > img 节点所在位置

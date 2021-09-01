@@ -13,8 +13,8 @@ if (typeof document !== 'undefined') {
 }
 
 // const s = doc.getElementsByTagName('script')[0];
-
-export function load({root, tag, getDomTag, ...attributes}) {
+// load: img link script 不支持 iframe video audio
+export function load({root, tag, sourceKey, ...attributes}) {
   return new Promise((resolve, reject) => {
     if (!doc) {
       return reject(new Error(`load source fail: can not execute code from non browser environment`));
@@ -31,8 +31,7 @@ export function load({root, tag, getDomTag, ...attributes}) {
         return reject(new Error(`load source fail: document not exist 'head' || 'body' tag`));
       }
     }
-
-    const domTag = getDomTag();
+    const domTag = `${tag}[${sourceKey}="${attributes[sourceKey]}"]`;
     const isExists = Boolean(doc.querySelector(domTag));
     if (isExists) {
       const resource = source.src || source.href || '';
@@ -43,8 +42,9 @@ export function load({root, tag, getDomTag, ...attributes}) {
     Object.entries(attributes).forEach(([attribute, value]) => {
       source.setAttribute(attribute, value);
     });
-    const resource = source.src || source.href || ''
-    source.onload = () => {
+    const resource = source[sourceKey] || ''
+
+    source.onload = (res) => {
       resolve({code: 0, message: '资源加载成功', resource});
     };
     source.onerror = (error) => {
@@ -53,7 +53,6 @@ export function load({root, tag, getDomTag, ...attributes}) {
     // s.parentNode.insertBefore(s1, s);
 
     domRoot.appendChild(source);
-
   })
   // 要么这里调用 catch，要么外部必须调用下 catch
   // .catch(err => {
@@ -74,9 +73,7 @@ export function loadJs(sourceUrl, obj = {}) {
     // crossOrigin: 'anonymous', // 默认不要开启，因为开启后，如果服务端不配合 CORS 设置，会导致无法正常加载（特别是第三方脚本）
     ...obj,
     tag: 'script',
-    getDomTag() {
-      return `script[src="${sourceUrl}"]`;
-    },
+    sourceKey: 'src',
   }
   return load(options);
 }
@@ -85,11 +82,9 @@ export function loadCss(sourceUrl, obj = {}) {
   const options = {
     href: sourceUrl,
     ...obj,
+    sourceKey: 'href',
     rel: 'stylesheet',
     tag: 'link',
-    getDomTag() {
-      return `link[href="${sourceUrl}"]`;
-    },
   }
   return load(options);
 }
@@ -98,10 +93,10 @@ export function loadImage(sourceUrl, obj = {}) {
   const options = {
     src: sourceUrl,
     ...obj,
+    sourceKey: 'src',
     tag: 'img',
-    getDomTag() {
-      return `img[src="${sourceUrl}"]`;
-    },
   }
   return load(options);
 }
+
+

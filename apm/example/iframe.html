@@ -5,15 +5,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>错误异常捕获 iframe</title>
-</head>
-<body>
-  <h1>Loading...</h1>
-  <!-- 资源错误 -->
-  <img src="../404.png" />
   <script>
     // iframe 错误
     (function(){
       var frames = window.frames;
+      console.log(frames);
       for (var i = 0; i < frames.length; i++) {
         frames[i].addEventListener('error', (err)=>{
           console.warn('addEventListener')
@@ -27,6 +23,12 @@
       }
     })();
   </script>
+</head>
+<body>
+  <h1>Loading...</h1>
+  <!-- 资源错误 -->
+  <iframe src="./iframe2.html"></iframe>
+
   <script>
     // 模拟错误
 

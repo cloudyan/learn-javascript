@@ -37,8 +37,8 @@ export function uncaughtOnError(callback = noop) {
     console.log('onerror', arguments);
     let bool
     if (lineno === 0 && regCrosError.test(message)) {
-      console.warn('Script Error: See Browser Console for Detail');
-      // console.warn('Ignoring cross-domain or eval script error.');
+      console.warn('Ignoring cross-domain or eval script error. See https://tinyurl.com/yztq2q5o');
+      // https://segmentfault.com/a/1190000020756584
     } else {
       // console.warn('onerror:err', arguments);
       // console.warn('onerror:source', filename);

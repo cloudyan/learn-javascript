@@ -35,7 +35,7 @@
 
   <script type="module">
     // 模拟错误
-    import { loadJs, loadCss, loadImage } from './sdk/utils/load.js';
+    import { load, loadJs, loadCss, loadImage } from './sdk/utils/load.js';
 
     // 为了避免产生 reject 后影响 unhandledrejection 捕获错误，此处处理下
     const loadSuccess = res => {
@@ -45,14 +45,31 @@
       // throw err // catch 里 throw 之后，会被 unhandledrejection 捕获到错误
       console.log('%couter catch log:', 'color: #fff; background: red;', err);
     };
-    loadJs('./sdk/utils/load.js', {root: '.test-box', type: 'module'}).then(loadSuccess)
+
+    loadJs('./sdk/utils/load.js', {root: '.test-box', type: 'module'})
+      .then(loadSuccess)
     loadJs('./404.js', {root: '.test-box'})
       .then(res => {})
       .catch(catchErr)
     loadCss('./404.css', {root: '.test-box'})
       .catch(catchErr)
-    loadImage('./404.png', {root: '.test-box', style: 'display: none;'})
+    loadImage('./404.png', {root: '.test-box'})
       .catch(catchErr)
+
+    // TODO: 背景图加载 404 怎么监控？
+    // 资源类加载失败，可以网关层收集 404 等资源错误
+    setTimeout(() => {
+      document.querySelector('.test-box').setAttribute('style', 'background-image: url(./css-background.png)')
+    }, 100)
+
+    // TODO: iframe 加载 404 怎么监控？
+    // https://stackoverflow.com/questions/16499117/how-to-detect-an-error-404-in-an-iframe
+    load({
+      root: '.test-box',
+      tag: 'iframe',
+      sourceKey: 'src',
+      src: './iframe2.html',
+    }).catch(catchErr)
   </script>
   <!-- <script type="module" src="./js/syntax-error.js"></script> -->
   <!-- <script type="module" src="./js/promise-error.js"></script> -->

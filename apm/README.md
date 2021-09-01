@@ -69,9 +69,15 @@ sentry 通过 tryCatch 的方式 wrap 了一些关键函数，使得这些函数
   - 如果不需要监控某类错误的话，可以通过配置filters来实现
     - `filters: [{type: /^unhandledrejection$/}]`
 - resource_error 资源加载错误
-  - silentResource 可关闭监控资源加载错误
+  - link_error
+  - img_error
+  - script_error
+  - iframe_error 暂不支持
+    - 注: 404 是一个HTTP 状态码，它只包含在服务器发送给浏览器的响应中，而不包含在javascript 可访问的 DOM 中（window或document对象）。
+    - 这意味着虽然可以收集状态代码并采取适当的行动，但只能在您的 javascript 收到响应时这样做，使用 ajax来检测
 - http_error HTTP 请求错误
-  - silentHttp
+  - xhr
+  - fetch
 - websocket_error
 
 手动调用上报
@@ -81,8 +87,7 @@ sentry 通过 tryCatch 的方式 wrap 了一些关键函数，使得这些函数
 
 错误捕获标识
 
-- caught    手动捕获
-- uncaught  自动捕获
+- `handled: false` 未捕获的错误, 手动捕获设为 true
 
 ## 错误公参
 

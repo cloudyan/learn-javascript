@@ -3,7 +3,7 @@
 
 // throw new Error('custom'); // addEventListener
 // console.log(`after throw new Error('custom')`);
-// 此错误导致后续代码无法执行，「执行中断」
+// 此错误导致后续代码无法执行，「执行中断」（TODO: 仅限当前文件？）
 
 try {
   const num = 1;
