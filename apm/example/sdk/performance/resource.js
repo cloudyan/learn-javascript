@@ -22,6 +22,9 @@ export function getResourceTiming() {
     //   resource[item.initiatorType] = arr = [];
     // }
     return {
+      type: 'performance',
+      sub_type: 'performance_resource',
+
       name: item.name,
       entryType: item.entryType || '',
       initiatorType: item.initiatorType || '',

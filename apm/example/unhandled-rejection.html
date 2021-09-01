@@ -7,10 +7,17 @@
   <title>错误异常捕获 addEventListener unhandledrejection</title>
 </head>
 <body>
+  <h1>Loading...</h1>
   <!-- 资源错误 -->
   <!-- <img src="../404.png" /> -->
   <script type="module">
     import { unhandledRejection } from './sdk/error/unhandled-rejection.js';
+    import { uncaughtOnError, uncaughtError } from './sdk/error/onerror.js';
+
+    uncaughtOnError(data => {
+      console.log(JSON.stringify(data, null, 2));
+      // return true;
+    })
 
     unhandledRejection(data => {
       console.log(JSON.stringify(data, null, 2));
@@ -22,7 +29,9 @@
 
   </script>
   <!-- <script src="./js/syntax-error.js"></script> -->
-  <script type="module" src="./js/async-error.js"></script>
+  <script type="module" src="./js/promise-error.js"></script>
+  <script type="module" src="./js/async-await.js"></script>
   <!-- <script src="./js/sync-error.js"></script> -->
+  <script type="module" src="./js/render-after-error.js"></script>
 </body>
 </html>

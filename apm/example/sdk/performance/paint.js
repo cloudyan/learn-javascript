@@ -6,6 +6,9 @@ export function getPaintTiming() {
 
   return entries.map(item => {
     return {
+      type: 'performance',
+      sub_type: 'performance_paint',
+
       duration: item.duration,
       entryType: item.entryType,
       name: item.name,

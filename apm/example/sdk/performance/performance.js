@@ -49,6 +49,8 @@ export function getPerformanceTiming() {
   } = performance.timing;
 
   return {
+    type: 'performance',
+    sub_type: 'performance_timing',
     //【重要】页面加载完成的时间
     //【原因】这几乎代表了用户等待页面可用的时间
     loadPage: loadEventEnd - navigationStart, // 页面完整加载时间

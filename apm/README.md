@@ -150,6 +150,21 @@ ECMA-262定义了下列8种错误类型：
   2. 资源加载错误（js,css,image,iframe）
   3. 接口请求错误
 - 性能监控 performance
+  - 参考 sentry 指标 (Event ID && Event Duration)
+    - browser - cache
+    - browser - connect
+    - browser - DNS
+    - browser - request
+    - browser - response
+    - browser - unloadEvent
+    - resource.script - /xxx/xx.js
+    - resource.link - /xxx/xx.css
+    - mark - tracing-init
+    - browser - domContentLoadedEvent
+    - paint - first-paint
+    - paint - first-contentful-paint
+    - browser - loadEvent
+  - Web Vitals(全部指标)
   - 基础性能指标 base
     1. 上次页面卸载耗时
     2. 连接耗时
@@ -193,6 +208,7 @@ ECMA-262定义了下列8种错误类型：
 - [使用性能API快速分析web前端性能](https://segmentfault.com/a/1190000004010453)
 - [让前端监控数据采集更高效](https://juejin.cn/post/6844903826256822279)
 - https://github.com/fingerprintjs/fingerprintjs
+- https://advancedweb.hu/how-to-avoid-uncaught-promise-errors-in-javascript/
 
 ## 报警邮件 or 钉钉
 

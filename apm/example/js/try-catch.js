@@ -25,16 +25,17 @@ catch (err) {
 
 // Javascript引擎首先读代码，然后运行。
 // 发生在读阶段错误称为“解析时”错误，不可恢复，因为引擎不理解代码。
-// 所以，try...catch 仅能处理有效代码中的错误，被称为“运行时”错误，有时也称为“异常”。
+// 所以，try-catch 仅能处理有效代码中的错误，被称为“运行时”错误，有时也称为“异常”。
 try {
-  xxx // 运行时错误(必须是有效的Javascript代码)，tryCatch 仅能处理有效代码中的错误，被称为“运行时”错误
+  xxx // 运行时错误(必须是有效的Javascript代码), tryCatch 仅能处理有效代码中的错误，被称为“运行时”错误
 } catch (err) {
   console.log('语法错误', err);
   // throw err;
 }
 
-// try...catch 只能捕获同步错误，如 setTimeout 就无法捕获
-// 无法捕获的，就会被全局捕获
+// try-catch 只能捕获同步错误，如 setTimeout, Promise 就无法捕获
+// async 返回 Promise也不行，但 await 还是可以 tryCatch 的（await 会停止异步 Promise）
+// 无法捕获的非 Promise 错误，就会被全局 onerror 捕获
 try {
   setTimeout(function() {
     noSuchVariable; // script will die here

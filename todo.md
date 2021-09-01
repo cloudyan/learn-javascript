@@ -36,6 +36,9 @@
 - 设备类型侦测
 - 前端缓存 cache
 - 前端调试 debugging
+- [ ] [根据 visibility 懒加载 JS](https://codepen.io/jonneal/full/ZELvMvw)
+- [ ] [0kb JavaScript](https://dev.to/this-is-learning/is-0kb-of-javascript-in-your-future-48og)
+- [ ] [图解 Context 渲染](https://alexsidorenko.com/blog/react-render-context/)
 
 - 浏览器的平台化
   - 操作本地文件

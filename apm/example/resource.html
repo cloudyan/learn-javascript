@@ -22,6 +22,7 @@
   </script>
 </head>
 <body>
+  <h1>Loading...</h1>
   <!-- 资源错误, 使用 es6 module, 异步加载 js，导致捕获不到资源加载错误  -->
   <!-- 测试示例加载的资源，改为动态生成 -->
   <!-- <img src="./404.png" />
@@ -54,7 +55,8 @@
       .catch(catchErr)
   </script>
   <!-- <script type="module" src="./js/syntax-error.js"></script> -->
-  <!-- <script type="module" src="./js/async-error.js"></script> -->
+  <!-- <script type="module" src="./js/promise-error.js"></script> -->
   <!-- <script type="module" src="./js/sync-error.js"></script> -->
+  <script type="module" src="./js/render-after-error.js"></script>
 </body>
 </html>
