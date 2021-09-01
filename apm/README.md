@@ -1,34 +1,22 @@
 # 错误异常捕获
 
-参考
+## 未捕获的错误
 
-- [GlobalEventHandlers.onerror](https://developer.mozilla.org/zh-CN/docs/Web/API/GlobalEventHandlers/onerror)
-- [unhandledrejection](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/unhandledrejection_event)
-- [try...catch](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/try...catch)
-- [QuirksMode列出的各浏览器对onError的支持情况](https://www.quirksmode.org/dom/events/error.html)
-- [Worker.onerror](https://developer.mozilla.org/en-US/docs/Web/API/Worker/onerror)
-- http://rapheal.sinaapp.com/2014/11/06/javascript-error-monitor/
-- https://dashenquan.yuque.com/docs/share/6417d568-e053-4b1c-a8c5-daec1523ed80?# 《错误监控》
-- [移动运维监控](https://sls.console.aliyun.com/lognext/app/mobilAPM), SLS、UC 岳鹰联合出品移动应用线上监控平台
-  - [阿里云日志服务-前端监控](https://help.aliyun.com/document_detail/300011.html)
-  - [接入前端监控数据](https://help.aliyun.com/document_detail/300009.htm)
-  - [日志服务学习路径](https://help.aliyun.com/learn/learningpath/log.html)
-- [w3c paint-timing](https://github.com/w3c/paint-timing)
-- TODO: [Fast load times](https://web.dev/fast/)
-- TODO: [Web Vitals](https://web.dev/learn-web-vitals/)
-- [lighthouse-performance](https://web.dev/lighthouse-performance/)
-- [让前端监控数据采集更高效](https://juejin.cn/post/6844903826256822279)
-- [【编译篇】AST实现函数错误的自动上报](https://juejin.cn/post/6888470833237327879)
+未捕获的错误不仅是显示在命令行里的警告信息，本质上说明了代码在某些场景的没考虑到和不可靠
 
-错误监控：
-
-- 任何没有被 try/catch 语句处理的错误都会在 window 对象上触发 error 事件。
+- 关于错误提示
+  - 非 Promise（同步）错误未捕获
+    - `Uncaught Error: <msg>`
+  - Promise 错误（异步）未捕获
+    - `Uncaught (in promise) Error: <msg>` (browser)
+    - `UnhandledPromiseRejectionWarning: Error: <msg>` (node:29493)
+- 任何没有被 tryCatch 语句处理的错误都会在 window 对象上触发 error 事件。
   - Promise 例外，详见 `unhandledrejection`
 - 当JavaScript运行时错误（包括语法错误）发生时，window会触发一个ErrorEvent接口的error事件，并执行window.onerror()。
 - 当一项资源（如`<img>`或`<script>`）加载失败，加载资源的元素会触发一个Event接口的error事件，并执行该元素上的onerror()处理函数。这些error事件不会向上冒泡到window，不过（至少在Firefox中）能被单一的window.addEventListener (en-US)捕获。
 - 当Promise 被 reject 且没有 reject 处理器的时候，会触发 `unhandledrejection` 事件；
   - 这可能发生在 window 下，但也可能发生在 Worker 中。 这对于调试回退错误处理非常有用。
-- 当加载自不同域的脚本中发生语法错误时，为避免信息泄露（参见[bug 363897](https://bugzilla.mozilla.org/show_bug.cgi?id=363897)），语法错误的细节将不会报告，而代之简单的 "Script error."。
+- 当加载自不同域的脚本中发生语法错误时，为避免信息泄露（参见[bug 363897](https://bugzilla.mozilla.org/show_bug.cgi?id=363897)），语法错误的细节将不会报告，而代之简单的 "Script error.", 参见 https://tinyurl.com/yztq2q5o。
   - 在某些浏览器中，通过在`<script>`使用`crossorigin`属性并要求服务器发送适当的 CORS HTTP 响应头，该行为可被覆盖。
 
 加载一个全局的error事件处理函数可用于自动收集错误报告。
@@ -198,9 +186,29 @@ ECMA-262定义了下列8种错误类型：
     - ~~FMP (First Meaningful Paint): 首次有意义的绘制~~ (lighthouse已弃, => LCP)
     - ~~FCI (First CPU Idle)        : 首次CPU空闲~~     (lighthouse已弃, => TBT+TTI)
 
-文档参考
+
+参考
+
+- [GlobalEventHandlers.onerror](https://developer.mozilla.org/zh-CN/docs/Web/API/GlobalEventHandlers/onerror)
+- [unhandledrejection](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/unhandledrejection_event)
+- [try...catch](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/try...catch)
+- [QuirksMode列出的各浏览器对onError的支持情况](https://www.quirksmode.org/dom/events/error.html)
+- [Worker.onerror](https://developer.mozilla.org/en-US/docs/Web/API/Worker/onerror)
+- http://rapheal.sinaapp.com/2014/11/06/javascript-error-monitor/
+- https://dashenquan.yuque.com/docs/share/6417d568-e053-4b1c-a8c5-daec1523ed80?# 《错误监控》
+- [移动运维监控](https://sls.console.aliyun.com/lognext/app/mobilAPM), SLS、UC 岳鹰联合出品移动应用线上监控平台
+  - [阿里云日志服务-前端监控](https://help.aliyun.com/document_detail/300011.html)
+  - [接入前端监控数据](https://help.aliyun.com/document_detail/300009.htm)
+  - [日志服务学习路径](https://help.aliyun.com/learn/learningpath/log.html)
+- [lighthouse-performance](https://web.dev/lighthouse-performance/)
+- [让前端监控数据采集更高效](https://juejin.cn/post/6844903826256822279)
+- [【编译篇】AST实现函数错误的自动上报](https://juejin.cn/post/6888470833237327879)
+
+其他文档参考
 
 - 渲染指标文档
+  - TODO: [Fast load times](https://web.dev/fast/)
+  - TODO: [Web Vitals](https://web.dev/learn-web-vitals/)
   - [w3c paint-timing](https://github.com/w3c/paint-timing)
   - [web-vitals](https://web.dev/vitals/)
   - [lighthouse-performance](https://web.dev/lighthouse-performance/)

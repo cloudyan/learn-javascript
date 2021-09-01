@@ -14,7 +14,7 @@ export function getStackMessage(stack) {
 // 错误格式
 export function formatError(event = {}, uncaughtType) {
   const {
-    message = '',
+    message = 'unknown',
     filename = '',
     lineno = 0,
     colno = 0,
@@ -49,7 +49,7 @@ export function formatAsyncError(error) {
   } if (typeof reason === 'number') {
     message = reason.toString();
   } if (typeof reason === 'object') {
-    message = reason.message || reason.name || '';
+    message = reason.message || reason.name || 'unknown';
     if (reason.stack) {
       let matchResult = reason.stack.match(/at\s+(.+):(\d+):(\d+)/);
       let temp;

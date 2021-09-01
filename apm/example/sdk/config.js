@@ -1,19 +1,33 @@
 
+// 通过服务器下发配置 apiConfig
+const apiConfig = {
+  dsn: '',
+  enabled: true,
+  enableReport: true,
+  reportJsErr: true,
+  reportResErr: true,
+  reportApiErr: true,
+}
 
-xxx.init({
+const projectName = 'demo';
+// APM SDK 相关配置
+const sdkConfig = {
   // debug: true,
   // enabled: true,
   dsn: 'http://xxxx@xxx.com/3',
-  // release: version,
+  release: version,
   environment: UI_RUNTIME_ENV, // 环境变量 dev/sit/prod 等
-  // tracesSampleRate: 1.0,
-  // commit: false, // 是否获取当前 git commit hash
+  enableReport: true,
+  spa: false,
+  projectName,
+}
 
-  // sourceMap 相关配置
+// sourceMap 相关配置
+const sourceMapConfig = {
   apiKey: 'xxx',
-  organization: 'xxx', //
-  // baseSentryURL: '', // 可以从 dsn 提取
-  // project: projectName,
+  baseUrl: 'xxx', //
+  projectName,
+  deleteAfterCompile: true,
   // include: /\.(js|js\.map)$/,
   // exclude: /\.(html|css|css\.map)$/,
   // suppressConflictError: true,
@@ -24,4 +38,4 @@ xxx.init({
   //   }
   //   return `~/` + filename;
   // },
-})
+}
