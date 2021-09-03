@@ -1,4 +1,5 @@
 import defaultConfig from './config.js'
+import { getCommon } from '../common/index.js'
 
 const noop = () => {}
 const isFn = fn => typeof fn === 'function'
@@ -10,6 +11,8 @@ export default class PluginCore {
     this._config = {}
     this._plugins = {}
     this.__logs__ = []
+
+    this.getCommon = getCommon;
 
     this.init(config)
   }
@@ -39,7 +42,7 @@ export default class PluginCore {
 
   logger([...rest]) {
     if (!rest.length) return
-    console.log(`%c[apm_sdk]:`, 'background:orange;color:#fff;', ...rest)
+    console.log(`%c[apm_sdk]:`, 'background:orange;color:#fff;', rest)
   }
 
   // 上报 log
@@ -59,13 +62,13 @@ export default class PluginCore {
 
   send() {
     const logs = this.__logs__
-    if (this._config.debug) {
-      this.logger(this.__logs__)
-    }
     if (logs.length) {
+      if (this._config.debug) {
+        this.logger(this.__logs__)
+      }
       console.log('real send report')
+      this.__logs__ = []
     }
-    this.__logs__ = []
   }
 
   getCommon() {
