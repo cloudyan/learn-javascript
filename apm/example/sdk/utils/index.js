@@ -11,67 +11,6 @@ export function getStackMessage(stack) {
     .join('^');
 }
 
-// 错误格式
-export function formatError(event = {}, uncaughtType) {
-  const {
-    message = 'unknown',
-    filename = '',
-    lineno = 0,
-    colno = 0,
-    error,
-  } = event;
-  const stack = getStackMessage(error?.stack);
-
-  // 错误类型 SyntaxError
-  const data = {
-    type: 'js_error', // errorType
-    handled: false,
-    sub_type: uncaughtType,
-    filename,
-    message,
-    stack,
-    position: `${lineno}:${colno}`,
-    selector: '',
-  };
-  return data;
-}
-
-export function formatAsyncError(error) {
-  let lineno = 0;
-  let colno = 0;
-  let message = '';
-  let filename = '';
-  let stack = '';
-  const { reason } = error;
-
-  if (typeof reason === 'string') {
-    message = reason;
-  } if (typeof reason === 'number') {
-    message = reason.toString();
-  } if (typeof reason === 'object') {
-    message = reason.message || reason.name || 'unknown';
-    if (reason.stack) {
-      let matchResult = reason.stack.match(/at\s+(.+):(\d+):(\d+)/);
-      let temp;
-      [temp, filename, lineno, colno] = matchResult;
-
-      stack = getStackMessage(reason.stack)
-    }
-  }
-
-  const data = {
-    type: 'js_error', // errorType
-    handled: false,
-    sub_type: 'unhandledrejection',
-    filename,
-    message,
-    stack,
-    position: `${lineno}:${colno}`,
-    selector: '',
-  };
-  return data;
-}
-
 export function readNodePath(el) {
   let selector = el.nodeName.toLowerCase();
   if (el.id) {

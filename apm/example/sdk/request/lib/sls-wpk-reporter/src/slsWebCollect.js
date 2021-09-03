@@ -46,69 +46,12 @@
     }, r.o = function (e, t) {
       return Object.prototype.hasOwnProperty.call(e, t)
     }, r.p = "", r(r.s = 2)
-  }([function (e, t) {
-    e.exports = {
-      sdk: {
-        BID: "wpkreporter",
-        CID: "jssdk",
-        WID_KEY: "__wpkreporterwid_"
-      },
-      env: {
-        BROWSER: "browser",
-        NODEJS: "nodejs",
-        WEEX: "weex"
-      },
-      px: {
-        signKey: "Uvn#08uefVdwe&c4"
-      },
-      http: {
-        methods: {
-          GET: "GET",
-          PUT: "PUT",
-          POST: "POST",
-          HEAD: "HEAD",
-          DELETE: "DELETE",
-          OPTIONS: "OPTIONS",
-          CONNECT: "OPTIONS",
-          TRACE: "OPTIONS",
-          PATCH: "OPTIONS"
-        },
-        protocols: {
-          HTTP: "http:",
-          HTTPS: "https:"
-        }
-      },
-      category: {
-        JSERR: 1,
-        API: 2,
-        JSFSPERF: 3,
-        RESLOADFAIL: 4,
-        FLOW: 5,
-        BKPG: 6,
-        HARLOG: 7,
-        PERFNEXT: 1e3
-      },
-      navConn: {
-        types: {
-          BLUETOOTH: "bluetooth",
-          CELLULAR: "cellular",
-          ETHERNET: "ethernet",
-          MIXED: "mixed",
-          NONE: "none",
-          OTHER: "other",
-          UNKNOWN: "unknown",
-          WIFI: "wifi",
-          WIMAX: "wimax"
-        },
-        effectiveTypes: {
-          "2G": "2g",
-          "3G": "3g",
-          "4G": "4g",
-          SLOW2G: "slow-2g"
-        }
-      }
-    }
-  }, function (e, t, r) {
+  }([
+  function (e, t) {
+    // import config from './config';
+    e.exports = config;
+  },
+  function (e, t, r) {
     var n = r(0).env,
       o = function (e) {
         var t;
@@ -133,16 +76,19 @@
           } else e.logger.info("wpkflowPlugin已关闭")
       };
     i.prototype.pluginId = "flow", e.exports = i
-  }, function (e, t, r) {
+  },
+  function (e, t, r) {
     e.exports = r(3)
-  }, function (e, t, r) {
+  },
+  function (e, t, r) {
     var n = r(4),
       o = r(10);
     e.exports = function (e) {
       var t = new n(e);
       return "function" == typeof this.upload && (t.upload = this.upload), t.initialize(o), t
     }
-  }, function (e, t, r) {
+  },
+  function (e, t, r) {
     var n = r(5),
       o = r(0),
       i = (o.px, o.category);
@@ -306,7 +252,8 @@
         return this._plugins = [], this._init = !1, this
       }
     }, e.exports = a
-  }, function (e, t) {
+  },
+  function (e, t) {
     var r = function (e) {
         return e || ""
       },
@@ -631,7 +578,8 @@
         inAlipayMiniAppWebview: T
       }
     }
-  }, function (e, t) {
+  },
+  function (e, t) {
     var r = window.history || {},
       n = window.document,
       o = function (e, t) {
@@ -665,7 +613,8 @@
     e.exports = function () {
       a("pushState"), a("replateState")
     }
-  }, function (e, t, r) {
+  },
+  function (e, t, r) {
     var n, o, i = r(0),
       a = i.env,
       s = i.category,
@@ -752,7 +701,8 @@
         }), !0) : e.logger.warn("资源加载异常监控已关闭")) : e.logger.warn("全局错误监控插件不支持非浏览器环境")
       };
     h.prototype.pluginId = "gerror", e.exports = h
-  }, function (e, t, r) {
+  },
+  function (e, t, r) {
     var n = r(0),
       o = n.sdk,
       i = n.http.methods,
@@ -953,7 +903,8 @@
       }
     };
     d.prototype.pluginId = "api", e.exports = d
-  }, function (e, t, r) {
+  },
+  function (e, t, r) {
     var n, o = r(0).env,
       i = r(0).category,
       a = ["navigationStart", "unloadEventStart", "unloadEventEnd", "redirectStart", "redirectEnd", "fetchStart", "domainLookupStart", "domainLookupEnd", "connectStart", "secureConnectionStart", "connectEnd", "requestStart", "responseStart", "responseEnd", "domLoading", "domInteractive", "domContentLoadedEventStart", "domContentLoadedEventEnd", "domComplete", "loadEventStart", "loadEventEnd", "msFirstPaint"],
@@ -1053,7 +1004,8 @@
         } else e.logger.warn("基础性能插件仅支持浏览器环境")
       };
     u.prototype.pluginId = "perf", e.exports = u
-  }, function (e, t, r) {
+  },
+  function (e, t, r) {
     var n = r(0),
       o = "undefined" != typeof window ? window : "undefined" != typeof self ? self : {},
       i = o.document,
@@ -1157,5 +1109,6 @@
         })))
       }
     }
-  }])
+  }
+  ])
 }));

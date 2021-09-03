@@ -1,4 +1,5 @@
-import { formatAsyncError, noop } from '../utils/index.js';
+import config from '../core/config.js';
+import { getStackMessage, noop } from '../utils/index.js';
 
 export function unhandledRejection(callback = noop) {
   window.addEventListener("unhandledrejection", (event) => {
@@ -16,4 +17,54 @@ export function unhandledRejection(callback = noop) {
       event.preventDefault();
     }
   }, true);
+}
+
+function formatAsyncError(error) {
+  let lineno = 0;
+  let colno = 0;
+  let message = '';
+  let filename = '';
+  let stack = '';
+  const { reason } = error;
+
+  if (typeof reason === 'string') {
+    message = reason;
+  } if (typeof reason === 'number') {
+    message = reason.toString();
+  } if (typeof reason === 'object') {
+    message = reason.message || reason.name || 'unknown';
+    if (reason.stack) {
+      let matchResult = reason.stack.match(/at\s+(.+):(\d+):(\d+)/);
+      let temp;
+      [temp, filename, lineno, colno] = matchResult;
+
+      stack = getStackMessage(reason.stack)
+    }
+  }
+
+  const data = {
+    type: 'js_error', // errorType
+    handled: false,
+    sub_type: 'unhandledrejection',
+    filename,
+    message,
+    stack,
+    position: `${lineno}:${colno}`,
+    selector: '',
+  };
+  return data;
+}
+
+
+export default {
+  name: 'js_error_unhandledrejection',
+  install(ctx, options) {
+    const config = ctx._config;
+    unhandledRejection(data => {
+      if (config.js_error_report) {
+        ctx.report(data);
+      }
+    });
+    console.log(this.name);
+  }
 }

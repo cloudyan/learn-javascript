@@ -63,7 +63,7 @@ sentry 通过 tryCatch 的方式 wrap 了一些关键函数，使得这些函数
   - iframe_error 暂不支持
     - 注: 404 是一个HTTP 状态码，它只包含在服务器发送给浏览器的响应中，而不包含在javascript 可访问的 DOM 中（window或document对象）。
     - 这意味着虽然可以收集状态代码并采取适当的行动，但只能在您的 javascript 收到响应时这样做，使用 ajax来检测
-- http_error HTTP 请求错误
+- api_error HTTP 请求错误
   - xhr
   - fetch
 - websocket_error
