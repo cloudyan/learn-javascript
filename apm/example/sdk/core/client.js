@@ -37,7 +37,8 @@ export default class PluginCore {
     return this._plugins[name]
   }
 
-  logger(...rest) {
+  logger([...rest]) {
+    if (!rest.length) return
     console.log(`%c[apm_sdk]:`, 'background:orange;color:#fff;', ...rest)
   }
 
@@ -45,24 +46,26 @@ export default class PluginCore {
   report(data) {
     const config = this._config;
     const common = this.getCommon()
-    const log = {
+    const log = clone({
       ...common,
       ...data,
       event_time: Date.now(),
-    }
-    if (config.debug) {
-      this.logger(log)
-    }
-    this.__logs__.push(clone(log))
+    })
+    this.__logs__.push(log)
     if (config.autoStart) {
       this.send()
     }
   }
 
   send() {
-    const logs = this.__logs__;
-    console.log('send report __logs__')
-    this.__logs__ = [];
+    const logs = this.__logs__
+    if (this._config.debug) {
+      this.logger(this.__logs__)
+    }
+    if (logs.length) {
+      console.log('real send report')
+    }
+    this.__logs__ = []
   }
 
   getCommon() {
