@@ -7,14 +7,18 @@ const client = new Client({
   debug: true, // 涉及到浏览器错误，直接本地预览测试
   name: 'apm_browser',
   js_error_report: true,
-  autoStart: true,
-  // 也可以控制log组上报（满足 5 条上报，或立即上报）
+  autoStart: true, //
   immediate: true, // 是否立即上报
 
   // TODO：测试时，safari 有js缓存，改了配置不立即生效
 })
-client.use(pluginOnError)
-      .use(pluginUnhandledRejection)
+// client.use(pluginOnError)
+//       .use(pluginUnhandledRejection)
+
+client.addPlugin([
+  [pluginOnError, {js_error_report: false}],
+  pluginUnhandledRejection,
+])
 
 setTimeout(() => {
   // 模拟延迟上报，等待下发配置

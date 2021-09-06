@@ -39,6 +39,7 @@ export function random(size) {
   return result;
 }
 
+// crypto.randomUUID() chrome92 支持，参见 https://www.chromestatus.com/features/schedule
 export function uuid(size = 21) {
   const url = randomString;
   let id = '';

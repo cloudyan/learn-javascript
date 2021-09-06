@@ -40,8 +40,10 @@ export function uncaughtOnError(callback = noop) {
     console.log('onerror', arguments);
     let bool
     if (lineno === 0 && regCrosError.test(event)) {
+      // Script error: See Browser Console for Detail
       // 此错误也需要上报，我需要知道那个链接的资源出了这个问题，同一个资源只需控制上报一次即可
-      console.warn('Ignoring cross-domain or eval script error. See https://tinyurl.com/yztq2q5o');
+      console.warn('Script Error: See Browser Console for Detail. See https://tinyurl.com/yztq2q5o');
+      // console.warn('Ignoring cross-domain or eval script error. See https://tinyurl.com/yztq2q5o');
       // https://segmentfault.com/a/1190000020756584
     } else {
       // console.warn('onerror:err', arguments);

@@ -8,17 +8,21 @@ const clone = data => data
 // [diy-plugin](https://github.com/cloudyan/diy-x/tree/main/x-plugin)
 export default class PluginCore {
   constructor(config) {
-    this._config = {}
+    this._config = {...defaultConfig}
     this._plugins = {}
     this.__logs__ = []
 
     this.getCommon = getCommon;
 
-    this.init(config)
+    this.setConfig(config)
+    const { name = 'apm_sdk', debug } = this._config;
+    if (debug) {
+      window[name] = this;
+    }
   }
 
-  init(config) {
-    this._config = {...defaultConfig, ...config}
+  setConfig(config) {
+    Object.assign(this._config, config)
   }
 
   use(plugin, config = {}) {
@@ -28,6 +32,7 @@ export default class PluginCore {
     }
     if (this._plugins[pluginKey]) return this
 
+    this.setConfig(config);
     if (isFn(plugin.install)) {
       plugin.install(this, config)
     } else if (isFn(plugin)) {
@@ -35,6 +40,18 @@ export default class PluginCore {
     }
     this._plugins[pluginKey] = plugin
     return this
+  }
+  addPlugin(plugin) {
+    if (Array.isArray(plugin)) {
+      plugin.forEach((p, o) => {
+        if (Array.isArray(p)) {
+          this.use(p[0], p[1])
+        } else {
+          this.use(p, o);
+        }
+      });
+      return this;
+    }
   }
   getPlugin(name) {
     return this._plugins[name]
