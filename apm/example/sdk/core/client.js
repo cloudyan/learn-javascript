@@ -57,7 +57,7 @@ export default class PluginCore {
     return this._plugins[name]
   }
 
-  logger([...rest]) {
+  _logger([...rest]) {
     if (!rest.length) return
     console.log(`%c[apm_sdk]:`, 'background:orange;color:#fff;', rest)
   }
@@ -72,7 +72,7 @@ export default class PluginCore {
       event_time: Date.now(),
     })
     this.__logs__.push(log)
-    if (config.autoStart) {
+    if (config.autoReport) {
       this.send()
     }
   }
@@ -81,7 +81,7 @@ export default class PluginCore {
     const logs = this.__logs__
     if (logs.length) {
       if (this._config.debug) {
-        this.logger(this.__logs__)
+        this._logger(this.__logs__)
       }
       console.log('real send report')
       this.__logs__ = []
@@ -92,7 +92,7 @@ export default class PluginCore {
     return {}
   }
 
-  start() {
+  startReport() {
     this.send();
   }
 }
