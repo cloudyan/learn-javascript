@@ -41,3 +41,5 @@
 
 - [如何正确定义PV和UV](https://zhuanlan.zhihu.com/p/49329968)
 - [如何清楚易懂的解释“UV和PV＂的定义？](https://www.zhihu.com/question/20448467)
+- w3-[HTML5](https://www.w3.org/TR/html52/)
+  - history-api
