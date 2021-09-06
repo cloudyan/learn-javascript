@@ -11,6 +11,12 @@ const client = new Client({
   immediate: true,  // 是否立即上报
 
   // TODO：测试时，safari 有js缓存，改了配置不立即生效
+  // Log数据格式化
+  // formatLog: false, // 是否数据扁平化，也可以自定义实现函数
+  // formatLog: log => {
+  //   // 格式化 log
+  //   return log;
+  // }
 })
 // client.use(pluginOnError)
 //       .use(pluginUnhandledRejection)

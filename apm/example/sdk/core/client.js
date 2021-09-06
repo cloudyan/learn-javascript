@@ -63,6 +63,9 @@ export default class PluginCore {
   }
 
   // 上报 log
+  // 原始的数据应该是有结构的，当产生 log数据时，可以按需要对数据进行格式化，比如扁平化、甚至更改 key 的名称，以方便日志系统使用
+  // 简单的扁平化逻辑，示例 ua: { host_name } --> ua_host_name 既可避免命名冲突，又能明确分组，查看日志时也比较方便
+  // TODO: log 格式，后续再支持
   report(data) {
     const config = this._config;
     const common = this.getCommon()
