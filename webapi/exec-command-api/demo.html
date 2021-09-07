@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>document.execCommand</title>
+</head>
+<body>
+  <p>这个用来测试选中，点击复制，可以复制到剪贴板</p>
+  <button onclick="doCommand('copy')">Copy</button>
+  <script>
+    // 也可以使用自动选中，参看 createTextRange API
+    // https://blog.csdn.net/weixin_30418341/article/details/95834111
+    console.log(document.execCommand('copy'))
+    function support(cmd) {
+      const s = document.queryCommandSupported(cmd)
+      console.log('support: ', cmd, s);
+      return s;
+    }
+    function doCommand(cmd) {
+      if (support(cmd)) {
+        const r = document.execCommand(cmd)
+        console.log('exec:', cmd, r)
+      }
+    }
+
+    // setInterval(function() {
+    //   doCommand('copy');
+    // }, 1000)
+  </script>
+</body>
+</html>
