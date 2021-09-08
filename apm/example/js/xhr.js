@@ -50,12 +50,12 @@ function ajax(url, options = {}) {
       } else {
         if (xhr.status !== 0) {
           console.log('HTTP 状态码类错误（本质网络请求成功了）')
-          // 网络请求类错误 客户端/服务器 服务端响应错误的 http 状态码
+          // xhr.status 为 HTTP 状态码
           // const { status, statusText } = xhr;
           fail(xhr);
         }
-        // 还有一种，超时或跨域请求错误，statusText为空字符串 status: 0, statusText: ''
-        // 特定错误事件 type: 'timeout'|abort|error
+        // 还有一种错误，触发特定错误事件 event, 结构如下
+        // 如: { status: 0, statusText: '', type: 'timeout|abort|error'}
       }
     }
   }
