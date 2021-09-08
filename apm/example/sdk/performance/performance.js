@@ -28,7 +28,7 @@ export function getPerformanceTiming() {
     // TCP
     connectStart,
       // HTTPS
-      secureCon,
+      secureConnectionStart,
     connectEnd,
     // Request
     requestStart,

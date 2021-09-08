@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    /* .box {
+        line-height: 30px;
+        background: #ccc;
+    }
+    .icon {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        white-space: nowrap;
+        letter-spacing: -1em;
+        text-indent: -999em;
+    }
+    .icon:before {
+        content: '\3000';
+    }
+    .icon-delete {
+        background: url(https://lattehtml.dev.lattebank.com/adlink/hbcampaign/imprest/share.png) np-repeat center;
+    } */
+    .box {
+      height: 10em;
+      border: 1px solid #ddd;
+      overflow: hidden;
+    }
+
+    .list {
+      height: 100%;
+      background: #ddd;
+      position: relative;
+    }
+
+    .list > input {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 1px;
+      border: 0;
+      padding: 0;
+      margin: 0;
+      clip: rect(0 0 0 0);
+    }
+  </style>
+  <body>
+    <!-- <div class="box">
+        <p><i class="icon icon-delete"></i>删除</p>
+    </div> -->
+
+    <div class="box">
+      <div class="list"><input id="one" />1</div>
+      <div class="list"><input id="two" />2</div>
+      <div class="list"><input id="three" />3</div>
+      <div class="list"><input id="four" />4</div>
+    </div>
+    <div class="link">
+      <label for="one">1</label>
+      <label for="two">2</label>
+      <label for="three">3</label>
+      <label for="four">4</label>
+    </div>
+
+    <button onclick="copyText('h5实现一键复制到粘贴板 兼容ios')">copy</button>
+
+    <script>
+      const copyText = (text) => {
+        // 数字没有 .length 不能执行selectText 需要转化成字符串
+        const textString = text.toString();
+        let input = document.querySelector('#copy-input');
+        if (!input) {
+          input = document.createElement('input');
+          input.id = 'copy-input';
+          input.readOnly = 'readOnly'; // 防止ios聚焦触发键盘事件
+          input.style.position = 'absolute';
+          input.style.left = '-1000px';
+          input.style.zIndex = '-1000';
+          document.body.appendChild(input);
+        }
+
+        input.value = textString;
+        // ios必须先选中文字且不支持 input.select();
+        selectText(input, 0, textString.length);
+        if (document.execCommand('copy')) {
+          document.execCommand('copy');
+          alert('已复制到粘贴板');
+        } else {
+          console.log('不兼容');
+        }
+        input.blur();
+
+        // input自带的select()方法在苹果端无法进行选择，所以需要自己去写一个类似的方法
+        // 选择文本。createTextRange(setSelectionRange)是input方法
+        function selectText(textbox, startIndex, stopIndex) {
+          if (textbox.createTextRange) {
+            //ie
+            const range = textbox.createTextRange();
+            range.collapse(true);
+            range.moveStart('character', startIndex); //起始光标
+            range.moveEnd('character', stopIndex - startIndex); //结束光标
+            range.select(); //不兼容苹果
+          } else {
+            //firefox/chrome
+            textbox.setSelectionRange(startIndex, stopIndex);
+            textbox.focus();
+          }
+        }
+      };
+    </script>
+  </body>
+</html>

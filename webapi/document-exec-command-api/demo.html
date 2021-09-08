@@ -9,6 +9,7 @@
 <body>
   <p>这个用来测试选中，点击复制，可以复制到剪贴板</p>
   <button onclick="doCommand('copy')">Copy</button>
+  <button onclick="copyToBoard('自定义 copy 内容')">自定义内容</button>
   <script>
     // 也可以使用自动选中，参看 createTextRange API
     // https://blog.csdn.net/weixin_30418341/article/details/95834111
@@ -28,6 +29,20 @@
     // setInterval(function() {
     //   doCommand('copy');
     // }, 1000)
+
+    function copyToBoard(value) {
+      const element = document.createElement('textarea')
+      document.body.appendChild(element)
+      element.value = value
+      element.select()
+      if (document.execCommand('copy')) {
+        document.execCommand('copy')
+        document.body.removeChild(element)
+        return true
+      }
+      document.body.removeChild(element)
+      return false
+    }
   </script>
 </body>
 </html>

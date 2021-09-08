@@ -203,6 +203,7 @@ ECMA-262定义了下列8种错误类型：
 - [lighthouse-performance](https://web.dev/lighthouse-performance/)
 - [让前端监控数据采集更高效](https://juejin.cn/post/6844903826256822279)
 - [【编译篇】AST实现函数错误的自动上报](https://juejin.cn/post/6888470833237327879)
+- [JavaScript 启动性能瓶颈分析与解决方案](https://zhuanlan.zhihu.com/p/25221314)
 
 其他文档参考
 
