@@ -30,6 +30,10 @@ http.createServer((req, res) => {
     let status = 200;
     let errno = 0;
     let errmsg = '成功';
+    if (params.timeout) {
+      console.log('模拟请求超时')
+      return
+    }
     status = Number(params.code);
     console.log(status);
     if (Number.isInteger(status)) {

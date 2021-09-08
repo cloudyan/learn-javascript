@@ -6,6 +6,7 @@ function ajax(url, options = {}) {
   const noop = () => {}
   const {
     method = 'get',
+    timeout = 0,
     success = noop,
     fail = noop,
     complete = noop,
@@ -29,30 +30,66 @@ function ajax(url, options = {}) {
 
           const {errno} = res
           if (errno === 0) {
-            // 业务错误
             success(res)
           } else {
+            console.log('业务提示类错误')
             fail({
               status: errno,
               statusText: res.errmsg,
             })
           }
         } catch (err) {
-          // 一般为数据处理错误，此类错误应该要上报
+          console.log('代码执行异常类错误')
+          // 刻意制造的 304
+          // 代码执行或数据解析异常类错误，此类错误应该要上报
           fail({
             status: err.name,
             statusText: err.message,
           }, err);
         }
       } else {
-        // const { status, statusText } = xhr;
-        fail(xhr);
+        if (xhr.status !== 0) {
+          console.log('HTTP 状态码类错误（本质网络请求成功了）')
+          // 网络请求类错误 客户端/服务器 服务端响应错误的 http 状态码
+          // const { status, statusText } = xhr;
+          fail(xhr);
+        }
+        // 还有一种，超时或跨域请求错误，statusText为空字符串 status: 0, statusText: ''
+        // 特定错误事件 type: 'timeout'|abort|error
       }
     }
   }
 
+
+  // 特定事件
+  function addListeners(xhr) {
+    // xhr.addEventListener('loadstart', handleEvent);
+    // xhr.addEventListener('load', handleEvent);
+    // xhr.addEventListener('loadend', handleEvent);
+    // xhr.addEventListener('progress', handleEvent);
+    xhr.addEventListener('timeout', handleEvent);
+    xhr.addEventListener('error', handleEvent);
+    xhr.addEventListener('abort', handleEvent);
+  }
+  function handleEvent(event) {
+    console.log('网络请求失败类错误, 如超时, 中途取消, 其他错误等')
+    console.log(`${event.type}: `, event);
+    fail(event)
+  }
+  // xhr.onload = function(event) {
+  //   console.log('onload event', event)
+  // }
+  // xhr.ontimeout = function(err) {
+  //   console.log('ontimeout err', err)
+  //   fail(err)
+  // }
+  addListeners(xhr)
+
   // 3. 调用open
   xhr.open(method, url, true);
+  xhr.timeout = timeout; // 无符号长整型数, 超时时间, 单位是毫秒, 默认为 0 意味着无超时
+  // 当超时发生，timeout 事件将会被触发
+
 
   // 4. 设置 HTTP 请求头的值。必须在 open() 之后、send() 之前调用
   // xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded')
