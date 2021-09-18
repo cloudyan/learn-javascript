@@ -1,11 +1,12 @@
 # learn-javascript
 
-- [ECMAScript Language Specification](https://tc39.es/ecma262/)
-- [Web API 接口参考](https://developer.mozilla.org/zh-CN/docs/Web/API)
-- [JavaScript](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript)
-- [ES6 入门教程](https://es6.ruanyifeng.com/)
+- tc39-[ECMAScript Language Specification](https://tc39.es/ecma262/)
+- MDN-[Web API 接口参考](https://developer.mozilla.org/zh-CN/docs/Web/API)
+- MDN-[JavaScript](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript)
+- 阮一峰-[ES6 入门教程](https://es6.ruanyifeng.com/)
+- [core-js](https://github.com/zloirock/core-js#ecmascript-object)
 - 推荐书籍
-  - JavaScript高级程序设计
+  - 红皮书-JavaScript高级程序设计
   - 你不知道的JavaScript(三部)
   - Effective JavaScript
   - 深入理解ES6
@@ -43,7 +44,7 @@ ECMA规范最终由[TC39](https://github.com/tc39)敲定。TC39由包括浏览�
 - Stage 0: strawman——最初想法的提交。
 - Stage 1: proposal（提案）——由TC39至少一名成员倡导的正式提案文件，该文件包括API事例。
 - Stage 2: draft（草案）——功能规范的初始版本，该版本包含功能规范的两个实验实现。
-- Stage 3: candidate（候选）——提案规范通过审查并从厂商那里收集反馈
+- [Stage 3](https://github.com/tc39/proposals#stage-3): candidate（候选）——提案规范通过审查并从厂商那里收集反馈
 - [Stage 4](https://github.com/tc39/proposals/blob/master/finished-proposals.md): finished（完成）——提案准备加入ECMAScript，但是到浏览器或者Nodejs中可能需要更长的时间。
 
 ![JavaScript发展简史](./static/img/JavaScript%20的发展简史.png)

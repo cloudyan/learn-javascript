@@ -24,11 +24,6 @@
         console.log(res)
       },
       fail(xhr) {
-        // 错误分请求错误和数据处理错误
-        // 1. 网络请求失败类错误（超时或中途取消或其他错误）
-        // 2. HTTP 状态码类错误（本质网络请求成功了）
-        // 3. 代码执行或解析异常类错误
-        // 4. 业务提示类错误
         console.log(xhr)
         console.log(xhr.status, xhr.statusText, xhr.responseURL, xhr.responseText)
         // xhr.responseText

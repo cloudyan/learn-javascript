@@ -1,7 +1,12 @@
 // 请求返回错误
-// 模拟请求超时，请求网络错误等
 
-// xhr 回调版本
+// 错误分类
+// 1. 网络请求失败类错误（超时或中途取消或其他错误）
+// 2. HTTP 状态码类错误（本质网络请求成功了）
+// 3. 代码执行或解析异常类错误（对返回数据进行操作等执行过程发生异常）
+// 4. 业务提示类错误（正常情况，手机号已注册等业务流程错误提示）
+
+// 1. xhr 回调函数版本
 function ajax(url, options = {}) {
   const noop = () => {}
   const {
@@ -98,3 +103,5 @@ function ajax(url, options = {}) {
   xhr.send();
 }
 
+// 2. xhr Promise 版本
+function ajaxPromise() {}

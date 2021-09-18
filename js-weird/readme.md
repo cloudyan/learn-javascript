@@ -7,8 +7,6 @@
 banana
 
 ```js
-// banana
-
 ('b'+'a'+ +'a'+'a').toLocaleLowerCase()
 // banana
 ```

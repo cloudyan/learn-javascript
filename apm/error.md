@@ -204,6 +204,8 @@ ECMA-262定义了下列8种错误类型：
 - [让前端监控数据采集更高效](https://juejin.cn/post/6844903826256822279)
 - [【编译篇】AST实现函数错误的自动上报](https://juejin.cn/post/6888470833237327879)
 - [JavaScript 启动性能瓶颈分析与解决方案](https://zhuanlan.zhihu.com/p/25221314)
+- [聊聊白屏度量，阿里是怎么监控前端白屏的？](https://mp.weixin.qq.com/s/q1oXKJCAW7NQjaF0MP3vuA)
+- [7 天打造前端性能监控系统](https://fex.baidu.com/blog/2014/05/build-performance-monitor-in-7-days/)
 
 其他文档参考
 
