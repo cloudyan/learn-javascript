@@ -5,6 +5,7 @@
 - MDN-[JavaScript](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript)
 - 阮一峰-[ES6 入门教程](https://es6.ruanyifeng.com/)
 - [core-js](https://github.com/zloirock/core-js#ecmascript-object)
+- [JavaScript Promise迷你书（中文版）](https://wohugb.gitbooks.io/promise/content/index.html)
 - 推荐书籍
   - 红皮书-JavaScript高级程序设计
   - 你不知道的JavaScript(三部)

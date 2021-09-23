@@ -104,4 +104,17 @@ function ajax(url, options = {}) {
 }
 
 // 2. xhr Promise 版本
-function ajaxPromise() {}
+function ajaxPromise(url, options) {
+  return new Promise((resolve, reject) => {
+    const opts = {
+      ...options,
+      success(res) {
+        resolve(res)
+      },
+      fail(err) {
+        reject(err)
+      },
+    }
+    ajax(url, opts)
+  })
+}

@@ -165,7 +165,7 @@ class Promise {
    * @param {*reject函数} rejectFn
    */
   catch(rejectFn) {
-    //不是函数直接返回
+    // 不是函数直接返回
     if(!(rejectFn instanceof Function)) {
       return
     }

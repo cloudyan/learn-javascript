@@ -6,11 +6,15 @@
 - then catch finally 中回调函数的参数都从哪里来
 - 执行时序什么样，如果中途出错呢
 - 什么情况是 `Promise 会吃掉错误`
+- [cancel Promise](https://stackoverflow.com/questions/30233302/promise-is-it-possible-to-force-cancel-a-promise)
+- [回调地狱](http://callbackhell.com/)
+- [[译] 如何取消你的 Promise？](https://juejin.cn/post/6844903533393772557)
 
 Promise A+ 规范
 
 - 官方英文地址：https://promisesaplus.com/
 - 中文翻译可参考 http://malcolmyu.github.io/malnote/2015/06/12/Promises-A-Plus/
+- https://segmentfault.com/a/1190000023157856
 
 - Promise 的含义
 - Promise.prototype.then()
@@ -150,6 +154,47 @@ setTimeout(() => {
 [宏任务->微任务->requestAnimation->UI操作]
 
 这一套循环执行完毕后，再去获取下一个宏任务，再按照上面的顺序执行。关于js的事件循环机制，你可以看下这篇文章： [前端中的事件循环eventloop机制](https://www.xiabingbao.com/post/javascript/js-eventloop.html)
+
+
+
+
+```js
+// https://stackoverflow.com/questions/36870467/what-is-the-order-of-execution-in-javascript-promises
+
+Promise.resolve('A')
+  .then(function(a){
+    console.log(2, a);
+    return 'B';
+  })
+  .then(function(a){
+     Promise.resolve('C')
+       .then(function(a){
+         console.log(7, a);
+        })
+       .then(function(a){
+         console.log(8, a);
+        });
+     console.log(3, a);
+     return a;
+  })
+  .then(function(a){
+     Promise.resolve('D')
+       .then(function(a){
+         console.log(9, a);
+        })
+       .then(function(a){
+         console.log(10, a);
+        });
+     console.log(4, a);
+  })
+  .then(function(a){
+     console.log(5, a);
+  });
+
+console.log(1);
+
+setTimeout(function(){console.log(6)},0);
+```
 
 参考：
 
