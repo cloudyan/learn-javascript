@@ -1,7 +1,9 @@
 
-var name = 'shuhe';
+// 请写出以下这段代码打印内容，并简述原因
+
+var name = 'dabao';
 var obj = {
-  name: 'keji',
+  name: 'erbao',
   foo: function() {
     console.log(this.name);
     (function() {
@@ -13,5 +15,5 @@ var obj = {
   },
 };
 
-var foo = obj.foo.bind({name: 'latte'});
+var foo = obj.foo.bind({name: 'sanbao'});
 foo();
