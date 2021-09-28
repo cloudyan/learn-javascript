@@ -41,7 +41,7 @@ function debounce(fn) {
   let timeout = null; // 创建一个标记用来存放定时器的返回值
   return function () {
     // 每当用户输入的时候把前一个 setTimeout clear 掉
-    clearTimeout(timeout);
+    clearTimeout(timeout); // 清除之前的，保留最后一次
     // 然后又创建一个新的 setTimeout, 这样就能保证interval 间隔内如果时间持续触发，就不会执行 fn 函数
     timeout = setTimeout(() => {
       fn.apply(this, arguments);
@@ -73,12 +73,12 @@ window.addEventListener('scroll', debounce(handle));
 - input 框实时搜索并发送请求展示下拉列表，每隔一秒发送一次请求 (也可做防抖)
 
 ```js
-//节流throttle代码：
+// 节流throttle代码：
 function throttle(fn) {
   let canRun = true; // 通过闭包保存一个标记
   return function () {
     // 在函数开头判断标记是否为true，不为true则return
-    if (!canRun) return;
+    if (!canRun) return; // 保留第一次 其他的都return
     // 立即设置为false
     canRun = false;
     // 将外部传入的函数的执行放在setTimeout中

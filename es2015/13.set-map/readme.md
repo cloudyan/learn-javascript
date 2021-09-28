@@ -1,5 +1,11 @@
 # Set && Map
 
+## 几个问题
+
+-  区别 [Map vs Object](../../vs/map-vs-object.md)
+
+## 相关 API
+
 - 使用场景
 - 区别
   - Set vs Array
