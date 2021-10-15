@@ -1,5 +1,10 @@
 # 引入 js
 
+添加到脚本标签时，以下两个属性可以解除对解析器的阻塞
+
+- `async` 确保脚本在后台下载并在下载完成后第一时间执行。
+- `defer` 确保脚本在后台下载并在解析完全完成后执行。
+
 引入使用 js 的方式有多种形式
 
 - 行内引入，`<img on+事件类型="js 代码" />`
@@ -243,11 +248,21 @@ export function loadCss(sourceUrl, obj = {}) {
 - https://web.dev/use-lighthouse-for-performance-budgets/
 - https://www.cdnplanet.com/blog/faster-google-webfonts-preconnect/
 - https://web.dev/codelab-optimize-third-party-javascript/
+- https://developer.akamai.com/blog/2012/12/12/non-blocking-script-loader-pattern#the_method_queue_pattern
+  - 单点故障 https://calendar.perfplanet.com/2012/spof-bug/
+  - https://blog.patrickmeenan.com/2011/10/testing-for-frontend-spof.html
 
-https://github.com/marcelduran/webpagetest-api
+性能测试
 
-sudo npm i -g webpagetest
+- https://github.com/marcelduran/webpagetest-api
+- https://webpagetest.org
+- https://developers.google.com/speed/pagespeed/insights/
+- lighthouse
+
+```bash
+npm i -g webpagetest
 webpagetest test https://m.mishifeng.com -k A.29c6fe1119c29af09a9171fdea280e1a
+```
 
 https://css-tricks.com/use-webpagetest-api/#single-point-of-failure
 
