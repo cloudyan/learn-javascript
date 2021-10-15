@@ -175,3 +175,12 @@ ECMA规范最终由[TC39](https://github.com/tc39)敲定。TC39由包括浏览�
 - https://github.com/ruanyf/es6tutorial/blob/7b8c0632f62f3da9310f6fe13e8d6c96c72111e5/docs/reference.md
 - https://github.com/marcuswestin/std.js
 - [Browser Support Tables](https://www.w3cschool.cn/doc_browser_support_tables/)
+
+扩展阅读
+
+- [【阅读】](./reading/readme.md)
+- https://web.dev/bundling-non-js-resources/
+- https://mp.weixin.qq.com/s/j9NsNKGtKhE0MgDLr81KcQ
+  - 第一章 「重学 JavaScript」变量和类型
+  - 第二章 「重学 JavaScript」原型和原型链
+  - 第三章 「重学 JavaScript」作用域和闭包

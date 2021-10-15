@@ -1,5 +1,5 @@
 
-// 计算加载时间
+// 计算资源加载时间
 export function getResourceTiming() {
   // 什么时机会获取此数据呢？unload 时？onload 时？
   const entries = window.performance.getEntriesByType('resource');

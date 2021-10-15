@@ -14,7 +14,7 @@
     - pnpm是一些测试用例的更好的选择
     - `npm install -g pnpm` 使用时，只需要把npm替换为pnpm即可
   - cnpm 国内源库
-- 循环依赖及解法 [参看](../es2015/23.module/loop/readme.md)
+- 循环依赖及解法 [参看](../es6/23.module/loop/readme.md)
   - 三大模块规范
   - 解法
 

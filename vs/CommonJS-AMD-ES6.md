@@ -24,4 +24,4 @@ AMD 是 “Asynchronous Module Definition” 的缩写，意思就是“异步�
 
 - 对于使用 webpack 进行项目构建的项目，发现推荐使用 webpack 插件 [circular-dependency-plugin](https://github.com/aackerman/circular-dependency-plugin) 来帮助你检测项目中存在的所有循环依赖，尽早发现潜在的循环依赖可能会免去未来很大的麻烦。
 
-参见[具体解法](../es2015/23.module/loop/readme.md)
+参见[具体解法](../es6/23.module/loop/readme.md)

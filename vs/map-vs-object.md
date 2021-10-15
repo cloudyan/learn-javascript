@@ -11,9 +11,9 @@
 
 其他
 
-- Object.entries()
-- __proto__
-- Object.create(null)
+- `Object.entries()`
+- `__proto__`
+- `Object.create(null)`
 
 参考：
 

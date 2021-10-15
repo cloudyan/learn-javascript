@@ -7,6 +7,10 @@
 参考：
 
 - https://www.cnblogs.com/sunshq/p/3808571.html
+- https://mp.weixin.qq.com/s/j9NsNKGtKhE0MgDLr81KcQ
+  - 第一章 「重学 JavaScript」变量和类型
+  - 第二章 「重学 JavaScript」原型和原型链
+  - 第三章 「重学 JavaScript」作用域和闭包
 
 ## 理解变量提升
 

@@ -13,6 +13,11 @@ Performance API 定义了 DOMHighResTimeStamp 类型，而不是使用 Date.now(
 - [性能优化篇 - Performance（工具 & api）](https://juejin.cn/post/6844903801518981133)
 - [Performance — 前端性能监控利器](https://www.cnblogs.com/bldxh/p/6857324.html)
 - [Chrome的Performance面板](https://www.jianshu.com/p/d476bd527e48)
+- https://web.dev/lab-and-field-data-differences/#field-data
+- https://developers.google.com/speed/pagespeed/insights/
+- https://web.dev/navigation-and-resource-timing/
+- https://web.dev/chrome-ux-report-data-studio-dashboard/
+- 数据洞察 https://datastudio.google.com/navigation/reporting
 
 时序图
 
@@ -113,9 +118,22 @@ Performance API 定义了 DOMHighResTimeStamp 类型，而不是使用 Date.now(
 参见
 
 - [PerformanceResourceTiming](https://developer.mozilla.org/zh-CN/docs/Web/API/PerformanceResourceTiming)
+  - https://developer.mozilla.org/zh-CN/docs/Web/API/Resource_Timing_API/Using_the_Resource_Timing_API
 - [w3c resource-timing](https://w3c.github.io/resource-timing/)
 - [PerformanceEntry.entryType](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceEntry/entryType)
 - https://www.mifengjc.com/api/PerformanceResourceTiming.html
+- https://developers.google.com/web/fundamentals/performance/navigation-and-resource-timing
+  - https://siusin.github.io/perf-timing-primer/
+  - https://github.com/andydavies/waterfall
+  - https://github.com/micmro/performance-bookmarklet
+- https://web.dev/custom-metrics/?utm_source=devtools#server-timing-api
+- https://nicj.net/resourcetiming-in-practice/
+  - 资源加载时间数据上报压缩
+    - https://nicj.net/compressing-resourcetiming/
+    - https://github.com/nicjansma/resourcetiming-compression.js
+    - https://github.com/akamai/boomerang/tree/master/plugins
+- https://github.com/akamai/boomerang
+  - https://nicj.net/side-effects-of-boomerangs-javascript-error-tracking/
 
 ### PerformanceEntry.entryType
 
@@ -131,6 +149,8 @@ Performance API 定义了 DOMHighResTimeStamp 类型，而不是使用 Date.now(
 - longtask 草案尚不可用，具体用法参见 [longtasks-api](https://w3c.github.io/longtasks/)
 
 ### initiatorType 的值：(谁发起的请求)
+
+
 
 发起对象 | 值 | 描述
 --- | --- | ----

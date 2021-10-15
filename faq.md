@@ -2,7 +2,9 @@
 
 遇到的一些问题
 
-##  mac 下 npm 安装某些包，如 bcrypto，报以下错误
+更多参见 [各种问题异常处理](https://www.yuque.com/cloudyan/faq)
+
+## mac 下 npm 安装某些包，如 bcrypto，报以下错误
 
 ```bash
 > node-gyp rebuild

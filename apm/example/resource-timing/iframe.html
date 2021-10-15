@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>ResourceTiming IFRAME Test</title>
+  <!-- source: http://dev.nicj.net/resourcetiming/iframe.html -->
+  <!-- practice: https://nicj.net/resourcetiming-in-practice/ -->
+</head>
+
+<body onload="showresources()">
+  <h1>ResourceTiming IFRAME Test</h1>
+
+  <p>Loads an IFRAME that has an embedded <code>IMG</code> that takes 5 seconds to load</p>
+
+  <iframe src="iframe-embed.html"></iframe>
+
+  <div id="output"></div>
+
+  <script>
+    function showresources() {
+      var el = document.getElementById("output");
+      el.innerHTML = "ResourceTiming for IFRAME duration: " +
+        performance.getEntriesByName(location.href.replace("iframe.html", "iframe-embed.html"))[0].duration;
+    }
+
+  </script>
+</body>
+
+</html>
