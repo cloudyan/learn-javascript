@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>错误异常捕获 resource</title>
   <script type="module">
-    import { resourceError } from './sdk/error/resource-error.js';
-    import { uncaughtError, uncaughtOnError } from './sdk/error/onerror.js';
-    import { unhandledRejection } from './sdk/error/unhandled-rejection.js';
+    import { resourceError } from '../sdk/error/resource-error.js';
+    import { uncaughtError, uncaughtOnError } from '../sdk/error/onerror.js';
+    import { unhandledRejection } from '../sdk/error/unhandled-rejection.js';
 
     uncaughtOnError(data => {
       console.warn('onerror', JSON.stringify(data, null, 2));
@@ -35,7 +35,7 @@
 
   <script type="module">
     // 模拟错误
-    import { load, loadJs, loadCss, loadImage } from './sdk/utils/load.js';
+    import { load, loadJs, loadCss, loadImage } from '../sdk/utils/load.js';
 
     // 为了避免产生 reject 后影响 unhandledrejection 捕获错误，此处处理下
     const loadSuccess = res => {
@@ -46,7 +46,7 @@
       console.log('%couter catch log:', 'color: #fff; background: red;', err);
     };
 
-    loadJs('./sdk/utils/load.js', {root: '.test-box', type: 'module'})
+    loadJs('../sdk/utils/load.js', {root: '.test-box', type: 'module'})
       .then(loadSuccess)
     loadJs('./404.js', {root: '.test-box'})
       .then(res => {})

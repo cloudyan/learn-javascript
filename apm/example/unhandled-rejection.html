@@ -11,8 +11,8 @@
   <!-- 资源错误 -->
   <!-- <img src="../404.png" /> -->
   <script type="module">
-    import { unhandledRejection } from './sdk/error/unhandled-rejection.js';
-    import { uncaughtOnError, uncaughtError } from './sdk/error/onerror.js';
+    import { unhandledRejection } from '../sdk/error/unhandled-rejection.js';
+    import { uncaughtOnError, uncaughtError } from '../sdk/error/onerror.js';
 
     uncaughtOnError(data => {
       console.log(JSON.stringify(data, null, 2));

@@ -11,9 +11,9 @@
   <h1>Loading...</h1>
   <!-- 资源错误 -->
   <!-- <img src="../404.png" /> -->
-  <!-- <script type="module" src="./sdk/tests/error_test.js"></script> -->
+  <!-- <script type="module" src="../sdk/tests/error_test.js"></script> -->
   <script type="module">
-    import { uncaughtOnError, uncaughtError } from './sdk/error/onerror.js';
+    import { uncaughtOnError, uncaughtError } from '../sdk/error/onerror.js';
 
     uncaughtOnError(data => {
       console.log(JSON.stringify(data, null, 2));
