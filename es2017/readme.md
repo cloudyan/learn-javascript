@@ -108,3 +108,7 @@ Object.fromEntries(map)
 Object.fromEntries(new URLSearchParams('foo=bar&baz=qux'))
 // { foo: "bar", baz: "qux" }
 ```
+
+参考：
+
+- https://github.com/DavidWells/safe-await

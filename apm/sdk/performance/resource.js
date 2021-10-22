@@ -1,6 +1,7 @@
+import { getStackMessage, noop, trimTiming } from '../utils/index.js';
 
 // 计算资源加载时间
-export function getResourceTiming() {
+export function getResourceTiming(callback = noop, options = {}) {
   // 什么时机会获取此数据呢？unload 时？onload 时？
   const entries = window.performance.getEntriesByType('resource');
 
@@ -15,6 +16,9 @@ export function getResourceTiming() {
   //   fetch: [],  // 接口请求
   //   xmlhttprequest: [], // 接口请求
   // };
+  if (options.debug) {
+    console.log(entries);
+  }
 
   const resource = entries.map((item) => {
     // let arr = resource[item.initiatorType];
@@ -28,18 +32,21 @@ export function getResourceTiming() {
       name: item.name,
       entryType: item.entryType || '',
       initiatorType: item.initiatorType || '',
-      duration: item?.duration ?? '',
-      size: item.transferSize || '',        // 注意兼容性 https://caniuse.com/?search=transferSize
-      protocol: item.nextHopProtocol || '', // 兼容性
+      duration: trimTiming(item?.duration),
+      transferSize: item.transferSize || '',        // 注意兼容性 https://caniuse.com/?search=transferSize
+      encodedBodySize: item.encodedBodySize || '',     // 资源解压后的大小
+      decodedBodySize: item.decodedBodySize || '',     // 资源解压后的大小
+      protocol: item.nextHopProtocol || '', // 请求协议 兼容性
 
+      // 时间保留到毫秒即可 ms
       // 重定向的时间
-      redirect: item.redirectEnd - item.redirectStart,
+      redirect: trimTiming(item.redirectEnd - item.redirectStart),
       // DNS 查询时间
-      lookupDomain: item.domainLookupEnd - item.domainLookupStart,
+      lookupDomain: trimTiming(item.domainLookupEnd - item.domainLookupStart),
       // 内容加载完成的时间
-      request: item.responseEnd - item.requestStart,
+      request: trimTiming(item.responseEnd - item.requestStart),
       // TCP 建立连接完成握手的时间
-      connect: item.connectEnd - item.connectStart,
+      connect: trimTiming(item.connectEnd - item.connectStart),
     };
   })
 
@@ -48,5 +55,8 @@ export function getResourceTiming() {
   //   return t += (item.duration || 0);
   // }, 0)
   // console.log('total', total);
-  return resource;
+  // return resource;
+  if (typeof callback === 'function') {
+    callback(resource);
+  }
 }

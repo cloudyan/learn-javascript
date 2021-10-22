@@ -16,4 +16,21 @@ APM的覆盖范围包括五个层次的实现：终端用户体验，应用架�
 
 其中 DEM 取代了之前的终端用户体验监测（EUEM）。最终用户的体验始终是 APM 最重要的任务，而现在，除了各类终端上的人类最终用户之外，还需要将各种数字代理、各类 IoT 设备以及社交媒体上的体验监控起来。2016 年随着摩拜单车等一系列新兴物联网项目的爆发，对物联网应用的性能监控将成为未来 DEM 最重要的关注点。
 
+2016 年 APM 核心能力（Critical Capabilities）报告中列举了六大 APM 核心能力，其中一半和智能相关，包括商业分析（Business Analysis）、异常检测（Anomaly Detection）和工作量分配（Workload Planning）。
+
+在 APM 领域应用机器学习要解决的一个先决条件是大数据的能力，其中包括打通各个产品线和数据源，存储、提取和处理大规模数据的能力等等。目前各 APM 厂商在人工智能领域还处于尝试和探索阶段。主要利用人工智能和机器学习解决的用例包括以下方向：
+
+- 商业智能（Business Intelligence）
+- 异常检测（Anomaly Detection）
+- 归因分析（Correlation & Root Cause Analysis）
+- 智能警报（Intelligent Alerting）
+- 未来预测（Forecasting & Prediction）
+- 能力分配（Capacity Planning）
+- 数据概要（Data Summarization）
+- 自动化（Automation）
+- 主动监控（Proactive Monitoring）
+- 等等
+
+2016 年的 APM 技术除了关注应用性能数据之外，也逐渐开始关注应用的用户行为和业务数据了。得益于 APM 探针的自动埋码技术，APM 可以以相对低的成本（相比手工埋点）采集和分析用户行为和业务方面的数据，同时提供性能指标与业务指标的相关性分析，例如当一个事务流程的响应性能下降后会影响多少的业务订单量。通过业务分析，APM 套件产品也将目标用户群从纯技术线的运维和研发人员推广到了业务线的产品和运营人员，实现产品价值的极大提升。
+
 又如何支持全链路监测？

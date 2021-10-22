@@ -2,6 +2,7 @@
 // 记录基础性能指标
 
 // 关于 window.performance.timing 参见 [performance-api](https://github.com/cloudyan/learn-javascript/tree/master/webapi/performance-api)
+
 export function getPerformanceTiming() {
   const { performance } = window;
   if (!performance) {

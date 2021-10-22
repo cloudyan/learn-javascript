@@ -38,3 +38,7 @@ export function readXPath(el) {
   }
   return path.join(' > ');
 }
+
+export function trimTiming(time = 0) {
+  return Math.round(time ? time : 0)
+}

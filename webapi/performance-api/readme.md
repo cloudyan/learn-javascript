@@ -1,6 +1,6 @@
 # Performance API
 
-Performance API 定义了 DOMHighResTimeStamp 类型，而不是使用 Date.now()接口。
+Performance API 定义了 DOMHighResTimeStamp 类型(单位是毫秒)，而不是使用 Date.now()接口。
 
 - [Performance API](https://developer.mozilla.org/zh-CN/docs/Web/API/Performance_API)
 - [网页性能管理详解](http://www.ruanyifeng.com/blog/2015/09/web-page-performance-in-depth.html)
@@ -18,6 +18,11 @@ Performance API 定义了 DOMHighResTimeStamp 类型，而不是使用 Date.now(
 - https://web.dev/navigation-and-resource-timing/
 - https://web.dev/chrome-ux-report-data-studio-dashboard/
 - 数据洞察 https://datastudio.google.com/navigation/reporting
+- [前端性能监控 Performance](https://github.com/pfan123/Articles/issues/87)
+
+> Navigation Timing Level 2 草案中，已经废弃了PerformanceTiming 接口（目前兼容性高，仍然可使用，未来可能被废弃）
+> 改用 PerformanceNavigationTiming 替代（`performance.getEntriesByType('navigation')[0]`）
+> https://developer.mozilla.org/en-US/docs/Web/API/Performance/timing
 
 时序图
 
@@ -117,8 +122,9 @@ Performance API 定义了 DOMHighResTimeStamp 类型，而不是使用 Date.now(
 
 参见
 
-- [PerformanceResourceTiming](https://developer.mozilla.org/zh-CN/docs/Web/API/PerformanceResourceTiming)
+- [PerformanceResourceTiming](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceResourceTiming)
   - https://developer.mozilla.org/zh-CN/docs/Web/API/Resource_Timing_API/Using_the_Resource_Timing_API
+  - https://w3c.github.io/resource-timing/#resources-included-in-the-performanceresourcetiming-interface
 - [w3c resource-timing](https://w3c.github.io/resource-timing/)
 - [PerformanceEntry.entryType](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceEntry/entryType)
 - https://www.mifengjc.com/api/PerformanceResourceTiming.html
@@ -164,6 +170,8 @@ a PerformanceNavigationTiming object | navigation | 当对象是PerformanceNavig
 > 使用该方法统计资源信息的时候首先可以合理利用`clearResourceTimings()`清除已统计过的对象避免重复统计，其次要过滤掉因上报统计数据而产生的对象。
 
 ![resource-timing](./../img/resource-timing.svg)
+
+chrome 很老的版本有一个 bug，当获取资源复用了已建立的 HTTPS 信道时，secureConnectionStart 设置为 0 了，按标准应该设置为时间戳。
 
 ```js
 {
