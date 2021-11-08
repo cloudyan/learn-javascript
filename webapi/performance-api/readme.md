@@ -47,7 +47,7 @@ Performance API 定义了 DOMHighResTimeStamp 类型(单位是毫秒)，而不�
   },
   timeOrigin: 1629105163391.1,
   timing: {
-    // 时间节点及指标计算
+    // 时间节点及指标计算，单位均为毫秒
 
     // Resource Timing
     // 在同一个浏览器上下文中，前一个网页（与当前页面不一定同域）unload 的时间戳，如果无前一个网页 unload ，则与 fetchStart 值相等

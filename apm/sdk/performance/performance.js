@@ -12,6 +12,7 @@ export function getPerformanceTiming() {
   }
 
   const {
+    // 单位均为毫秒
     // 耗时节点及指标计算
     // Resource Timing
     navigationStart,

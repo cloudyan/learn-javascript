@@ -10,6 +10,8 @@ const allowOrigin = [
   // 'https://localhost:5500',
 ];
 
+// 用于测试 xhr.html
+// node
 const PORT = 8888;
 http.createServer((req, res) => {
   const { method, headers: { origin } } = req;
