@@ -64,6 +64,8 @@ https://developer.mozilla.org/zh-CN/docs/Web/HTML/Preloading_content
 
 向浏览器提供提示，建议浏览器提前打开与链接网站的连接，而不会泄露任何私人信息或下载任何内容，以便在跟随链接时可以更快地获取链接内容。
 
+![preconnect](./img/preconnect.png)
+
 ## modulepreload
 
 更早和更高优先级的加载模块脚本
