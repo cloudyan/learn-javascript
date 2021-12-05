@@ -5,3 +5,4 @@
 - https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
 - polyfill https://github.com/ungap/url-search-params
 - https://url.spec.whatwg.org/#urlsearchparams
+- https://url.spec.whatwg.org/#example-url-parsing
