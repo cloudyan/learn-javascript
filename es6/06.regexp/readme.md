@@ -1,5 +1,7 @@
 # RegExp
 
+https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions
+
 - RegExp 构造函数
 - 字符串的正则方法
 - u 修饰符
@@ -15,6 +17,8 @@
 - [ES2020] String.prototype.matchAll()
 
 ## 常用的正则
+
+- 空行 `^\s*(?=\r?$)\n`
 
 ### JS多行注释以及单行注释
 
