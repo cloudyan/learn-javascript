@@ -18,7 +18,7 @@
 类似的 API
 
 API | 描述 | 时间
-=== | ==== | ===
+--- | --- | ---
 Promise.all  | 当有一个rejected就短路   | ES2015
 Promise.race | 当有一个rejected或fulfilled就短路 | es2015
 Promise.allSettled | 不会短路          | ES2020

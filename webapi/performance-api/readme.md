@@ -118,6 +118,16 @@ Performance API 定义了 DOMHighResTimeStamp 类型(单位是毫秒)，而不�
 }
 ```
 
+一些指标
+
+- 关于 [LCP-vs-FMP.md](../../vs/LCP-vs-FMP.md)
+- Apdex
+  - [arms 统计指标说明](https://help.aliyun.com/document_detail/60288.html)
+    - ARMS 取页面首次渲染时间（First Paint Time）作为计算指标，默认定义T为2秒
+    - FPT（First Paint Time）首次渲染时间（白屏时间）responseEnd - fetchStart, 从请求开始到浏览器开始解析第一批HTML文档字节的时间差。
+- LCP 最大内容绘制
+
+
 ## 关于 PerformanceResourceTiming
 
 参见

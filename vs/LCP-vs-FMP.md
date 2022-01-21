@@ -39,6 +39,17 @@
   - https://web.dev/performance-scoring/
   - [Lighthouse scoring calculator](https://googlechrome.github.io/lighthouse/scorecalc/)
 
+对比 arms 的其他一些[统计指标说明](https://help.aliyun.com/document_detail/60288.html)
+
+上报字段 | 描述 | 计算公式 | 备注
+--- | --- | --- | ---
+FMP（First Meaningful Paint） | 首屏时间 | 参见[FMP技术实现方案](https://zhuanlan.zhihu.com/p/44933789?spm=a2c4g.11186623.0.0.22fd6c29WT05KP) | 无
+FPT（First Paint Time） | 首次渲染时间（白屏时间） | responseEnd - fetchStart | 从请求开始到浏览器开始解析第一批HTML文档字节的时间差。
+TTI（Time to Interact） | 首次可交互时间 | domInteractive - fetchStart | 浏览器完成所有HTML解析并且完成DOM构建，此时浏览器开始加载资源。
+Ready | HTML加载完成时间， 即DOM Ready时间。 | domContentLoadEventEnd - fetchStart | 如果页面有同步执行的JS，则同步JS执行时间=Ready-TTI。
+Load | 页面完全加载时间 | loadEventStart - fetchStart | Load=首次渲染时间+DOM解析耗时+同步JS执行+资源加载耗时。
+FirstByte | 首包时间 | responseStart - domainLookupStart | 无
+
 ## 关于 LCP
 
 最大内容绘制 (LCP) 指标报告视口内可见的最大图像或文本块的渲染时间，相对于页面首次开始加载的时间。
