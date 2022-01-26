@@ -16,7 +16,7 @@
 - 当一项资源（如`<img>`或`<script>`）加载失败，加载资源的元素会触发一个Event接口的error事件，并执行该元素上的onerror()处理函数。这些error事件不会向上冒泡到window，不过（至少在Firefox中）能被单一的window.addEventListener (en-US)捕获。
 - 当Promise 被 reject 且没有 reject 处理器的时候，会触发 `unhandledrejection` 事件；
   - 这可能发生在 window 下，但也可能发生在 Worker 中。 这对于调试回退错误处理非常有用。
-- 当加载自不同域的脚本中发生语法错误时，为避免信息泄露（参见[bug 363897](https://bugzilla.mozilla.org/show_bug.cgi?id=363897)），语法错误的细节将不会报告，而代之简单的 "Script error.", 参见 https://tinyurl.com/yztq2q5o。
+- 当加载自不同域的脚本中发生语法错误时，为避免信息泄露（参见[bug 363897](https://bugzilla.mozilla.org/show_bug.cgi?id=363897)），语法错误的细节将不会报告，而代之简单的 "Script error.", 参见 https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers/onerror#notes。
   - 在某些浏览器中，通过在`<script>`使用`crossorigin`属性并要求服务器发送适当的 CORS HTTP 响应头，该行为可被覆盖。
 
 加载一个全局的error事件处理函数可用于自动收集错误报告。
@@ -41,7 +41,7 @@
   - fetch 请求
 - iframe 错误捕获
 - 语法错误是无法被捕获的，throw 后可以捕获，但会终止代码执行
-- 跨域错误 `Script error.` 处理
+- [跨域错误 `Script error.` 处理](https://www.alibabacloud.com/help/zh/doc-detail/88579.htm)
   - server: `Access-Control-Allow-Origin: *`
   - client: `crossorigin="anonymous"`
 - tryCatch 只能捕获同步错误
