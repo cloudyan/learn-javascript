@@ -225,6 +225,12 @@ ECMA-262定义了下列8种错误类型：
 - [让前端监控数据采集更高效](https://juejin.cn/post/6844903826256822279)
 - https://github.com/fingerprintjs/fingerprintjs
 - https://advancedweb.hu/how-to-avoid-uncaught-promise-errors-in-javascript/
+- [Chrome 新的默认 Referrer-Policy : strict-origin-when-cross-origin](https://cloud.tencent.com/developer/article/1748911)
+  - `>=` chrome@85 默认策略 `Referrer-Policy: strict-origin-when-cross-origin`
+- [同站 和 同源 你理解清楚了么？](https://mp.weixin.qq.com/s?__biz=Mzk0MDMwMzQyOA==&mid=2247490440&idx=1&sn=c28829962c39293fe7e51fd11fa85e73&source=41#wechat_redirect)
+  - 同站 same-site
+  - 同源 same-origin (Origin 是协议,主机名和端口的组合)
+    - 跨域 cross-origin
 
 ## 报警邮件 or 钉钉
 
