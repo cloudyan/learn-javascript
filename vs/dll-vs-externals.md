@@ -1,6 +1,6 @@
 # webpack dll vs external
 
-dll 在 webpack@5 已废弃
+~~dll 在 webpack@5 已废弃~~
 
 **extenals的使用方式:**
 
