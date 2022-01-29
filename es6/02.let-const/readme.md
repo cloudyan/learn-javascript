@@ -115,6 +115,8 @@ var constantize = obj => {
 }
 ```
 
+## globalThis
+
 顶层对象[globalThis 对象](https://es6.ruanyifeng.com/#docs/let#globalThis-%E5%AF%B9%E8%B1%A1)
 
 ES2020 在语言标准的层面，引入globalThis作为顶层对象。也就是说，任何环境下，globalThis都是存在的，都可以从它拿到顶层对象，指向全局环境下的this。
