@@ -48,3 +48,79 @@
      1. 父级作用域链 + 当前的变量对象
 
 
+## `Object.defineProperty()`
+
+参考
+
+- 若川 https://juejin.cn/post/6994976281053888519
+- MDN https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
+
+还有一个定义多个属性的API：Object.defineProperties(obj, props) (ES5)
+
+`Object.defineProperty` 涉及到比较重要的知识点。
+
+在ES3中，除了一些内置属性（如：`Math.PI`），对象的所有的属性在任何时候都可以被修改、插入、删除。
+
+在`ES5`中，我们可以设置属性是否可以被改变或是被删除——在这之前，它是**内置属性的特权**。
+
+`ES5`中引入了**属性描述符**的概念，我们可以通过它对所定义的属性有更大的控制权。这些**属性描述符**（特性）包括：
+
+> value——当试图获取属性时所返回的值。
+> writable——该属性是否可写。
+> enumerable——该属性在for in循环中是否会被枚举。
+> configurable——该属性是否可被删除。
+> set()——该属性的更新操作所调用的函数。
+> get()——获取属性值时所调用的函数。
+
+另外，数据描述符（其中属性为：`enumerable`，`configurable`，`value`，`writable`）与存取描述符（其中属性为`enumerable`，`configurable`，`set()`，`get()`）之间是有互斥关系的。在定义了`set()`和`get()`之后，描述符会认为存取操作已被定义了，其中再定义`value`和`writable`会引起错误。
+
+以下是`ES3`风格的属性定义方式：
+
+```js
+var person = {};
+person.legs = 2;
+```
+
+以下是等价的ES5通过数据描述符定义属性的方式：
+
+```js
+var person = {};
+Object.defineProperty(person, 'legs', {
+  value: 2,
+  writable: true,
+  configurable: true,
+  enumerable: true
+});
+```
+
+其中， 除了value的默认值为undefined以外，其他的默认值都为false。这就意味着，如果想要通过这一方式定义一个可写的属性，必须显示将它们设为true。
+
+或者，我们也可以通过ES5的存储描述符来定义：
+
+```js
+var person = {};
+Object.defineProperty(person, 'legs', {
+  set:function(v) {
+    return this.value = v;
+  },
+  get: function(v) {
+    return this.value;
+  },
+  configurable: true,
+  enumerable: true
+});
+person.legs = 2;
+```
+
+这样一来，多了许多可以用来描述属性的代码，如果想要防止别人篡改我们的属性，就必须要用到它们。此外，也不要忘了浏览器向后兼容`ES3`方面所做的考虑。例如，跟添加`Array.prototype`属性不一样，我们不能再旧版的浏览器中使用`shim`这一特性。
+
+另外，我们还可以（通过定义`nonmalleable`属性），在具体行为中运用这些描述符：
+
+```js
+var person = {};
+Object.defineProperty(person, 'heads', {value: 1});
+person.heads = 0; // 0
+person.heads; // 1  (改不了)
+delete person.heads; // false
+person.heads // 1 (删不掉)
+```
