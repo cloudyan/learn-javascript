@@ -30,3 +30,7 @@ https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expression
 //
 // 测试 data.replace(/^(https?:)?\/\//, "").replace(/\?.*$/, "")
 ```
+
+参考：
+
+- [JS正则表达式完整教程（略长）](https://juejin.cn/post/6844903487155732494)
