@@ -50,6 +50,10 @@ ECMA规范最终由[TC39](https://github.com/tc39)敲定。TC39由包括浏览�
 
 ![JavaScript发展简史](./static/img/JavaScript%20的发展简史.png)
 
+## ES3
+
+- [JS 中 setTimeout 的实现机理是什么？](https://www.zhihu.com/question/463446982/answer/1927497540)
+
 ## ES5
 
 - 严格模式(strict mode) `'use strict';`
