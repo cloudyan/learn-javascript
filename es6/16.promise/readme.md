@@ -199,3 +199,4 @@ setTimeout(function(){console.log(6)},0);
 参考：
 
 - [关于 Promise 执行顺序的一个问题？](https://www.zhihu.com/question/36273908?sort=created)
+- [V8 Promise源码全面解读，其实你对Promise一无所知](https://mp.weixin.qq.com/s/pdzvF6aWp-tenqhXmQ8Wcg)
