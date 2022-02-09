@@ -168,3 +168,57 @@ let p10 = p9.then(() => {
 // 9. 同上，是给 p9 添加 reactions
 
 // ========== 题目 1 解析
+
+
+
+// 解析
+// Promise构造函数的参数是一个执行器，是同步的；
+// 构造完立即注册then函数，等同步代码执行完毕后，执行then函数。
+new Promise((resolve, reject) => {
+  console.log("1"); // 1. Promise构造函数接受的参数是一个需要立即执行的函数, 是一个同步任务
+  resolve();
+})
+.then(() => { // 2. 注册then方法，把它加到微任务队列
+  // 3. 没有同步代码，开始执行该微任务
+  console.log("2");
+  new Promise((resolve, reject) => { // 4. 继续执行Promise构造函数
+    console.log("3");
+    resolve();
+  })
+  .then(() => { // 5. 注册其then方法，将其加到微任务队列
+      console.log("4"); // 7. 执行
+  })
+  .then(() => { // 8. 注册
+    console.log("5"); // 10. 执行
+  });
+})
+.then(() => { // 6. 没有同步代码，第一个then执行完毕，继续注册外层 Promise 的第二个 then
+  console.log("6"); // 9. 执行
+});
+// 输出： 1 2 3 4 6 5
+
+
+
+// 解析
+new Promise((resolve, reject) => {
+  console.log("1"); // 1. 构造函数的参数，先执行
+  resolve();
+})
+.then(() => { // 2. 注册第一个then
+  console.log("2"); // 3. 执行第一个 then
+  // 看到return ，需要将表达式执行完毕，才能执行外层第二个then
+  return new Promise((resolve, reject) => {
+    console.log("3"); // 4. 构造函数执行
+    resolve();
+  })
+  .then(() => { // 5. 注册
+    console.log("4"); // 6. 执行
+  })
+  .then(() => { // 7. 注册
+    console.log("5"); // 8. 执行
+  });
+})
+.then(() => { // 9. 注册
+  console.log("6"); // 10. 执行
+});
+// 输出： 1 2 3 4 6 5
