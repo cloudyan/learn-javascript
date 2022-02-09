@@ -116,6 +116,136 @@ new Promise((resolve, reject) => {
 }).then(v => console.log(v));
 // 2 1
 
+
+
+
+
+// https://github.com/sisterAn/blog/issues/21
+// 今日头条面试题
+async function async1() {
+  console.log('async1 start')
+  await async2()
+  console.log('async1 end')
+}
+async function async2() {
+  console.log('async2')
+}
+console.log('script start')
+setTimeout(function () {
+  console.log('settimeout')
+})
+async1()
+new Promise(function (resolve) {
+  console.log('promise1')
+  resolve()
+}).then(function () {
+  console.log('promise2')
+})
+console.log('script end')
+
+
+// https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/7
+// 变式 1
+async function async1() {
+  console.log('async1 start');
+  await async2();
+  console.log('async1 end');
+}
+async function async2() {
+  // async2做出如下更改：
+  new Promise(function(resolve) {
+  console.log('promise1');
+  resolve();
+}).then(function() {
+  console.log('promise2');
+  });
+}
+console.log('script start');
+
+setTimeout(function() {
+  console.log('setTimeout');
+}, 0)
+async1();
+
+new Promise(function(resolve) {
+  console.log('promise3');
+  resolve();
+}).then(function() {
+  console.log('promise4');
+});
+
+console.log('script end');
+
+
+// 变式 2
+async function async1() {
+  console.log('async1 start');
+  await async2();
+  // 更改如下：
+  setTimeout(function() {
+      console.log('setTimeout1')
+  },0)
+}
+async function async2() {
+  // 更改如下：
+  setTimeout(function() {
+    console.log('setTimeout2')
+  },0)
+}
+console.log('script start');
+
+setTimeout(function() {
+  console.log('setTimeout3');
+}, 0)
+async1();
+
+new Promise(function(resolve) {
+  console.log('promise1');
+  resolve();
+}).then(function() {
+  console.log('promise2');
+});
+console.log('script end');
+
+
+// 变式 3
+async function a1 () {
+  console.log('a1 start')
+  await a2()
+  console.log('a1 end')
+}
+async function a2 () {
+  console.log('a2')
+}
+
+console.log('script start')
+
+setTimeout(() => {
+  console.log('setTimeout')
+}, 0)
+
+Promise.resolve().then(() => {
+  console.log('promise1')
+})
+
+a1()
+
+let promise2 = new Promise((resolve) => {
+  resolve('promise2.then')
+  console.log('promise2')
+})
+
+promise2.then((res) => {
+  console.log(res)
+  Promise.resolve().then(() => {
+      console.log('promise3')
+  })
+})
+console.log('script end')
+
+
+
+
 // ========== 题目 1 解析
 let p1 = Promise.resolve()
 // 1. p1 的状态为 fulfilled

@@ -58,7 +58,7 @@ process.nextTick(function(){
   console.log(7);
 });
 console.log(8);
-// 结果是：3 4 6 8 7 5 2 1
+// nodejs 结果是：3 4 6 8 7 5 2 1
 ```
 
 参考：
