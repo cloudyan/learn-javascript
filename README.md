@@ -1,6 +1,6 @@
 # learn-javascript
 
-- tc39-[ECMAScript Language Specification](https://tc39.es/ecma262/)
+- ECMA-262-[ECMAScript Language Specification](https://tc39.es/ecma262/)
 - MDN-[Web API 接口参考](https://developer.mozilla.org/zh-CN/docs/Web/API)
 - MDN-[JavaScript](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript)
 - 阮一峰-[ES6 入门教程](https://es6.ruanyifeng.com/)
