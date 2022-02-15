@@ -15,6 +15,7 @@ ES6 的模块自动采用严格模式，不管你有没有在模块头部加上"
 - `Symbol` 第七种原始数据类型, 表示独一无二的值
   - 前六种是：`undefined`、`null`、布尔值（Boolean）、字符串（String）、数值（Number）、对象（Object）
 - `Promise`
+  - `then`
 - `Proxy`
 - 类 Class
 - 模块化
