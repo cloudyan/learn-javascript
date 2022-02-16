@@ -24,6 +24,7 @@ Promise.resolve().then(() => {
 // 0 1 2 3 4 5 6
 
 
+
 // 题目 2
 Promise.resolve().then(() => {
   console.log(0);
@@ -44,6 +45,7 @@ Promise.resolve().then(() => {
   console.log(6);
 })
 // 0 1 2 4 3 5 6
+
 
 
 // 题目 3
@@ -68,6 +70,7 @@ console.log(2);
 // 1
 // 2
 // 0
+
 
 
 // 题目 4
@@ -103,6 +106,7 @@ new Promise(function (resolve) {
   console.log("promise4");
 });
 console.log("script end");
+
 
 
 // 面试题 2
@@ -144,6 +148,7 @@ new Promise(function (resolve) {
 console.log('script end')
 
 
+
 // https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/7
 // 变式 1
 async function async1() {
@@ -177,6 +182,7 @@ new Promise(function(resolve) {
 console.log('script end');
 
 
+
 // 变式 2
 async function async1() {
   console.log('async1 start');
@@ -206,6 +212,7 @@ new Promise(function(resolve) {
   console.log('promise2');
 });
 console.log('script end');
+
 
 
 // 变式 3

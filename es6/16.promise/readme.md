@@ -26,6 +26,7 @@
   3. [Promise V8 源码分析(一)](https://zhuanlan.zhihu.com/p/264944183)
   4. [Promise V8 源码分析(二)](https://zhuanlan.zhihu.com/p/329201628)
   5. [Promise V8 源码补充篇](https://juejin.cn/post/6953452438300917790)
+     1. [Promise V8 源码地址](https://chromium.googlesource.com/v8/v8.git/+/refs/heads/9.0-lkgr/src/builtins/promise-then.tq)
 - MDN [在 JavaScript 中通过 queueMicrotask() 使用微任务](https://developer.mozilla.org/zh-CN/docs/Web/API/HTML_DOM_API/Microtask_guide)
   - 理解下何时使用微任务
 

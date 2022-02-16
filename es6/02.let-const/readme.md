@@ -10,8 +10,20 @@
   - 只将对象本身冻结
   - 如果将对象的属性也冻结（这样才彻底冻结）
 - 声明变量的六种方法
+  - var function
+  - let const import class
 - 顶层对象 globalThis 对象
-  - [ES2020](https://github.com/tc39/proposal-global) 在语言标准的层面，引入`globalThis`作为顶层对象。也就是说，任何环境下，`globalThis`都是存在的，都可以从它拿到顶层对象，指向全局环境下的`this`。
+  - 参见 [ES2020](../../es2020/readme.md)
+- var,let,const 的异同
+
+类别 | var | let | const
+--- | --- | --- | ---
+变量提升 | √ | x | x
+块级作用域 | x | √ | √
+同一作用域不允许重复声明 | x | √ | √
+TDZ 暂时性死区（声明之前不能使用） | x | √ | √
+声明时必须初始化赋值 | x | x | √
+不允许重复赋值（只读变量） | x | x | √
 
 为什么需要块级作用域？
 
@@ -115,64 +127,3 @@ var constantize = obj => {
 }
 ```
 
-## globalThis
-
-顶层对象[globalThis 对象](https://es6.ruanyifeng.com/#docs/let#globalThis-%E5%AF%B9%E8%B1%A1)
-
-ES2020 在语言标准的层面，引入globalThis作为顶层对象。也就是说，任何环境下，globalThis都是存在的，都可以从它拿到顶层对象，指向全局环境下的this。
-
-垫片库[global-this](https://github.com/ungap/global-this)模拟了这个提案，可以在所有环境拿到globalThis。
-
-- https://github.com/es-shims/globalThis
-
-```js
-// 不支持小程序, 小程序内为 global
-// 解析: https://mathiasbynens.be/notes/globalthis
-(function() {
-  if (typeof globalThis === 'object') return;
-  Object.defineProperty(Object.prototype, '__magic__', {
-    get: function() {
-      return this;
-    },
-    configurable: true // This makes it possible to `delete` the getter later.
-  });
-  __magic__.globalThis = __magic__; // lolwat
-  delete Object.prototype.__magic__;
-}());
-
-// Your code can use `globalThis` now.
-console.log(globalThis);
-```
-
-最终版
-
-```js
-(function (Object) {
-  typeof globalThis !== 'object' && (
-    this ?
-      get() :
-      (Object.defineProperty(Object.prototype, '_T_', {
-        configurable: true,
-        get: get
-      }), _T_)
-  );
-  function get() {
-    this.globalThis = this;
-    delete Object.prototype._T_;
-  }
-}(Object));
-```
-
-扩展
-
-```js
-(0, eval)('this')
-
-// vs
-eval('this')
-
-```
-
-Isn’t this equivalent to just `eval('this')`? Why the comma operator? 🤔
-
-`eval(code)` is a “direct eval” and executes code in the current scope. `(0, eval)(code)` is an [indirect eval](https://2ality.com/2014/01/eval.html) and executes code in the global scope.
