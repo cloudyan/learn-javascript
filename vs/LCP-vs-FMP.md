@@ -13,6 +13,8 @@
 
 [Web Vitals](https://web.dev/vitals/)是一组由 Google 定义的指标，用于衡量呈现时间、响应时间和布局偏移。每个数据点都提供有关应用程序整体性能的见解。
 
+web-vitals 的三个指标
+
 - LCP(Largest Contentful Paint)   测量最大内容出现在视口中的渲染时间。
 - FID(First Input Delay)          测量用户尝试与视口交互时的响应时间。
 - CLS(Cumulative Layout Shift)    是渲染过程中每个意外元素偏移的单个布局偏移分数的总和。
@@ -21,17 +23,24 @@
 
 其他网络重要信息，https://web.dev/lighthouse-performance/
 
-- FP(First Paint)             测量第一个像素出现在视口中所花费的时间
+lighthouse 的六个指标
+
 - FCP(First Contentful Paint) 测量第一个内容在视口中呈现的时间。
 - TTI(Time To Interactive)    交互时间TTI 衡量一个页面需要多长时间才能完全交互
-- SI(Speed Index)             速度指数衡量页面加载期间内容的视觉显示速度。
+- SI (Speed Index)            速度指数衡量页面加载期间内容的视觉显示速度。
 - TBT(Total Blocking Time)    总阻塞时间，测量 FCP 和 TTI 之间主线程被阻塞足够长的时间以防止输入响应的总时间。
+- LCP(Largest Contentful Paint) 最大内容绘制，标记了渲染出最大文本或图片的时间
 - CLS(Cumulative Layout Shift)是衡量页面整个生命周期内发生的每个意外布局偏移的最大布局偏移分数的度量。
-- FID(Fist Inout Delay)       x 测量用户尝试与视口交互时的响应时间。
-- FMP(First Meaningful Paint) x 首次有意义的绘制，指页面的首要内容（primary content）出现在屏幕上的时间。
+
+其他指标
+
+- FP (First Paint)            测量第一个像素出现在视口中所花费的时间
+- FID(Fist Inout Delay)       测量用户尝试与视口交互时的响应时间。
+- FMP(First Meaningful Paint) x(lighthouse@6+ 不再推荐) 首次有意义的绘制，指页面的首要内容（primary content）出现在屏幕上的时间。
+  - 在实践中，FMP 对页面加载的微小差异过于敏感，导致结果不一致（双峰）。此外，该指标的定义依赖于特定于浏览器的实现细节，这意味着它不能标准化，也不能在所有 Web 浏览器中实现。改用 LCP
   - 参考：https://web.dev/first-meaningful-paint/
   - [首次有意义绘制的时间：基于布局的方法](https://docs.google.com/document/d/1BR94tJdZLsin5poeet0XoTW60M0SjvOJQttKT-JK8HI/view)
-- FCI(First CPU Idle)         x
+- FCI(First CPU Idle)         x(lighthouse@6+ 不再推荐) 衡量一个页面需要多长时间才能成为最低限度的交互。改用 TBT 和 TTI
 
 关于这些指标，有发生过定义上的变化，参考
 
