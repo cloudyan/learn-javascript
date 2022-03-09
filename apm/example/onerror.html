@@ -13,7 +13,8 @@
   <!-- <img src="../404.png" /> -->
   <!-- <script type="module" src="../sdk/tests/error_test.js"></script> -->
   <script type="module">
-    import { uncaughtOnError, uncaughtError } from '../sdk/error/onerror.js';
+    // serve -C ./    服务启用 cors
+    import { uncaughtOnError, uncaughtError } from 'http://localhost:3000/sdk/error/onerror.js';
 
     uncaughtOnError(data => {
       console.log(JSON.stringify(data, null, 2));
@@ -30,7 +31,17 @@
 
   <!-- 通过 server.js, 暂时没复现 Script error. 的情况, 可使用另一个 -->
   <!-- <script src="http://127.0.0.1:8888" ></script> -->
+
+  <!-- 测试跨域 -->
+  <h1></h1>
+  <!-- Script error. 问题测试 -->
+  <!-- A 域加载 html -->
+  <!-- B 域加载 业务脚本 js，产生错误 -->
+  <!-- C 域加载 错误收集 js -->
+  <!-- 解决方案，仅仅 B 域适配即可 -->
   <script defer src="https://cors.javascript.info/article/onload-onerror/crossorigin/error.js"></script>
+  <!-- <script defer src="https://cors.javascript.info/article/onload-onerror/crossorigin/error.js" crossorigin="anonymous"></script> -->
+
   <!-- https://segmentfault.com/a/1190000020756584 -->
   <script type="module" src="./js/render-after-error.js"></script>
 </body>
