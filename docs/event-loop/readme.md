@@ -3,6 +3,7 @@
 关于 **Event loop 的时序**，我认为这一篇文章就足够了[Tasks, microtasks, queues and schedules](https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/)
 
 - https://github.com/sisterAn/blog/issues/21
+- [要就来45道Promise面试题一次爽到底](https://juejin.cn/post/6844904077537574919)
 
 这里涉及的相关概念：
 

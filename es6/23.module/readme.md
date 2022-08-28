@@ -50,7 +50,7 @@ import('/modules/my-module.js')
 })();
 ```
 
-export
+export，详细参见：https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export
 
 存在两种 exports 导出方式：
 
@@ -86,8 +86,10 @@ export { name1 as default, … };
 export * from "module-name"; // does not set the default export
 export * as name1 from "module-name";
 export { name1, name2, …, nameN } from "module-name";
+// ES7 proposal
 export { import1 as name1, import2 as name2, …, nameN } from "module-name";
 export { default } from "module-name";
+export DefaultExport from 'bar.js'; // Invalid ❌
 ```
 
 具体语法分析
