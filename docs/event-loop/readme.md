@@ -4,6 +4,7 @@
 
 - https://github.com/sisterAn/blog/issues/21
 - [要就来45道Promise面试题一次爽到底](https://juejin.cn/post/6844904077537574919)
+- https://juejin.cn/post/6945319439772434469
 
 这里涉及的相关概念：
 
