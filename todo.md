@@ -61,7 +61,8 @@ JavaScript 难点
 WebAssembly 格式，它是 JavaScript 引擎的中间码格式，全部都是二进制代码。
 
 理解 webpack config optimization.splitChunks
-  - https://www.cnblogs.com/kwzm/p/10314438.html
+
+- https://www.cnblogs.com/kwzm/p/10314438.html
 
 
 - Ajax, Axios, Fetch 的核心区别
