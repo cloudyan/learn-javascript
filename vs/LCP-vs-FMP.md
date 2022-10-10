@@ -52,7 +52,7 @@ lighthouse 的六个指标
 
 上报字段 | 描述 | 计算公式 | 备注
 --- | --- | --- | ---
-FMP（First Meaningful Paint） | 首屏时间 | 参见[FMP技术实现方案](https://zhuanlan.zhihu.com/p/44933789?spm=a2c4g.11186623.0.0.22fd6c29WT05KP) | 无
+FMP（First Meaningful Paint） | 首屏时间 | 参见[FMP技术实现方案](https://zhuanlan.zhihu.com/p/44933789) | 无
 FPT（First Paint Time） | 首次渲染时间（白屏时间） | responseEnd - fetchStart | 从请求开始到浏览器开始解析第一批HTML文档字节的时间差。
 TTI（Time to Interact） | 首次可交互时间 | domInteractive - fetchStart | 浏览器完成所有HTML解析并且完成DOM构建，此时浏览器开始加载资源。
 Ready | HTML加载完成时间， 即DOM Ready时间。 | domContentLoadEventEnd - fetchStart | 如果页面有同步执行的JS，则同步JS执行时间=Ready-TTI。
@@ -152,6 +152,8 @@ const browserSupportsLCP = browserSupportsEntry('largest-contentful-paint');
 如果每次都去遍历新增元素并计算是否可见是非常消耗性能的。实际上采用的是深度优先算法，如果子元素可见，那父元素可见，不再计算。 同样的，如果最后一个元素可见，那前面的兄弟元素也可见。通过深度优先算法，性能有了大幅的提升。
 
 First Meaningful Paint (FMP)
+
+- 算法: https://github.com/qbright/fmp-timing
 
 其他
 
