@@ -127,6 +127,20 @@ Performance API 定义了 DOMHighResTimeStamp 类型(单位是毫秒)，而不�
     - FPT（First Paint Time）首次渲染时间（白屏时间）responseEnd - fetchStart, 从请求开始到浏览器开始解析第一批HTML文档字节的时间差。
 - LCP 最大内容绘制
 
+### APM 指标计算
+
+- 满意度
+- 通过 APDEX 计算用户满意度
+- 性能指数APDEX（全称Application Performance Index）是一个国际通用的应用性能计算标准。该标准将用户对应用的体验定义为三个等级：
+  - ● 满意（0~T）Good
+  - ● 可容忍（T~4T）Meh
+  - ● 不满意（大于4T）Poor
+
+- 计算公式：Apdex=(满意数+可容忍数/2)/总样本量
+- 这里取 T = 两秒，计算 ADEPX, https://help.aliyun.com/document_detail/60288.html
+  - 这里有一些关键性能指标的定义
+- 需要去排除 null 数据
+
 
 ## 关于 PerformanceResourceTiming
 
