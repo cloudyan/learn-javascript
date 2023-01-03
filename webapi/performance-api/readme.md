@@ -20,9 +20,12 @@ Performance API 定义了 DOMHighResTimeStamp 类型(单位是毫秒)，而不�
 - 数据洞察 https://datastudio.google.com/navigation/reporting
 - [前端性能监控 Performance](https://github.com/pfan123/Articles/issues/87)
 
-> Navigation Timing Level 2 草案中，已经废弃了PerformanceTiming 接口（目前兼容性高，仍然可使用，未来可能被废弃）
-> 改用 PerformanceNavigationTiming 替代（`performance.getEntriesByType('navigation')[0]`）
+> Navigation Timing Level 2 草案中，已经废弃了 PerformanceTiming 接口（目前兼容性高，仍然可使用，未来可能被废弃）window.performance.timing 被废弃，
+> 改为通过 PerformanceObserver 来获取。PerformanceNavigationTiming（`performance.getEntriesByType('navigation')[0]`）
+> 旧的 api，返回的是一个 UNIX 类型的绝对时间，和用户的系统时间相关，分析的时候需要再次计算。而新的 api，返回的是一个相对时间，可以直接用来分析
 > https://developer.mozilla.org/en-US/docs/Web/API/Performance/timing
+
+现在 chrome 开发团队提供了 [web-vitals](https://github.com/GoogleChrome/web-vitals) 库，方便来计算各性能数据（注意：web-vitals 不支持safari浏览器）
 
 时序图
 

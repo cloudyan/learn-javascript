@@ -3,7 +3,7 @@
 - https://web.dev/custom-metrics/
 - https://web.dev/metrics/
 
-有了PerformanceObserver你可以被动地订阅性能相关的事件，这意味着这些API一般不会与页面的性能干扰，因为它们的回调过程中通常发射空闲周期。
+有了PerformanceObserver你可以被动地订阅性能相关的事件，这意味着这些API一般不会被页面的性能干扰，因为它们的回调过程中通常发生在空闲周期。
 
 您可以PerformanceObserver通过向它传递一个回调来创建一个，以便在调度新的性能条目时运行。然后你告诉观察者通过observe()方法监听什么类型的条目：
 
