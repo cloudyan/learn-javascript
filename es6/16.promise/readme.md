@@ -2,7 +2,7 @@
 
 实现 `Promise` 需要完全读懂 Promise A+ 规范，不过从总体的实现上看，有如下几个点需要考虑到：
 
-- `Promise` 本质是一个状态机，且状态只能为以下三种：Pending（等待态）、Fulfilled（执行态）、Rejected（拒绝态），状态的变更是单向的，只能从Pending -> Fulfilled 或 Pending -> Rejected，状态变更不可逆
+- `Promise` 本质是一个状态机，且状态只能为以下三种：Pending（等待态）、Fulfilled（执行态）、Rejected（拒绝态），状态的变更是单向的，只能从 Pending -> Fulfilled 或 Pending -> Rejected，状态变更不可逆
 - then 需要支持链式调用
 
 ## 几个问题
@@ -35,21 +35,21 @@
 方法
 
 - Promise 的含义
-- Promise.prototype.then()  ES2015
+- Promise.prototype.then() ES2015
 - Promise.prototype.catch() ES2015
-- Promise.prototype.finally()   ES2018
-- Promise.resolve()         ES2015
-- Promise.reject()          ES2015
-- Promise.all()             ES2015
-- Promise.race()            ES2015
-- Promise.allSettled()          ES2020
-- Promise.any()                 ES2021
-- Promise.try()                 ESnext
-- await.ops                     ESnext
+- Promise.prototype.finally() ES2018
+- Promise.resolve() ES2015
+- Promise.reject() ES2015
+- Promise.all() ES2015
+- Promise.race() ES2015
+- Promise.allSettled() ES2020
+- Promise.any() ES2021
+- Promise.try() ESnext
+- await.ops ESnext
 
-ES6 之前常见的Promise 库: Bluebird、Q 和 when
+ES6 之前常见的 Promise 库: Bluebird、Q 和 when
 
-所谓Promise，简单说就是一个容器，里面保存着某个未来才会结束的事件（通常是一个异步操作）的结果。
+所谓 Promise，简单说就是一个容器，里面保存着某个未来才会结束的事件（通常是一个异步操作）的结果。
 
 从语法上说，Promise 是一个对象，从它可以获取异步操作的消息。
 
@@ -64,20 +64,18 @@ ES6 之前常见的Promise 库: Bluebird、Q 和 when
 - https://github.com/addyosmani/es6-tools#polyfills
 
 ```js
-const PENDING = 'pending'
-const FULFILLED = 'fulfilled'
-const REJECTED = 'rejected'
+const PENDING = "pending";
+const FULFILLED = "fulfilled";
+const REJECTED = "rejected";
 
 class MyPromise {
-  constructor() {
+  constructor() {}
 
-  }
-
-  status = PENDING
-  value = null
-  reason = null
-  onFulfilledCallbacks = []
-  onRejectedCallbacks = []
+  status = PENDING;
+  value = null;
+  reason = null;
+  onFulfilledCallbacks = [];
+  onRejectedCallbacks = [];
 
   then() {}
   catch() {}
@@ -92,14 +90,6 @@ class MyPromise {
   static try() {}
 }
 ```
-
-关于 macrotask 和 microtask 两个概念
-
-- 宏任务 macro-task: script（整体代码块）, setTimeout, setInterval, setImmediate（node环境）, I/O, 事件队列, UI rendering
-- 微任务 micro-task: process.nextTick（node环境）, Promises（这里指浏览器实现的原生 Promise）, Object.observe, MutationObserver, queueMicrotask
-- requestAnimationFrame 有争议
-
-详见 [stackoverflow](https://stackoverflow.com/questions/25915634/difference-between-microtask-and-macrotask-within-an-event-loop-context) 解答
 
 ```js
 const promise = new Promise((resolve, reject) => {
@@ -130,28 +120,29 @@ let promise = new Promise((resolve, reject) => {
   let i = 1;
   resolve(i); // 调用.then()中的方法
   i++;
-  reject(i);  // 调用.catch()中的方法，不能与.then()一起执行
-})
+  reject(i); // 调用.catch()中的方法，不能与.then()一起执行
+});
 
 promise
-  .then(num => {
-    console.log('then1:', num)
-    return 'r1'
+  .then((num) => {
+    console.log("then1:", num);
+    return "r1";
   })
-  .then(num => {
-    console.log('then2:', num)
-    return 'r2'
+  .then((num) => {
+    console.log("then2:", num);
+    return "r2";
   })
-  .catch(num => {
-    console.log('catch:', num)
+  .catch((num) => {
+    console.log("catch:", num);
   })
-  .finally(res => {  // 不论执行.then还是.catch，finally都会执行
-    console.log('finally', res)
-  })
-  // .then(res => {
-  //   console.log(111)
-  //   return 222
-  // })
+  .finally((res) => {
+    // 不论执行.then还是.catch，finally都会执行
+    console.log("finally", res);
+  });
+// .then(res => {
+//   console.log(111)
+//   return 222
+// })
 ```
 
 关于执行顺序
@@ -182,54 +173,55 @@ setTimeout(() => {
 }, 0);
 ```
 
-不是微任务会在宏任务之前进行，而是每次执行完一个宏任务后，js进程都会检查微任务队列中是否存在微任务，若存在微任务则将所有的微任务都执行完毕后，才开始下一个的宏任务。
+不是微任务会在宏任务之前进行，而是每次执行完一个宏任务后，js 进程都会检查微任务队列中是否存在微任务，若存在微任务则将所有的微任务都执行完毕后，才开始下一个的宏任务。
 
 每个单独的事件循环机制是这样：
 
-[宏任务->微任务->requestAnimation->UI操作]
+[宏任务->微任务->requestAnimation->UI 操作]
 
-这一套循环执行完毕后，再去获取下一个宏任务，再按照上面的顺序执行。关于js的事件循环机制，你可以看下这篇文章： [前端中的事件循环eventloop机制](https://www.xiabingbao.com/post/javascript/js-eventloop.html)
-
+这一套循环执行完毕后，再去获取下一个宏任务，再按照上面的顺序执行。关于 js 的事件循环机制，你可以看下这篇文章： [前端中的事件循环 eventloop 机制](https://www.xiabingbao.com/post/javascript/js-eventloop.html)
 
 ```js
 // https://stackoverflow.com/questions/36870467/what-is-the-order-of-execution-in-javascript-promises
 
-Promise.resolve('A')
-  .then(function(a){
+Promise.resolve("A")
+  .then(function (a) {
     console.log(2, a);
-    return 'B';
+    return "B";
   })
-  .then(function(a){
-     Promise.resolve('C')
-       .then(function(a){
-         console.log(7, a);
-        })
-       .then(function(a){
-         console.log(8, a);
-        });
-     console.log(3, a);
-     return a;
+  .then(function (a) {
+    Promise.resolve("C")
+      .then(function (a) {
+        console.log(7, a);
+      })
+      .then(function (a) {
+        console.log(8, a);
+      });
+    console.log(3, a);
+    return a;
   })
-  .then(function(a){
-     Promise.resolve('D')
-       .then(function(a){
-         console.log(9, a);
-        })
-       .then(function(a){
-         console.log(10, a);
-        });
-     console.log(4, a);
+  .then(function (a) {
+    Promise.resolve("D")
+      .then(function (a) {
+        console.log(9, a);
+      })
+      .then(function (a) {
+        console.log(10, a);
+      });
+    console.log(4, a);
   })
-  .then(function(a){
-     console.log(5, a);
+  .then(function (a) {
+    console.log(5, a);
   });
 
 console.log(1);
 
-setTimeout(function(){console.log(6)},0);
+setTimeout(function () {
+  console.log(6);
+}, 0);
 ```
 
 参考：
 
 - [关于 Promise 执行顺序的一个问题？](https://www.zhihu.com/question/36273908?sort=created)
-- [V8 Promise源码全面解读，其实你对Promise一无所知](https://mp.weixin.qq.com/s/pdzvF6aWp-tenqhXmQ8Wcg)
+- [V8 Promise 源码全面解读，其实你对 Promise 一无所知](https://mp.weixin.qq.com/s/pdzvF6aWp-tenqhXmQ8Wcg)
