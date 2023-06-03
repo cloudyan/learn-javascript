@@ -40,10 +40,28 @@
     - 是在浏览器渲染后有空闲时间时执行，如果 requestIdleCallback 设置了第二个参数 timeout，则会在超时后的下一帧强制执行
   - MessageChannel 是一个异步操作的 API
 
+在浏览器的 Event Loop 中是有多个任务队列的，每个任务队列的执行时机是不一样的，下面直接上干货，说说浏览器执行任务的顺序
+
+1. 从 task 任务队列中取第一个 task（比如 `setTimeout`、`setIntervel` 的回调，也可以将同一轮循环中的所有同步代码看作是一个宏任务），执行它。
+2. 执行微任务队列里的所有微任务。
+3. 浏览器判断是否更新渲染屏幕，如果需要重新绘制，则执行步骤 4-13，如果不需要重新绘制，则流程回到步骤 1，这样不断循环。
+4. 触发 `resize`、`scroll` 事件，建立媒体查询（执行一个任务中如果生成了微任务，则执行完任务该后就会执行所有的微任务，然后再执行下一个任务）。
+5. 建立 css 动画（执行一个任务中如果生成了微任务，则执行完该任务后就会执行所有的微任务，然后再执行下一个任务）。
+6. 执行 `requestAnimationFrame` 回调（执行一个任务中如果生成了微任务，则执行完该任务后就会执行所有的微任务，然后再执行下一个任务）。
+7. 执行 `IntersectionObserver` 回调（执行一个任务中如果生成了微任务，则执行完该任务后就会执行所有的微任务，然后再执行下一个任务）。
+8. 更新渲染屏幕。
+9. 浏览器判断当前帧是否还有空闲时间，如果有空闲时间，则执行步骤 10-12。
+10. 从 `requestIdleCallback` 回调函数队列中取第一个，执行它。
+11. 执行微任务队列里的所有微任务。
+12. 流程回到步骤 9，直到 `requestIdleCallback` 回调函数队列清空或当前帧没有空闲时间。
+13. 流程回到步骤 1，这样不断循环。
+
 详见
 
 - [stackoverflow](https://stackoverflow.com/questions/25915634/difference-between-microtask-and-macrotask-within-an-event-loop-context) 解答
 - [requestAnimationFrame 和 requestIdleCallback 是宏任务还是微任务](https://juejin.cn/post/7134972903816167455)
+
+### requestAnimationFrame 和 requestIdleCallback 是宏任务还是微任务?
 
 结论
 
