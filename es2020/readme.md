@@ -9,8 +9,8 @@
   - 行为类似 `||`，但是只有运算符左侧的值为`null`或`undefined`时，才会返回右侧的值
   - 这个运算符的一个目的，就是跟链判断运算符`?.`配合使用，为`null`或`undefined`的值设置默认值。
   - 运算优先级问题，与 `&&` `||`一起使用，必须用括号表明优先级，否则会报错
-- import() dynamic import
-- import.meta
+- import() dynamic import 运行时动态加载模块
+- import.meta 提供了与宿主相关的模块元信息
 - export 加强
 - Promise.allSettled()
 - 顶层对象 `globalThis` 对象
@@ -27,24 +27,24 @@
 - Node 中是 `global`
 - web workers 中是 `self`
 
-polyfill 垫片库[global-this](https://github.com/ungap/global-this)模拟了这个提案，可以在所有环境拿到globalThis。
+polyfill 垫片库[global-this](https://github.com/ungap/global-this)模拟了这个提案，可以在所有环境拿到 globalThis。
 
 - https://github.com/es-shims/globalThis
 
 ```js
 // 不支持小程序, 小程序内为 global
 // 解析: https://mathiasbynens.be/notes/globalthis
-(function() {
-  if (typeof globalThis === 'object') return;
-  Object.defineProperty(Object.prototype, '__magic__', {
-    get: function() {
+(function () {
+  if (typeof globalThis === "object") return;
+  Object.defineProperty(Object.prototype, "__magic__", {
+    get: function () {
       return this;
     },
-    configurable: true // This makes it possible to `delete` the getter later.
+    configurable: true, // This makes it possible to `delete` the getter later.
   });
   __magic__.globalThis = __magic__; // lolwat
   delete Object.prototype.__magic__;
-}());
+})();
 
 // Your code can use `globalThis` now.
 console.log(globalThis);
@@ -54,35 +54,33 @@ console.log(globalThis);
 
 ```js
 (function (Object) {
-  typeof globalThis !== 'object' && (
-    this ?
-      get() :
-      (Object.defineProperty(Object.prototype, '_T_', {
-        configurable: true,
-        get: get
-      }), _T_)
-  );
+  typeof globalThis !== "object" &&
+    (this
+      ? get()
+      : (Object.defineProperty(Object.prototype, "_T_", {
+          configurable: true,
+          get: get,
+        }),
+        _T_));
   function get() {
     this.globalThis = this;
     delete Object.prototype._T_;
   }
-}(Object));
+})(Object);
 ```
 
 扩展
 
 ```js
-(0, eval)('this')
+(0, eval)("this");
 
 // vs
-eval('this')
-
+eval("this");
 ```
 
 Isn’t this equivalent to just `eval('this')`? Why the comma operator? 🤔
 
 `eval(code)` is a “direct eval” and executes code in the current scope. `(0, eval)(code)` is an [indirect eval](https://2ality.com/2014/01/eval.html) and executes code in the global scope.
-
 
 ES2020 引入了一种新的数据类型 BigInt（大整数），来解决这个问题，这是 ECMAScript 的第八种数据类型。
 
@@ -96,7 +94,7 @@ BigInt 只用来表示整数，没有位数的限制，任何位数的整数都�
 ```js
 // BigInt 实战应用参看js版本[雪花算法](https://github.com/cloudyan/snowflake)
 
-BigInt.parseInt('9007199254740993', 10)
+BigInt.parseInt("9007199254740993", 10);
 // 9007199254740993n
 ```
 
@@ -107,18 +105,20 @@ BigInt.parseInt('9007199254740993', 10)
 const firstName = message.body.user.firstName;
 
 // 正确的写法
-const firstName = (message
-  && message.body
-  && message.body.user
-  && message.body.user.firstName) || 'default';
+const firstName =
+  (message &&
+    message.body &&
+    message.body.user &&
+    message.body.user.firstName) ||
+  "default";
 
 // 链判断运算符
 // 直接在链式调用的时候判断，左侧的对象是否为null或undefined。
 // 如果是的，就不再往下运算，而是返回undefined
-const firstName = message?.body?.user?.firstName || 'default';
+const firstName = message?.body?.user?.firstName || "default";
 
-const fooValue = myForm.querySelector('input[name=foo]')?.value
-iterator.return?.()
+const fooValue = myForm.querySelector("input[name=foo]")?.value;
+iterator.return?.();
 
 // 老式浏览器的表单可能没有checkValidity这个方法
 if (myForm.checkValidity?.() === false) {
@@ -127,9 +127,9 @@ if (myForm.checkValidity?.() === false) {
 }
 
 // 三种用法
-obj?.prop // 对象属性
-obj?.[expr] // 同上
-func?.(...args) // 函数或对象方法的调用
+obj?.prop; // 对象属性
+obj?.[expr]; // 同上
+func?.(...args); // 函数或对象方法的调用
 
 let hex = "#C0FFEE".match(/#([A-Z]+)/i)?.[1];
 ```
@@ -137,33 +137,34 @@ let hex = "#C0FFEE".match(/#([A-Z]+)/i)?.[1];
 常见用法
 
 ```js
-a?.b
+a?.b;
 // 等同于
-a == null ? undefined : a.b
+a == null ? undefined : a.b;
 
-a?.[x]
+a?.[x];
 // 等同于
-a == null ? undefined : a[x]
+a == null ? undefined : a[x];
 
-a?.b()
+a?.b();
 // 等同于
-a == null ? undefined : a.b()
+a == null ? undefined : a.b();
 
-a?.()
+a?.();
 // 等同于
-a == null ? undefined : a()
+a == null ? undefined : a();
 
-a?.[++x]
+a?.[++x];
 // 等同于
-a == null ? undefined : a[++x]
+a == null ? undefined : a[++x];
 
-delete a?.b
+delete a?.b;
 // 等同于
-a == null ? undefined : delete a.b
-
-(a?.b).c
-// 等价于
-(a == null ? undefined : a.b).c
+a == null
+  ? undefined
+  : delete a.b(a?.b).c(
+      // 等价于
+      a == null ? undefined : a.b
+    ).c;
 ```
 
 报错场合
@@ -196,14 +197,14 @@ a?.b = c
 
 `??`有一个运算优先级问题，它与`&&`和`||`的优先级孰高孰低。现在的规则是，如果多个逻辑运算符一起使用，必须用括号表明优先级，否则会报错。
 
-动态imports
+动态 imports
 
 ```js
 const baseModulePath = "./baseModules";
 const btnImportModule = document.getElementById("btnImportModule");
 let userList = [];
 
-btnImportModule.addEventListener("click", async e => {
+btnImportModule.addEventListener("click", async (e) => {
   const userModule = await import(`${baseModulePath}/users.js`);
 
   userList = userModule.getUsers();
@@ -216,21 +217,21 @@ btnImportModule.addEventListener("click", async e => {
 
 ```js
 // 之前支持这个
-import * as utils from './utils'
+import * as utils from "./utils";
 
 // 但(之前)不支持这个(现在支持了，通过 babel 可以更早的使用到最新的支持)
-export * as utils from './utils'
+export * as utils from "./utils";
 
 // 等同以下效果
-import * as utils from './utils'
+import * as utils from "./utils";
 
-export { utils }
+export { utils };
 ```
 
 String.prototype.matchAll()
 
 ```js
-const string = 'test1test2test3';
+const string = "test1test2test3";
 const regex = /t(e)(st(\d?))/g;
 
 for (const match of string.matchAll(regex)) {
