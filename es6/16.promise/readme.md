@@ -10,7 +10,7 @@
 - finally 后面还可以写 then 调用吗
 - then catch finally 中回调函数的参数都从哪里来
 - 执行时序什么样，如果中途出错呢
-- 什么情况是 `Promise 会吃掉错误`
+- [什么情况是 `Promise 会吃掉错误`](https://github.com/pekonchan/Blog/issues/11)
 - 什么情况下应该使用微任务, 参见 queueMicrotask
 - [cancel Promise](https://stackoverflow.com/questions/30233302/promise-is-it-possible-to-force-cancel-a-promise)
 - [回调地狱](http://callbackhell.com/)
@@ -64,9 +64,9 @@ ES6 之前常见的 Promise 库: Bluebird、Q 和 when
 - https://github.com/addyosmani/es6-tools#polyfills
 
 ```js
-const PENDING = "pending";
-const FULFILLED = "fulfilled";
-const REJECTED = "rejected";
+const PENDING = 'pending';
+const FULFILLED = 'fulfilled';
+const REJECTED = 'rejected';
 
 class MyPromise {
   constructor() {}
@@ -125,19 +125,19 @@ let promise = new Promise((resolve, reject) => {
 
 promise
   .then((num) => {
-    console.log("then1:", num);
-    return "r1";
+    console.log('then1:', num);
+    return 'r1';
   })
   .then((num) => {
-    console.log("then2:", num);
-    return "r2";
+    console.log('then2:', num);
+    return 'r2';
   })
   .catch((num) => {
-    console.log("catch:", num);
+    console.log('catch:', num);
   })
   .finally((res) => {
     // 不论执行.then还是.catch，finally都会执行
-    console.log("finally", res);
+    console.log('finally', res);
   });
 // .then(res => {
 //   console.log(111)
@@ -184,13 +184,13 @@ setTimeout(() => {
 ```js
 // https://stackoverflow.com/questions/36870467/what-is-the-order-of-execution-in-javascript-promises
 
-Promise.resolve("A")
+Promise.resolve('A')
   .then(function (a) {
     console.log(2, a);
-    return "B";
+    return 'B';
   })
   .then(function (a) {
-    Promise.resolve("C")
+    Promise.resolve('C')
       .then(function (a) {
         console.log(7, a);
       })
@@ -201,7 +201,7 @@ Promise.resolve("A")
     return a;
   })
   .then(function (a) {
-    Promise.resolve("D")
+    Promise.resolve('D')
       .then(function (a) {
         console.log(9, a);
       })
