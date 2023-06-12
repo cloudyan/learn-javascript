@@ -1,5 +1,15 @@
 # ES2023
 
+- Array/TypedArray
+  - toReversed
+  - toSorted
+  - toSpliced
+  - with
+- Array
+  - findLast
+  - findLastIndex
+- WeakMap 支持 Symbol 作为 key
+
 ## 数组被修改时，返回副本
 
 对 Array, TypedArray, 新方法不修改原数组
@@ -27,7 +37,7 @@ WeakMap 原本只支持 object 类型的 key，现在支持了 Symbol 类型作�
 
 ```js
 const weak = new WeakMap();
-weak.set(Symbol("symbol1"), {});
+weak.set(Symbol('symbol1'), {});
 ```
 
 ## Hashbang 语法
@@ -39,10 +49,10 @@ Hashbang 也叫 Shebang，是一个由井号和叹号构成的字符序列 `#!`�
 ```js
 #!/usr/bin/env node
 // hashbang.js
-console.log("hashbang");
+console.log('hashbang');
 
 // nohashbang.js
-console.log("no hashbang");
+console.log('no hashbang');
 ```
 
 ## 从尾部查找
