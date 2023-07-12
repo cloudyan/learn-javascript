@@ -161,7 +161,7 @@ async function async1() {
   console.log('async1 end');
 }
 async function async2() {
-  // async2做出如下更改：
+  // async2 做出如下更改：
   new Promise(function (resolve) {
     console.log('promise1');
     resolve();
