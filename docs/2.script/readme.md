@@ -11,7 +11,9 @@
 - 使用 script 标签，内联嵌入在当前的 `html` 文档内
 - 使用 script 标签引入外部 js
 - 也可以动态加载
-- 浏览器对于带有`type="module"`的`<script>`，都是异步加载，不会造成堵塞浏览器，即等到整个页面渲染完，再执行模块脚本，等同于打开了`<script>`标签的`defer`属性。
+- 浏览器对于带有`type="module"`的`<script>`
+  - 默认(无 async)都是异步加载，不会造成堵塞浏览器（解析 html），会等到整个页面渲染完，再执行模块脚本，等同于打开了`<script>`标签的`defer`属性
+  - 但如果加了 async 属性，也是异步加载，不会造成堵塞浏览器，但会加载完成立即执行，此时会阻塞渲染。
 
 重点内容便是掌握 **js 的加载时序与执行时序**
 
@@ -242,7 +244,7 @@ export function loadCss(sourceUrl, obj = {}) {
 
 性能分析
 
-使用 `<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>` 可优化资源加载 crossorigin属性必须，不然资源会加载两次
+使用 `<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>` 可优化资源加载 crossorigin 属性必须，不然资源会加载两次
 
 - https://web.dev/efficiently-load-third-party-javascript
 - https://web.dev/use-lighthouse-for-performance-budgets/

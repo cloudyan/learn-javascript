@@ -8,6 +8,8 @@
 
 ## prefetch
 
+指定用户代理应预先获取并缓存目标资源，因为后续的导航可能需要它。
+
 关键字 `prefetch` 作为元素 `<link>`  的属性 `rel` 的值，是为了提示浏览器，用户未来的浏览有可能需要加载目标资源，所以浏览器有可能通过事先获取和缓存对应资源，优化用户体验。
 
 从Firefox 44开始，考虑了crossorigin属性的值，从而可以进行匿名预取。
@@ -28,7 +30,7 @@ https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Link_prefetching_FAQ
 
 ## preload
 
-https://developer.mozilla.org/zh-CN/docs/Web/HTML/Preloading_content
+- https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel/preload
 
 关键字 `preload` 作为元素 `<link>` 的属性 `rel` 的值，表示用户十分有可能需要在当前浏览中加载目标资源，所以浏览器必须预先获取和缓存对应资源。
 
@@ -58,13 +60,100 @@ https://developer.mozilla.org/zh-CN/docs/Web/HTML/Preloading_content
 
 ## dns-prefetch
 
-提示浏览器该资源需要在用户点击链接之前进行DNS查询和协议握手
+DNS 预解析。预先进行 DNS 查询，在用户浏览页面同时，可解析将要用到的域名。
+
+DNS-prefetch 尝试在请求资源之前解析域名。
+
+```html
+<link rel="dns-prefetch" href="//static.xxx.com">
+```
+
+最佳实践
+
+1. dns-prefetch 仅对跨源域上的 DNS 查找有效，因此请避免使用它来指向你的站点或域。这是因为，到浏览器看到提示时，你的站点背后的 IP 已经被解析了。
+2. 可以通过使用 HTTP Link 字段将 dns-prefetch（以及其他资源提示）指定为 HTTP 标头之一：
+
+    ```HTTP
+    Link: <https://fonts.googleapis.com/>; rel=dns-prefetch
+    ```
+
+3. 考虑将 dns-prefetch 与 preconnect 提示配对。dns-prefetch 只执行 DNS 查询，而 preconnect 则是建立与服务器的连接。这个过程包括 DNS 解析，以及建立 TCP 连接，如果是 HTTPS 网站，就进一步执行 TLS 握手。将这两者结合起来，可以进一步减少跨源请求的感知延迟。你可以像这样安全地将它们结合起来使用：
+
+    ```html
+    <link rel="preconnect" href="https://fonts.googleapis.com/" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com/" />
+    ```
+
+> 备注： 如果页面需要建立与许多第三方域的连接，则将它们预先连接会适得其反。`preconnect` 提示最好仅用于最关键的连接。对于其他的连接，只需使用 `<link rel="dns-prefetch">` 即可节省第一步——DNS 查询——的时间。
+>
+> crossorigin 属性必须，不然资源会加载两次
+
+数据验证:
+
+1. 删除本地 DNS 缓存
+
+```bash
+# windows
+# ipconfig /displaydns: 查看DNS缓存
+# ipconfig /flushdns: 清空DNS缓存
+
+# mac
+# https://support.apple.com/en-us/HT202516
+# https://www.freecodecamp.org/chinese/news/how-to-flush-dns-on-mac-macos-clear-dns-cache/
+# https://sysin.org/blog/how-to-flush-dns-cache/
+
+# 重置 DNS 缓存，适用于 macOS 10.15 至 14.x:
+sudo killall -HUP mDNSResponder; sudo dscacheutil -flushcache
+```
+
+2. 重启浏览器
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="preconnect" href="https://pss.bdstatic.com/" crossorigin />
+  <link rel="dns-prefetch" href="https://pss.bdstatic.com/" />
+</head>
+<body>
+  preconnect vs dns-prefetch
+
+  <!-- https://pss.bdstatic.com/static/superman/js/lib/jquery-1-edb203c114.10.2.js -->
+</body>
+</html>
+```
+
+使用 Wireshark
+
+```conf
+dns.qry.name contains bdstatic.com || ip.dst === 47.93.222.203
+
+; 过滤器
+dst host pss.bdstatic.com || src port 53
+```
+
+参考：
+
+- https://zhuanlan.zhihu.com/p/358836730
+- https://tech.youzan.com/dns-prefetching/
+- https://www.chromium.org/developers/design-documents/dns-prefetching/
+  - Manual Prefetch
+
 
 ## preconnect
 
-向浏览器提供提示，建议浏览器提前打开与链接网站的连接，而不会泄露任何私人信息或下载任何内容，以便在跟随链接时可以更快地获取链接内容。
+指定用户代理应预先连接到目标资源的来源。
+
+预先建立 HTTP 连接。包括 DNS 查询、TCP 握手链接建立以及 TLS 连接。
 
 ![preconnect](./img/preconnect.png)
+
+## prerender
+
+指定用户代理应预先获取目标资源，并以有助于在未来提供更快的响应的方式处理它。
 
 ## modulepreload
 
