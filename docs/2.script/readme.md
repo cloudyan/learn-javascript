@@ -91,6 +91,8 @@
 
 理解了，就方便记忆、使用了。
 
+> 动态创建 script 标签的形式加载的脚本，它的 async 属性是 true，如果想按顺序执行，可以将其设置为 false
+
 ## 性能分析
 
 ![script-async](./img/script-async.jpg)
