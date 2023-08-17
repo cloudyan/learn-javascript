@@ -229,6 +229,20 @@ export function loadCss(sourceUrl, obj = {}) {
 
 深入理解 script 加载与执行机制，对性能提升，加载器实现非常重要
 
+## 关于 script crossorigin
+
+script 标签就是可以跨域请求资源的，那 `crossorigin="anonymous"` 这个设置是为了什么？
+
+1. script 标签默认请求资源的时候，request 是没有 origin 请求头的（这是常规理解的支持跨域请求资源）
+2. script 标签请求跨域资源，内部运行如果报错，`window.onerror` 捕获错误时，只能看到 `Script error.`，无法看到具体的错误信息。这是浏览器安全策略控制的。
+
+解决上述问题的办法
+
+1. 设置 script 标签的 crossorigin 属性，request 请求时会带上 origin 请求头，然后会要求服务器进行 cors 校验，跨域请求如果响应头没有 `Access-Control-Allow-Origin` 就不会拿到资源（加载资源报跨域错误）。cors 验证通过后，拿到的 `script` 运行内部报错的话，`window.onerror` 就能捕获到内部的完整错误信息。
+2. `crossorigin` 的属性值分为 `anonymous` 和 `use-credentials`。如果设置了 `crossorigin` 属性，但是属性值不正确的话（或设置""，或没有值），默认都是 `anonymous`。
+3. `anonymous` 代表同域会带上 cookie，跨域则不带上 cookie，相当于 fecth请求的`credentials: 'same-origin'`。
+4. `use-credentials` 跨域也会带上 cookie，相当于 fetch 请求的 `credentials: 'include'`，这种情况下跨域的 response header 需要设置`'Access-Control-Allow-Credentials' = true`，否则 cors 失败。
+
 参考：
 
 - 红皮书
@@ -243,6 +257,7 @@ export function loadCss(sourceUrl, obj = {}) {
 - [全面理解document.write()](https://segmentfault.com/a/1190000007958530)
 - [MDN document.write](https://developer.mozilla.org/zh-CN/docs/Web/API/Document/write)
 - [document.write知多少](https://segmentfault.com/a/1190000006197157)
+- [script crossorigin 属性](https://juejin.cn/post/6969825311361859598)
 
 性能分析
 
