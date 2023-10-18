@@ -121,3 +121,4 @@ throttle 作用，预先设定一个执行周期，当调用动作的时刻大�
 - https://github.com/mqyqingfeng/Blog/issues/22
 - https://github.com/mqyqingfeng/Blog/issues/26
 - 推荐： https://github.com/pekonchan/Blog/issues/14
+- lodash [Debouncing and Throttling Explained Through Examples](https://css-tricks.com/debouncing-throttling-explained-examples/)
